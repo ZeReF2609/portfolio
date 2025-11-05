@@ -1,23 +1,25 @@
-<header 
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-  [class.bg-white]="isScrolled && currentThemeMode === 'light'"
-  [class.bg-gray-900]="isScrolled && currentThemeMode === 'dark'"
-  [class.shadow-lg]="isScrolled"
-  [class.bg-opacity-95]="isScrolled"
-  [class.backdrop-blur-sm]="isScrolled">
-  
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300
+          shadow-sm backdrop-blur-sm
+          bg-white dark:bg-gray-900" [ngClass]="{
+    'md:shadow-none md:backdrop-blur-none': !isScrolled,
+    'md:bg-transparent md:shadow-none md:backdrop-blur-none': !isScrolled && currentThemeMode === 'light',
+    'md:bg-transparent md:shadow-none md:backdrop-blur-none dark:md:bg-transparent': !isScrolled && currentThemeMode === 'dark',
+
+    'md:bg-white md:shadow-lg md:bg-opacity-95 md:backdrop-blur-sm': isScrolled && currentThemeMode === 'light',
+    'md:bg-gray-900 md:shadow-lg md:bg-opacity-95 md:backdrop-blur-sm': isScrolled && currentThemeMode === 'dark'
+  }">
+
   <nav class="container mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <div class="text-2xl font-display font-bold cursor-pointer" (click)="scrollToSection('hero')">
-        <span class="text-gradient">Portfolio</span>
+        <span class="text-gradient">Wilder Rojas</span>
       </div>
 
       <!-- Desktop Menu -->
       <ul class="hidden md:flex items-center space-x-8">
         <li *ngFor="let item of menuItems">
-          <a 
-            (click)="scrollToSection(item.anchor)"
+          <a (click)="scrollToSection(item.anchor)"
             class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors duration-300">
             {{ item.label }}
           </a>
@@ -26,86 +28,86 @@
 
       <!-- Theme Controls, CV Button & Mobile Menu -->
       <div class="flex items-center space-x-4">
-        <!-- CV Button -->
-        <button
-          (click)="downloadCV()"
-          class="hidden md:flex items-center space-x-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-          <span>Ver CV</span>
-        </button>
         <!-- Color Theme Selector -->
         <div class="relative">
-          <button
-            (click)="toggleThemeMenu()"
+          <!-- Botón para abrir el menú -->
+          <button (click)="toggleThemeMenu()"
             class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
             aria-label="Selector de tema de color">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v11H4V4zm2 2a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd"
+                d="M4 2a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v11H4V4zm2 2a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z"
+                clip-rule="evenodd" />
             </svg>
           </button>
-          
-          <div 
-            *ngIf="isThemeMenuOpen"
-            class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-2 animate-fade-in">
-            <button
-              *ngFor="let theme of colorThemes"
-              (click)="setColorTheme(theme.name)"
-              class="w-full flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-              [class.bg-gray-100]="currentColorTheme === theme.name && currentThemeMode === 'light'"
-              [class.dark:bg-gray-700]="currentColorTheme === theme.name && currentThemeMode === 'dark'">
-              <span class="w-4 h-4 rounded-full" [style.background-color]="theme.color"></span>
-              <span class="text-sm font-medium">{{ theme.label }}</span>
-            </button>
+
+          <!-- Menú de selección de tema -->
+          <div *ngIf="isThemeMenuOpen"
+            class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-3 animate-fade-in">
+            <div class="grid grid-cols-2 gap-2">
+              <button *ngFor="let theme of colorThemes" (click)="setColorTheme(theme.name)"
+                      class="flex flex-col items-center justify-center p-2 rounded-md border-2 transition-all duration-200"
+                      [ngClass]="{
+                'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500':
+                  currentColorTheme !== theme.name,
+                'border-primary-500 ring-2 ring-primary-400':
+                  currentColorTheme === theme.name
+              }">
+                <span class="w-8 h-8 rounded-full shadow-sm border border-gray-300 dark:border-gray-600"
+                  [style.background-color]="theme.color"></span>
+                <span class="text-xs mt-2 text-gray-700 dark:text-gray-300">
+                  {{ theme.label }}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
+
         <!-- Dark Mode Toggle -->
-        <button
-          (click)="toggleThemeMode()"
+        <button (click)="toggleThemeMode()"
           class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
           aria-label="Cambiar modo oscuro">
           <svg *ngIf="currentThemeMode === 'light'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
           </svg>
           <svg *ngIf="currentThemeMode === 'dark'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            <path fill-rule="evenodd"
+              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+              clip-rule="evenodd" />
           </svg>
         </button>
 
         <!-- Mobile Menu Button -->
-        <button
-          (click)="toggleMobileMenu()"
+        <button (click)="toggleMobileMenu()"
           class="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
           aria-label="Menú móvil">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            <path *ngIf="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+            <path *ngIf="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
     </div>
 
     <!-- Mobile Menu -->
-    <div
-      *ngIf="isMobileMenuOpen"
-      class="md:hidden mt-4 pb-4 animate-slide-down">
+    <div *ngIf="isMobileMenuOpen" class="md:hidden mt-4 pb-4 animate-slide-down">
       <ul class="space-y-2">
         <li *ngFor="let item of menuItems">
-          <a
-            (click)="scrollToSection(item.anchor)"
+          <a (click)="scrollToSection(item.anchor)"
             class="block px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium cursor-pointer transition-colors duration-300">
             {{ item.label }}
           </a>
         </li>
         <!-- CV Button for Mobile -->
         <li>
-          <button
-            (click)="downloadCV()"
+          <button (click)="downloadCV()"
             class="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all duration-300">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span>Ver CV</span>
           </button>

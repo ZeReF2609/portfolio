@@ -12,8 +12,11 @@ import { User } from '../../models/user.interface';
 })
 export class HeroComponent implements OnInit {
   user: User | null = null;
+  cvUrl: string = '';
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.cvUrl = this.dataService.getCVUrl();
+  }
 
   ngOnInit(): void {
     this.user = this.dataService.getUserData();
@@ -28,5 +31,9 @@ export class HeroComponent implements OnInit {
 
   openLink(url: string): void {
     window.open(url, '_blank');
+  }
+
+  downloadCV(): void {
+    window.open(this.cvUrl, '_blank');
   }
 }

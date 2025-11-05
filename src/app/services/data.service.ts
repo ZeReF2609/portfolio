@@ -17,7 +17,7 @@ export class DataService {
       profession: 'Full Stack Developer & Software Engineer',
       description: 'Desarrollador de Software apasionado por crear soluciones escalables e innovadoras. Especializado en tecnologías modernas como Java, Spring Boot, Angular, TypeScript y Flutter. Con experiencia en desarrollo Full Stack y un enfoque en la calidad del código y las mejores prácticas.',
       email: 'wilderrojasmarin@gmail.com',
-      location: 'Perú',
+      location: 'Lima, Perú',
       profileImage: 'assets/images/profile.jpg',
       socialLinks: [
         { platform: 'GitHub', url: 'https://github.com/ZeReF2609/', icon: 'github' },
