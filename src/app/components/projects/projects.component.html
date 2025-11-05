@@ -1,0 +1,102 @@
+<section id="projects" class="py-20 px-4 bg-white dark:bg-gray-800">
+  <div class="container mx-auto max-w-7xl">
+    <!-- Section Header -->
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="section-title">Proyectos</h2>
+      <p class="section-subtitle">
+        Algunos de mis trabajos más recientes
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex justify-center mb-12 animate-on-scroll">
+      <div class="inline-flex flex-wrap gap-3 p-2 bg-gray-50 dark:bg-gray-900 rounded-lg">
+        <button
+          *ngFor="let category of categories"
+          (click)="filterProjects(category)"
+          [class.bg-primary-600]="selectedCategory === category"
+          [class.text-white]="selectedCategory === category"
+          [class.text-gray-700]="selectedCategory !== category"
+          [class.dark:text-gray-300]="selectedCategory !== category"
+          [class.hover:bg-gray-200]="selectedCategory !== category"
+          [class.dark:hover:bg-gray-700]="selectedCategory !== category"
+          class="px-6 py-2 rounded-lg font-medium transition-all duration-300 capitalize">
+          {{ category === 'all' ? 'Todos' : category }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
+      <div
+        *ngFor="let project of filteredProjects"
+        class="card group overflow-hidden cursor-pointer transform hover:-translate-y-2 transition-all duration-300">
+        
+        <!-- Project Image -->
+        <div class="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-800 dark:to-primary-600">
+          <div class="aspect-video flex items-center justify-center">
+            <svg class="w-20 h-20 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <div class="flex gap-4">
+              <button
+                *ngIf="project.demoUrl"
+                (click)="openLink(project.demoUrl)"
+                class="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors duration-300"
+                aria-label="Ver demo">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+              </button>
+              <button
+                *ngIf="project.githubUrl"
+                (click)="openLink(project.githubUrl)"
+                class="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors duration-300"
+                aria-label="Ver código">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Info -->
+        <div class="space-y-3">
+          <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            {{ project.title }}
+          </h3>
+          
+          <p class="text-gray-600 dark:text-gray-400 line-clamp-2">
+            {{ project.description }}
+          </p>
+          
+          <!-- Technologies -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span
+              *ngFor="let tech of project.technologies"
+              class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No projects message -->
+    <div
+      *ngIf="filteredProjects.length === 0"
+      class="text-center py-16 animate-on-scroll">
+      <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <p class="text-gray-500 dark:text-gray-400 text-lg">
+        No hay proyectos en esta categoría
+      </p>
+    </div>
+  </div>
+</section>

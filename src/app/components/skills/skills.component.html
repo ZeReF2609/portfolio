@@ -1,0 +1,90 @@
+<section id="skills" class="py-20 px-4 bg-gray-50 dark:bg-gray-900">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Section Header -->
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="section-title">Habilidades</h2>
+      <p class="section-subtitle">
+        Tecnologías y herramientas que domino
+      </p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex justify-center mb-12 animate-on-scroll">
+      <div class="inline-flex flex-wrap gap-4 p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+        <button
+          *ngFor="let category of skillCategories"
+          (click)="selectCategory(category.name)"
+          [class.bg-primary-600]="selectedCategory === category.name"
+          [class.text-white]="selectedCategory === category.name"
+          [class.text-gray-700]="selectedCategory !== category.name"
+          [class.dark:text-gray-300]="selectedCategory !== category.name"
+          [class.hover:bg-gray-100]="selectedCategory !== category.name"
+          [class.dark:hover:bg-gray-700]="selectedCategory !== category.name"
+          class="px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
+          {{ category.name }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="animate-on-scroll">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          *ngFor="let skill of currentSkills?.skills"
+          class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <!-- Skill Header -->
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-display font-semibold text-gray-900 dark:text-white">
+              {{ skill.name }}
+            </h3>
+            <span class="text-primary-600 dark:text-primary-400 font-bold text-sm">
+              {{ skill.level }}%
+            </span>
+          </div>
+          
+          <!-- Progress Bar -->
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+            <div
+              class="bg-gradient-to-r from-primary-600 to-primary-400 h-full rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="skill.level"
+              [class.animate-pulse]="true">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Summary -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
+      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">3+</h3>
+        <p class="text-gray-600 dark:text-gray-400">Años de Experiencia</p>
+      </div>
+
+      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+        </div>
+        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">20+</h3>
+        <p class="text-gray-600 dark:text-gray-400">Tecnologías Dominadas</p>
+      </div>
+
+      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">10+</h3>
+        <p class="text-gray-600 dark:text-gray-400">Proyectos Completados</p>
+      </div>
+    </div>
+  </div>
+</section>
