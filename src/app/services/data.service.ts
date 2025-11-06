@@ -22,7 +22,7 @@ export class DataService {
       socialLinks: [
         { platform: 'GitHub', url: 'https://github.com/ZeReF2609/', icon: 'github' },
         { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/wilderrojasmarin/', icon: 'linkedin' },
-        { platform: 'Instagram', url: 'https://www.instagram.com/zereff.26', icon: 'twitter' }
+        { platform: 'Instagram', url: 'https://www.instagram.com/zereff.26', icon: 'instagram' }
       ]
     };
   }

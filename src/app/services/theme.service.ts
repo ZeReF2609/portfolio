@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export type ThemeMode = 'light' | 'dark';
 export type ColorTheme = 'blue' | 'green' | 'gray' | 'beige' | 'red' | 'purple' | 'orange' | 'yellow' | 'white' | 'pink';
+export type ThemeEffect = 'none' | 'glassmorphism' | 'dark-neon';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,20 @@ export type ColorTheme = 'blue' | 'green' | 'gray' | 'beige' | 'red' | 'purple' 
 export class ThemeService {
   private themeModeSubject = new BehaviorSubject<ThemeMode>('light');
   private colorThemeSubject = new BehaviorSubject<ColorTheme>('blue');
+  private effectSubject = new BehaviorSubject<ThemeEffect>('none');
   
   public themeMode$ = this.themeModeSubject.asObservable();
   public colorTheme$ = this.colorThemeSubject.asObservable();
+  public effect$ = this.effectSubject.asObservable();
 
   constructor() {
     this.loadThemeFromStorage();
   }
 
   private loadThemeFromStorage(): void {
-    const savedThemeMode = localStorage.getItem('themeMode') as ThemeMode;
-    const savedColorTheme = localStorage.getItem('colorTheme') as ColorTheme;
+    const savedThemeMode = localStorage.getItem('themeMode') as ThemeMode | null;
+    const savedColorTheme = localStorage.getItem('colorTheme') as ColorTheme | null;
+    const savedEffect = localStorage.getItem('themeEffect') as ThemeEffect | null;
     
     if (savedThemeMode) {
       this.setThemeMode(savedThemeMode);
@@ -28,6 +32,10 @@ export class ThemeService {
     
     if (savedColorTheme) {
       this.setColorTheme(savedColorTheme);
+    }
+
+    if (savedEffect) {
+      this.setEffect(savedEffect);
     }
   }
 
@@ -43,6 +51,12 @@ export class ThemeService {
     this.applyTheme();
   }
 
+  public setEffect(effect: ThemeEffect): void {
+    this.effectSubject.next(effect);
+    localStorage.setItem('themeEffect', effect);
+    this.applyTheme();
+  }
+
   public toggleThemeMode(): void {
     const newMode = this.themeModeSubject.value === 'light' ? 'dark' : 'light';
     this.setThemeMode(newMode);
@@ -52,6 +66,7 @@ export class ThemeService {
     const root = document.documentElement;
     const mode = this.themeModeSubject.value;
     const theme = this.colorThemeSubject.value;
+    const effect = this.effectSubject.value;
     
     // Apply dark mode class
     if (mode === 'dark') {
@@ -62,6 +77,9 @@ export class ThemeService {
     
     // Apply color theme
     root.setAttribute('data-theme', theme);
+
+    // Apply visual effect as a data attribute so CSS can target it
+    root.setAttribute('data-effect', effect);
   }
 
   public getCurrentThemeMode(): ThemeMode {
@@ -70,5 +88,9 @@ export class ThemeService {
 
   public getCurrentColorTheme(): ColorTheme {
     return this.colorThemeSubject.value;
+  }
+
+  public getCurrentEffect(): ThemeEffect {
+    return this.effectSubject.value;
   }
 }

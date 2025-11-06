@@ -215,3 +215,33 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary-600;
 }
+
+/* Theme visual effects hooked via data-effect attribute set on <html> by ThemeService */
+:root[data-effect="glassmorphism"] .theme-panel,
+:root[data-effect="glassmorphism"] .card {
+  background: rgba(255,255,255,0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+:root.dark[data-effect="glassmorphism"] .theme-panel,
+:root.dark[data-effect="glassmorphism"] .card {
+  background: rgba(17,24,39,0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+:root[data-effect="dark-neon"] .text-gradient {
+  text-shadow: 0 2px 14px rgba(99,102,241,0.18), 0 6px 30px rgba(59,130,246,0.12);
+}
+
+:root[data-effect="dark-neon"] .theme-toggle-btn::after {
+  background: radial-gradient(circle at center, rgba(59,130,246,0.25), transparent 40%);
+  filter: blur(12px);
+}
+
+:root.dark[data-effect="dark-neon"] .theme-toggle-btn::after {
+  background: radial-gradient(circle at center, rgba(56,189,248,0.18), transparent 40%);
+}

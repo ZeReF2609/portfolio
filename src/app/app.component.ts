@@ -8,6 +8,7 @@ import { CertificationsComponent } from './components/certifications/certificati
 import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,11 @@ import { FooterComponent } from './components/footer/footer.component';
     CertificationsComponent,
     BlogComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    ThemeSelectorComponent 
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'portfolio';

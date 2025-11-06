@@ -1,0 +1,99 @@
+<div class="theme-selector" [class.open]="isOpen">
+  <button class="theme-toggle-btn" (click)="toggleSelector()" title="Selector de temas">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M12 1v6m0 6v6m5.657-13.657l-4.243 4.243m-4.243 4.243l-4.243 4.243m16.485 0l-4.243-4.243m-4.243-4.243l-4.243-4.243"></path>
+    </svg>
+  </button>
+
+  <div class="theme-panel">
+    <div class="panel-header">
+      <h3>Personalización</h3>
+  <button class="close-btn" (click)="closeSelector()" aria-label="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="panel-section">
+      <h4>Paleta de Colores</h4>
+      <div class="theme-grid">
+        <button 
+          class="theme-option" 
+          *ngFor="let theme of colorThemes"
+          [class.active]="(currentTheme$ | async) === theme.name"
+          (click)="selectTheme(theme.name)"
+          [title]="theme.label"
+        >
+          <div class="theme-preview" [style.background-color]="theme.color"></div>
+          <span>{{ theme.label }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h4>Modo</h4>
+      <div class="mode-toggle">
+        <button 
+          class="mode-btn" 
+          [class.active]="(currentMode$ | async) === 'light'"
+          (click)="setMode('light')"
+          title="Modo Claro"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          Claro
+        </button>
+        <button 
+          class="mode-btn" 
+          [class.active]="(currentMode$ | async) === 'dark'"
+          (click)="setMode('dark')"
+          title="Modo Oscuro"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          Oscuro
+        </button>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h4>Efectos Visuales</h4>
+      <div class="effects-grid">
+        <button 
+          class="effect-btn" 
+          [class.active]="(currentEffect$ | async) === 'none'"
+          (click)="setEffect('none')"
+        >
+          Normal
+        </button>
+        <button 
+          class="effect-btn" 
+          [class.active]="(currentEffect$ | async) === 'glassmorphism'"
+          (click)="setEffect('glassmorphism')"
+        >
+          Glassmorphism
+        </button>
+        <button 
+          class="effect-btn" 
+          [class.active]="(currentEffect$ | async) === 'dark-neon'"
+          (click)="setEffect('dark-neon')"
+        >
+          Dark Neon
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

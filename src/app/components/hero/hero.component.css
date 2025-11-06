@@ -1,1 +1,15 @@
-/* Hero specific styles */
+.typing-container {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  min-height: 2.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+}
