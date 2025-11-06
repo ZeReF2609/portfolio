@@ -24,8 +24,10 @@ export class HeaderComponent {
     { label: 'Habilidades', anchor: 'skills' },
     { label: 'Proyectos', anchor: 'projects' },
     { label: 'Certificaciones', anchor: 'certifications' },
+    { label: 'Experiencia', anchor: 'experience' },
     { label: 'Blog', anchor: 'blog' },
-    { label: 'Contacto', anchor: 'contact' }
+    { label: 'Contacto', anchor: 'contact' },
+    
   ];
 
   colorThemes: { name: ColorTheme; label: string; color: string }[] = [

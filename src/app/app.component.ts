@@ -9,6 +9,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
+import { ExperienceComponent } from "./components/experience/experience.component";
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,9 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
     BlogComponent,
     ContactComponent,
     FooterComponent,
-    ThemeSelectorComponent 
-  ],
+    ThemeSelectorComponent,
+    ExperienceComponent
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

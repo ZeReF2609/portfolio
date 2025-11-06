@@ -5,6 +5,7 @@ import { SkillCategory } from '../models/skill.interface';
 import { ContactInfo } from '../models/contact.interface';
 import { Certification, Event } from '../models/certification.interface';
 import { Community, BlogPost } from '../models/community.interface';
+import { Experience } from '../models/experience.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -160,5 +161,28 @@ export class DataService {
       email: 'wilderrojasmarin@gmail.com',
       location: 'Perú'
     };
+  }
+
+  getExperience(): Experience[] {
+    return [
+      {
+        id: 1,
+        company: 'Manufacturas San Isidro S.A.C.',
+        position: 'Desarrollador Full Stack',
+        startDate: '2025-02',
+        endDate: '2025-12',
+        description: 'Implementación de sistema de monitoreo de PLC en tiempo real optimizando el control de procesos industriales (35% mejora). Digitalización del proceso de visitas reduciendo tiempos de validación en 40%. Optimización de gestión de reportes eléctricos y productivos automatizando la recopilación de datos (30% reducción). Desarrollo de sistemas integrando lecturas de PLC con Python y APIs en C#, generando reportes y dashboards en Flutter (80% mejora en eficiencia).',
+        current: true
+      },
+      {
+        id: 2,
+        company: 'Manufacturas San Isidro S.A.C.',
+        position: 'Prácticas Profesionales',
+        startDate: '2024-08',
+        endDate: '2025-02',
+        description: 'Configuración y administración de bases de datos para aplicaciones web responsivas mejorando disponibilidad en 25%. Implementación de medidas de seguridad reduciendo vulnerabilidades en 30% y optimización SEO. Aplicación de buenas prácticas logrando 20% de mejora en estabilidad y escalabilidad de sistemas internos.',
+        current: false
+      }
+    ];
   }
 }
