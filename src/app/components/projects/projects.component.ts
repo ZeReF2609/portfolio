@@ -21,6 +21,11 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.allProjects = this.dataService.getProjects();
+    this.allProjects.forEach(p => {
+      if (p.image && typeof p.image === 'string' && p.image.includes('..')) {
+        p.image = p.image.replace(/\.\./g, '.');
+      }
+    });
     this.filteredProjects = this.allProjects;
   }
 
@@ -39,5 +44,10 @@ export class ProjectsComponent implements OnInit {
     if (url) {
       window.open(url, '_blank');
     }
+  }
+
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/image.png';
   }
 }

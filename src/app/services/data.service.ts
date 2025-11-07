@@ -34,7 +34,7 @@ export class DataService {
         id: 1,
         title: 'Zafar E-Commerce',
         description: 'Plataforma de e-commerce moderna para ropa y accesorios. Incluye carrito persistente, sistema de checkout, cuenta de usuario, y panel de administración. Desarrollado con las últimas tecnologías.',
-        image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80',
+        image: 'assets/project/zafar_ecommerce.png',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'ShadCN UI', 'Zustand', 'React Hook Form', 'Zod'],
         demoUrl: 'https://zafar-ecommerce-wp5b.vercel.app',
         githubUrl: 'https://github.com/ZeReF2609/zafarEcommerce',
@@ -44,10 +44,20 @@ export class DataService {
         id: 2,
         title: 'Portfolio Personal',
         description: 'Mi portafolio personal desarrollado con Angular, mostrando mis habilidades, proyectos y experiencia profesional. Diseño moderno y responsivo con sistema de temas personalizable.',
-        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80',
+        image: 'assets/project/portafolio1.png',
         technologies: ['Angular', 'TypeScript', 'SCSS', 'Lottie', 'Responsive Design'],
+        demoUrl: 'https://portafolio-theta-lilac.vercel.app',
         githubUrl: 'https://github.com/ZeReF2609/portafolio',
         category: 'Web'
+      },
+      {
+        id: 3,
+        title: 'Ticket Support App',
+        description: 'Sistema multiplataforma para gestión de tickets de soporte técnico (roles, tickets, chat, calendario, dashboard y métricas). Arquitectura modular con Riverpod y SQLite; UI basada en Material 3 y componentes Syncfusion/FL Chart.',
+        image: 'assets/project/ticket_support_app.png',
+        technologies: ['Flutter', 'Dart', 'Riverpod', 'SQLite', 'Syncfusion', 'FL Chart', 'Provider'],
+        githubUrl: 'https://github.com/ZeReF2609/ticket_support_app',
+        category: 'Mobile'
       }
     ];
   }

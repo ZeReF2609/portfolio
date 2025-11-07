@@ -34,10 +34,8 @@
         
         <!-- Project Image -->
         <div class="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-800 dark:to-primary-600">
-          <div class="aspect-video flex items-center justify-center">
-            <svg class="w-20 h-20 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
-            </svg>
+          <div class="aspect-video flex items-center justify-center overflow-hidden">
+            <img [src]="project.image" alt="{{ project.title }}" class="w-full h-full object-cover" (error)="onImgError($event)" />
           </div>
           <!-- Overlay on hover -->
           <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
