@@ -198,6 +198,25 @@ export class DataService {
         date: 'Septiembre 2025',
         description: 'Conferencia internacional enfocada en Angular, mejores prácticas, casos de estudio y tendencias de desarrollo frontend.',
         topics: ['Angular', 'Frontend', 'Best Practices', 'Case Studies']
+      },
+      {
+        id: 4,
+        title: 'CodeOn 2025 (1ª edición)',
+        organization: 'CodeOn / GDG',
+        location: 'Av. Arequipa 265, Lima, Perú',
+        date: 'Octubre 2025',
+        description: 'Asistí a la 1ª edición de CodeOn 2025: un día de charlas, talleres y networking sobre AI, Android, DevOps, Firebase y desarrollo web.',
+        topics: ['AI', 'Android', 'DevOps', 'Firebase', 'Web']
+      }
+      ,
+      {
+        id: 5,
+        title: 'Ethereum Lima Day 2025',
+        organization: 'Ethereum Lima',
+        location: 'Av. Arequipa 265, Lima, Perú',
+        date: 'Mayo 2025',
+        description: 'Asistí a Ethereum Lima Day 2025 jornada con charlas y workshops sobre Ethereum, Web3, blockchain y AI. Se presentaron ponentes nacionales e internacionales.',
+        topics: ['Ethereum', 'Web3', 'Blockchain', 'AI']
       }
     ];
   }
@@ -287,6 +306,16 @@ export class DataService {
         startDate: '2024-08',
         endDate: '2025-02',
         description: 'Configuración y administración de bases de datos para aplicaciones web responsivas mejorando disponibilidad en 25%. Implementación de medidas de seguridad reduciendo vulnerabilidades en 30% y optimización SEO. Aplicación de buenas prácticas logrando 20% de mejora en estabilidad y escalabilidad de sistemas internos.',
+        current: false
+      }
+      ,
+      {
+        id: 3,
+        company: 'Transporte Guías',
+        position: 'Prácticas Pre Profesionales',
+        startDate: '2023-09-21',
+        endDate: '2023-10-20',
+        description: 'Prácticas pre profesionales en Transporte Guías: apoyo en logística y coordinación de rutas, manejo de documentación de transporte y atención a clientes.',
         current: false
       }
     ];
