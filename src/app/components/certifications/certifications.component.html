@@ -11,28 +11,45 @@
     <!-- Certifications -->
     <div class="mb-16 animate-on-scroll">
       <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-8">
-        Certificaciones Platzi 2025
+        Certificaciones
       </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          *ngFor="let cert of certifications"
-          class="card group hover:border-primary-500 dark:hover:border-primary-400 border-2 border-transparent">
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center flex-shrink-0">
-              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">
-                {{ cert.title }}
-              </h4>
-              <p class="text-sm text-primary-600 dark:text-primary-400 font-medium">
-                {{ cert.organization }}
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                {{ cert.date }}
-              </p>
+      
+      <!-- Grouped by Organization -->
+      <div class="space-y-12">
+        <div *ngFor="let org of organizations" class="animate-on-scroll">
+          <!-- Organization Header -->
+          <div class="flex items-center mb-6">
+            <div class="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+            <h4 class="px-4 text-lg font-semibold text-primary-600 dark:text-primary-400">
+              {{ org }}
+            </h4>
+            <div class="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+          </div>
+          
+          <!-- Certificates Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              *ngFor="let cert of certificationsByOrg[org]"
+              (click)="openCertificate(cert.pdfUrl)"
+              class="card group hover:border-primary-500 dark:hover:border-primary-400 border-2 border-transparent cursor-pointer">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-semibold text-gray-900 dark:text-white mb-1">
+                    {{ cert.title }}
+                  </h4>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {{ cert.date }}
+                  </p>
+                  <p class="text-xs text-gray-600 dark:text-gray-400 mt-2" *ngIf="cert.description">
+                    {{ cert.description }}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

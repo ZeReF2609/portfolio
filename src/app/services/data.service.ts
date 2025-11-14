@@ -64,12 +64,109 @@ export class DataService {
 
   getCertifications(): Certification[] {
     return [
-      { id: 1, title: 'Curso de Introducción al Desarrollo Backend', organization: 'Platzi', date: '2025' },
-      { id: 2, title: 'Curso de Project Management con PMBOK', organization: 'Platzi', date: '2025' },
-      { id: 3, title: 'Curso de GitHub Copilot', organization: 'Platzi', date: '2025' },
-      { id: 4, title: 'Curso de Flutter', organization: 'Platzi', date: '2025' },
-      { id: 5, title: 'Curso de Git y GitHub', organization: 'Platzi', date: '2025' },
-      { id: 6, title: 'Curso de Python', organization: 'Platzi', date: '2025' }
+      // Cisco Certifications
+      { 
+        id: 1, 
+        title: 'Python Essentials 1', 
+        organization: 'Cisco Networking Academy', 
+        date: '23 Sep 2025',
+        description: 'Fundamentos de programación en Python',
+        pdfUrl: '/assets/certificates/cisco/Python_Essentials_1_certificate.pdf'
+      },
+      { 
+        id: 2, 
+        title: 'Introduction to IoT', 
+        organization: 'Cisco Networking Academy', 
+        date: '14 Nov 2023',
+        description: 'Conceptos básicos de Internet de las Cosas (IoT)',
+        pdfUrl: '/assets/certificates/cisco/Introduction_to_IoT_certificate.pdf'
+      },
+      
+      // Platzi Certifications
+      { 
+        id: 3, 
+        title: 'Backend con Node.js', 
+        organization: 'Platzi', 
+        date: '24 Ago 2025',
+        description: 'Desarrollo backend con Node.js y Express',
+        pdfUrl: '/assets/certificates/platzi/diploma-backend.pdf'
+      },
+      { 
+        id: 4, 
+        title: 'Desarrollo con Flutter', 
+        organization: 'Platzi', 
+        date: '31 Jul 2025',
+        description: 'Desarrollo de aplicaciones móviles con Flutter',
+        pdfUrl: '/assets/certificates/platzi/diploma-flutter.pdf'
+      },
+      { 
+        id: 5, 
+        title: 'Git y GitHub', 
+        organization: 'Platzi', 
+        date: '30 Jul 2025',
+        description: 'Control de versiones con Git y GitHub',
+        pdfUrl: '/assets/certificates/platzi/diploma-gitgithub.pdf'
+      },
+      { 
+        id: 6, 
+        title: 'GitHub Copilot', 
+        organization: 'Platzi', 
+        date: '31 Jul 2025',
+        description: 'Programación asistida con IA',
+        pdfUrl: '/assets/certificates/platzi/diploma-github-copilot.pdf'
+      },
+      { 
+        id: 7, 
+        title: 'Gestión de Proyectos PMBOK', 
+        organization: 'Platzi', 
+        date: '24 Ago 2025',
+        description: 'Metodología de gestión de proyectos',
+        pdfUrl: '/assets/certificates/platzi/diploma-proyectos-pmbok.pdf'
+      },
+      { 
+        id: 8, 
+        title: 'Programación en Python', 
+        organization: 'Platzi', 
+        date: '27 Jul 2025',
+        description: 'Python desde cero hasta avanzado',
+        pdfUrl: '/assets/certificates/platzi/diploma-python.pdf'
+      },
+      
+      // UPN Certifications
+      { 
+        id: 9, 
+        title: 'Ingeniería del Futuro', 
+        organization: 'Universidad Privada del Norte', 
+        date: '29 Oct 2025',
+        description: 'Conferencia sobre tendencias en ingeniería',
+        pdfUrl: '/assets/certificates/upn/IngenieriaDelFuturo.pdf'
+      },
+      
+      // Cibertec Certifications
+      { 
+        id: 10, 
+        title: 'Certificación de Participación', 
+        organization: 'Cibertec', 
+        date: '07 Nov 2023',
+        description: 'Certificación de participación en programa académico',
+        pdfUrl: '/assets/certificates/cibertec/Certificación_de_Participación_Rojas Marin, Wilder Enrique.pdf'
+      },
+      { 
+        id: 11, 
+        title: 'Constancia de Egresado', 
+        organization: 'Cibertec', 
+        date: '30 Dic 2024',
+        description: 'Constancia de Término de Estudios en Cibertec',
+        pdfUrl: '/assets/certificates/cibertec/COVT.CIB-2025-001588_ROJAS MARIN, WILDER ENRIQUE.pdf'
+      },
+      { 
+        id: 12, 
+        title: 'Certificado Modular', 
+        organization: 'Cibertec', 
+        date: '10 Dic 2023',
+        description: 'Certificación de cumplimiento de módulos académicos',
+        pdfUrl: '/assets/certificates/cibertec/M2202382-202030368-ROJAS MARIN, WILDER ENRIQUE-COMPUTACIÓN E INFORMÁTICA.pdf'
+      }
     ];
   }
 
@@ -121,7 +218,7 @@ export class DataService {
   }
 
   getCVUrl(): string {
-    return 'https://portafolio-theta-lilac.vercel.app/assets/doc/cv_wilder_rojas_marin.pdf';
+    return 'assets/cv_wilder_rojas_marin.pdf';
   }
 
   getSkills(): SkillCategory[] {
@@ -134,7 +231,6 @@ export class DataService {
           { name: 'JavaScript', level: 90, category: 'Frontend' },
           { name: 'TypeScript', level: 88, category: 'Frontend' },
           { name: 'Angular', level: 90, category: 'Frontend' },
-          { name: 'React', level: 85, category: 'Frontend' },
           { name: 'Vue.js', level: 80, category: 'Frontend' },
           { name: 'Sass/SCSS', level: 87, category: 'Frontend' }
         ]

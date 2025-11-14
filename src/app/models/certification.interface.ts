@@ -5,6 +5,7 @@ export interface Certification {
   date: string;
   description?: string;
   icon?: string;
+  pdfUrl?: string;
 }
 
 export interface Event {
