@@ -17,6 +17,7 @@ export class HeaderComponent {
   currentThemeMode: ThemeMode = 'light';
   currentColorTheme: ColorTheme = 'blue';
   cvUrl: string = '';
+  // ownerMode = localStorage.getItem('owner_mode') === '1';
 
   menuItems = [
     { label: 'Inicio', anchor: 'hero' },
@@ -25,7 +26,7 @@ export class HeaderComponent {
     { label: 'Proyectos', anchor: 'projects' },
     { label: 'Certificaciones', anchor: 'certifications' },
     { label: 'Experiencia', anchor: 'experience' },
-    { label: 'Blog', anchor: 'blog' },
+    // { label: 'Blog', anchor: 'blog' },
     { label: 'Contacto', anchor: 'contact' },
     
   ];
@@ -89,4 +90,13 @@ export class HeaderComponent {
   downloadCV(): void {
     window.open(this.cvUrl, '_blank');
   }
+
+  // toggleOwnerMode(): void {
+  //   this.ownerMode = !this.ownerMode;
+  //   try {
+  //     localStorage.setItem('owner_mode', this.ownerMode ? '1' : '0');
+  //   } catch (e) {
+  //     // ignore storage errors
+  //   }
+  // }
 }

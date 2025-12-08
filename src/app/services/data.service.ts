@@ -166,6 +166,22 @@ export class DataService {
         date: '10 Dic 2023',
         description: 'Certificación de cumplimiento de módulos académicos',
         pdfUrl: '/assets/certificates/cibertec/M2202382-202030368-ROJAS MARIN, WILDER ENRIQUE-COMPUTACIÓN E INFORMÁTICA.pdf'
+      },
+      {
+        id: 13,
+        title: 'Diploma de Reconocimiento - Programa MiConsultor (MiBanco)',
+        organization: 'Universidad Privada del Norte', 
+        date: '26 Nov 2025',
+        description: 'Diploma otorgado por haber culminado el programa MiConsultor de MiBanco, en alianza con la Universidad Privada del Norte. Incluye firmas de la Gerencia de Sostenibilidad e Inclusión Financiera de MiBanco y del Decano de la Facultad de Negocios de la UPN.',
+        pdfUrl: '/assets/certificates/upn/Wilder Enrique Rojas Marin MI BANCO.pdf'
+      },
+      {
+        id: 14,
+        title: 'AWS Academy Graduate — Cloud Operations (Training Badge)',
+        organization: 'AWS Academy',
+        date: '05 Dic 2025',
+        description: 'Badge otorgado por completar el programa de Cloud Operations de AWS Academy. Incluye contenidos sobre operaciones en la nube, administración de infraestructuras, despliegue, monitorización y buenas prácticas en AWS.',
+        pdfUrl: '/assets/certificates/AWS/AWS_Academy_Graduate___Cloud_Operations___Training_Badge_Badge20251205-31-83t6ix.pdf'
       }
     ];
   }
@@ -207,8 +223,7 @@ export class DataService {
         date: 'Octubre 2025',
         description: 'Asistí a la 1ª edición de CodeOn 2025: un día de charlas, talleres y networking sobre AI, Android, DevOps, Firebase y desarrollo web.',
         topics: ['AI', 'Android', 'DevOps', 'Firebase', 'Web']
-      }
-      ,
+      },
       {
         id: 5,
         title: 'Ethereum Lima Day 2025',
@@ -217,7 +232,26 @@ export class DataService {
         date: 'Mayo 2025',
         description: 'Asistí a Ethereum Lima Day 2025 jornada con charlas y workshops sobre Ethereum, Web3, blockchain y AI. Se presentaron ponentes nacionales e internacionales.',
         topics: ['Ethereum', 'Web3', 'Blockchain', 'AI']
+      },
+      {
+        id: 6,
+        title: 'CodeOn 2025 (2ª edición)',
+        organization: 'CodeOn / GDG',
+        location: 'Av. Arequipa 265, Lima, Perú',
+        date: 'Noviembre 2025',
+        description: 'Asistí en la 2ª edición de CodeOn 2025, enfocada en talleres prácticos y sesiones técnicas. Temas técnicos destacados: integración continua y despliegues con GitHub Actions, contenedores Docker y despliegues en entornos serverless, orquestación introductoria con Kubernetes, optimización de rendimiento web, arquitecturas backend con Firebase y Supabase, y desarrollo móvil con Android y Flutter. Hubo sesiones hands-on con ejercicios de CI/CD, pipelines, y ejemplos de monitoring y observability.',
+        topics: ['CI/CD', 'Docker', 'Kubernetes (intro)', 'Serverless', 'Firebase', 'Supabase', 'Android', 'Flutter', 'Web Performance', 'Observability']
+      },
+      {
+        id: 7,
+        title: 'DevFest Lima 2025',
+        organization: 'DevFest / GDG Lima',
+        location: 'Lima, Perú',
+        date: '2025',
+        description: 'Asistí a DevFest Lima 2025, centrado en inteligencia artificial, nube, desarrollo web y mobile. El programa incluyó charlas y workshops sobre modelos de IA y ML aplicados, arquitecturas cloud-native y serverless, desarrollo multiplataforma (Flutter/Android), performance web, seguridad en la nube y prácticas de observability.',
+        topics: ['AI/ML', 'Cloud', 'Serverless', 'Web', 'Mobile', 'Flutter', 'Android', 'Security', 'Observability']
       }
+
     ];
   }
 
