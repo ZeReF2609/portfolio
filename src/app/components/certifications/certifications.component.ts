@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Certification, Event } from '../../models/certification.interface';
@@ -11,7 +11,7 @@ import { ScrollAnimationDirective } from '../../directives/scroll-animation.dire
   templateUrl: './certifications.component.html',
   styleUrls: ['./certifications.component.css']
 })
-export class CertificationsComponent implements OnInit {
+export class CertificationsComponent implements OnInit, OnDestroy {
   certifications: Certification[] = [];
   events: Event[] = [];
   certificationsByOrg: { [key: string]: Certification[] } = {};
@@ -26,6 +26,11 @@ export class CertificationsComponent implements OnInit {
   sidebarOpen = true;
   expandedOrgs: Set<string> = new Set();
   orgVisibleCounts: { [key: string]: number } = {};
+
+  // Carousel state
+  carouselIntervals: { [eventId: number]: any } = {};
+  currentImageIndex: { [eventId: number]: number } = {};
+  openGallery: { [eventId: number]: boolean } = {};
 
   constructor(private dataService: DataService) {}
 
@@ -59,6 +64,53 @@ export class CertificationsComponent implements OnInit {
       return db.getTime() - da.getTime();
     });
     this.groupCertificationsByOrganization();
+    this.initializeCarousels();
+  }
+
+  ngOnDestroy(): void {
+    // Limpiar todos los intervalos cuando se destruya el componente
+    Object.values(this.carouselIntervals).forEach(interval => {
+      if (interval) clearInterval(interval);
+    });
+  }
+
+  initializeCarousels(): void {
+    this.events.forEach(event => {
+      if (event.images && event.images.length > 0) {
+        this.currentImageIndex[event.id] = 0;
+        // Auto-avanzar cada 3 segundos
+        this.carouselIntervals[event.id] = setInterval(() => {
+          this.nextImage(event.id, event.images!);
+        }, 3000);
+      }
+    });
+  }
+
+  nextImage(eventId: number, images: string[]): void {
+    if (!images || images.length === 0) return;
+    this.currentImageIndex[eventId] = (this.currentImageIndex[eventId] + 1) % images.length;
+  }
+
+  prevImage(eventId: number, images: string[]): void {
+    if (!images || images.length === 0) return;
+    this.currentImageIndex[eventId] = 
+      (this.currentImageIndex[eventId] - 1 + images.length) % images.length;
+  }
+
+  goToImage(eventId: number, index: number): void {
+    this.currentImageIndex[eventId] = index;
+  }
+
+  getCurrentImageIndex(eventId: number): number {
+    return this.currentImageIndex[eventId] || 0;
+  }
+
+  toggleGallery(eventId: number): void {
+    this.openGallery[eventId] = !this.openGallery[eventId];
+  }
+
+  isGalleryOpen(eventId: number): boolean {
+    return this.openGallery[eventId] || false;
   }
 
   groupCertificationsByOrganization(): void {

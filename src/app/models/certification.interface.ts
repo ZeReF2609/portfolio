@@ -16,4 +16,6 @@ export interface Event {
   date: string;
   description: string;
   topics?: string[];
+  images?: string[];
+  folder?: string; // Nombre de la carpeta en assets/events
 }

@@ -1,1 +1,55 @@
 /* Certificaciones Component Styles */
+
+/* Carousel smooth transitions */
+.carousel-image {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Carousel navigation buttons hover effects */
+.carousel-nav-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.carousel-nav-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Dot indicators animation */
+.carousel-dot {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Image loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.carousel-container img {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Prevent layout shift during image loading */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* Slide in animation for gallery */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-out;
+}

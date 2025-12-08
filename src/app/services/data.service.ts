@@ -11,7 +11,7 @@ import { Experience } from '../models/experience.interface';
   providedIn: 'root'
 })
 export class DataService {
-  
+
   getUserData(): User {
     return {
       name: 'Wilder Rojas',
@@ -65,104 +65,104 @@ export class DataService {
   getCertifications(): Certification[] {
     return [
       // Cisco Certifications
-      { 
-        id: 1, 
-        title: 'Python Essentials 1', 
-        organization: 'Cisco Networking Academy', 
+      {
+        id: 1,
+        title: 'Python Essentials 1',
+        organization: 'Cisco Networking Academy',
         date: '23 Sep 2025',
         description: 'Fundamentos de programación en Python',
         pdfUrl: '/assets/certificates/cisco/Python_Essentials_1_certificate.pdf'
       },
-      { 
-        id: 2, 
-        title: 'Introduction to IoT', 
-        organization: 'Cisco Networking Academy', 
+      {
+        id: 2,
+        title: 'Introduction to IoT',
+        organization: 'Cisco Networking Academy',
         date: '14 Nov 2023',
         description: 'Conceptos básicos de Internet de las Cosas (IoT)',
         pdfUrl: '/assets/certificates/cisco/Introduction_to_IoT_certificate.pdf'
       },
-      
+
       // Platzi Certifications
-      { 
-        id: 3, 
-        title: 'Backend con Node.js', 
-        organization: 'Platzi', 
+      {
+        id: 3,
+        title: 'Backend con Node.js',
+        organization: 'Platzi',
         date: '24 Ago 2025',
         description: 'Desarrollo backend con Node.js y Express',
         pdfUrl: '/assets/certificates/platzi/diploma-backend.pdf'
       },
-      { 
-        id: 4, 
-        title: 'Desarrollo con Flutter', 
-        organization: 'Platzi', 
+      {
+        id: 4,
+        title: 'Desarrollo con Flutter',
+        organization: 'Platzi',
         date: '31 Jul 2025',
         description: 'Desarrollo de aplicaciones móviles con Flutter',
         pdfUrl: '/assets/certificates/platzi/diploma-flutter.pdf'
       },
-      { 
-        id: 5, 
-        title: 'Git y GitHub', 
-        organization: 'Platzi', 
+      {
+        id: 5,
+        title: 'Git y GitHub',
+        organization: 'Platzi',
         date: '30 Jul 2025',
         description: 'Control de versiones con Git y GitHub',
         pdfUrl: '/assets/certificates/platzi/diploma-gitgithub.pdf'
       },
-      { 
-        id: 6, 
-        title: 'GitHub Copilot', 
-        organization: 'Platzi', 
+      {
+        id: 6,
+        title: 'GitHub Copilot',
+        organization: 'Platzi',
         date: '31 Jul 2025',
         description: 'Programación asistida con IA',
         pdfUrl: '/assets/certificates/platzi/diploma-github-copilot.pdf'
       },
-      { 
-        id: 7, 
-        title: 'Gestión de Proyectos PMBOK', 
-        organization: 'Platzi', 
+      {
+        id: 7,
+        title: 'Gestión de Proyectos PMBOK',
+        organization: 'Platzi',
         date: '24 Ago 2025',
         description: 'Metodología de gestión de proyectos',
         pdfUrl: '/assets/certificates/platzi/diploma-proyectos-pmbok.pdf'
       },
-      { 
-        id: 8, 
-        title: 'Programación en Python', 
-        organization: 'Platzi', 
+      {
+        id: 8,
+        title: 'Programación en Python',
+        organization: 'Platzi',
         date: '27 Jul 2025',
         description: 'Python desde cero hasta avanzado',
         pdfUrl: '/assets/certificates/platzi/diploma-python.pdf'
       },
-      
+
       // UPN Certifications
-      { 
-        id: 9, 
-        title: 'Ingeniería del Futuro', 
-        organization: 'Universidad Privada del Norte', 
+      {
+        id: 9,
+        title: 'Ingeniería del Futuro',
+        organization: 'Universidad Privada del Norte',
         date: '29 Oct 2025',
         description: 'Conferencia sobre tendencias en ingeniería',
         pdfUrl: '/assets/certificates/upn/IngenieriaDelFuturo.pdf'
       },
-      
+
       // Cibertec Certifications
-      { 
-        id: 10, 
-        title: 'Certificación de Participación', 
-        organization: 'Cibertec', 
+      {
+        id: 10,
+        title: 'Certificación de Participación',
+        organization: 'Cibertec',
         date: '07 Nov 2023',
         description: 'Certificación de participación en programa académico',
         pdfUrl: '/assets/certificates/cibertec/Certificación_de_Participación_Rojas Marin, Wilder Enrique.pdf'
       },
-      { 
-        id: 11, 
-        title: 'Constancia de Egresado', 
-        organization: 'Cibertec', 
+      {
+        id: 11,
+        title: 'Constancia de Egresado',
+        organization: 'Cibertec',
         date: '30 Dic 2024',
         description: 'Constancia de Término de Estudios en Cibertec',
         pdfUrl: '/assets/certificates/cibertec/COVT.CIB-2025-001588_ROJAS MARIN, WILDER ENRIQUE.pdf'
       },
-      { 
-        id: 12, 
-        title: 'Certificado Modular', 
-        organization: 'Cibertec', 
+      {
+        id: 12,
+        title: 'Certificado Modular',
+        organization: 'Cibertec',
         date: '10 Dic 2023',
         description: 'Certificación de cumplimiento de módulos académicos',
         pdfUrl: '/assets/certificates/cibertec/M2202382-202030368-ROJAS MARIN, WILDER ENRIQUE-COMPUTACIÓN E INFORMÁTICA.pdf'
@@ -170,7 +170,7 @@ export class DataService {
       {
         id: 13,
         title: 'Diploma de Reconocimiento - Programa MiConsultor (MiBanco)',
-        organization: 'Universidad Privada del Norte', 
+        organization: 'Universidad Privada del Norte',
         date: '26 Nov 2025',
         description: 'Diploma otorgado por haber culminado el programa MiConsultor de MiBanco, en alianza con la Universidad Privada del Norte. Incluye firmas de la Gerencia de Sostenibilidad e Inclusión Financiera de MiBanco y del Decano de la Facultad de Negocios de la UPN.',
         pdfUrl: '/assets/certificates/upn/Wilder Enrique Rojas Marin MI BANCO.pdf'
@@ -231,7 +231,19 @@ export class DataService {
         location: 'Av. Arequipa 265, Lima, Perú',
         date: 'Mayo 2025',
         description: 'Asistí a Ethereum Lima Day 2025 jornada con charlas y workshops sobre Ethereum, Web3, blockchain y AI. Se presentaron ponentes nacionales e internacionales.',
-        topics: ['Ethereum', 'Web3', 'Blockchain', 'AI']
+        topics: ['Ethereum', 'Web3', 'Blockchain', 'AI'],
+        folder: 'Ethereum',
+        images: [
+          'assets/events/Ethereum/1.jpeg',
+          'assets/events/Ethereum/2.jpeg',
+          'assets/events/Ethereum/3.jpeg',
+          'assets/events/Ethereum/4.jpeg',
+          'assets/events/Ethereum/5.jpeg',
+          'assets/events/Ethereum/6.jpeg',
+          'assets/events/Ethereum/7.jpeg',
+          'assets/events/Ethereum/8.jpeg',
+          'assets/events/Ethereum/9.jpeg',
+        ]
       },
       {
         id: 6,
@@ -245,13 +257,12 @@ export class DataService {
       {
         id: 7,
         title: 'DevFest Lima 2025',
-        organization: 'DevFest / GDG Lima',
-        location: 'Lima, Perú',
-        date: '2025',
-        description: 'Asistí a DevFest Lima 2025, centrado en inteligencia artificial, nube, desarrollo web y mobile. El programa incluyó charlas y workshops sobre modelos de IA y ML aplicados, arquitecturas cloud-native y serverless, desarrollo multiplataforma (Flutter/Android), performance web, seguridad en la nube y prácticas de observability.',
-        topics: ['AI/ML', 'Cloud', 'Serverless', 'Web', 'Mobile', 'Flutter', 'Android', 'Security', 'Observability']
+        organization: 'GDG Lima (Google Developers Group)',
+        location: 'UPC Campus Villa, 11 Avenida Alameda San Marcos, Chorrillos, 15067',
+        date: 'Noviembre 2025',
+        description: 'Asistí en DevFest Lima 2025, la conferencia anual más grande de desarrolladores en Perú organizada por GDG Lima. El evento se centró en las tecnologías emergentes de Google y la comunidad de código abierto, con un enfoque en las siguientes áreas temáticas:',
+        topics: ['AI/ML', 'Cloud', 'GCP', 'Serverless', 'Web', 'Mobile', 'Flutter', 'Android', 'Security', 'Observability'],
       }
-
     ];
   }
 

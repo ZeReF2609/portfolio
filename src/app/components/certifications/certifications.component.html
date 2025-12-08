@@ -149,42 +149,60 @@
         <div
           *ngFor="let event of events"
           class="card hover:shadow-2xl transition-all duration-300">
-          <div class="flex flex-col md:flex-row md:items-start md:space-x-6">
+          
+          <div class="flex items-start gap-4">
             <!-- Event Icon/Badge -->
-            <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center flex-shrink-0 mb-4 md:mb-0">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center flex-shrink-0">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
             </div>
-
+            
             <!-- Event Details -->
             <div class="flex-1">
-              <h4 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-2">
-                {{ event.title }}
-              </h4>
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h4 class="text-xl font-display font-bold text-gray-900 dark:text-white">
+                  {{ event.title }}
+                </h4>
+                
+                <!-- Botón Ver Fotos -->
+                <button 
+                  *ngIf="event.images && event.images.length > 0"
+                  (click)="toggleGallery(event.id)"
+                  class="flex-shrink-0 px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 flex items-center gap-2 text-sm">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <span *ngIf="!isGalleryOpen(event.id)">Ver fotos ({{ event.images.length }})</span>
+                  <span *ngIf="isGalleryOpen(event.id)">Ocultar fotos</span>
+                </button>
+              </div>
+              
               <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
                 <span class="flex items-center">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                   </svg>
                   {{ event.organization }}
                 </span>
                 <span class="flex items-center">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   </svg>
                   {{ event.location }}
                 </span>
                 <span class="flex items-center">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                   </svg>
                   {{ event.date }}
                 </span>
               </div>
-              <p class="text-gray-700 dark:text-gray-300 mb-4">
+              
+              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                 {{ event.description }}
               </p>
+              
               <!-- Topics -->
               <div class="flex flex-wrap gap-2" *ngIf="event.topics && event.topics.length > 0">
                 <span
@@ -192,6 +210,73 @@
                   class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium">
                   {{ topic }}
                 </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Galería de imágenes (dentro de la card, debajo del contenido) -->
+          <div *ngIf="event.images && event.images.length > 0 && isGalleryOpen(event.id)" 
+               class="mt-6 overflow-hidden animate-slideIn">
+            <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border-2 border-primary-500 dark:border-primary-400">
+              <div class="relative h-96 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
+                <!-- Image Carousel -->
+                <img 
+                  *ngFor="let image of event.images; let i = index"
+                  [src]="image" 
+                  [alt]="event.title + ' - Imagen ' + (i + 1)"
+                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out p-2"
+                  [class.opacity-100]="getCurrentImageIndex(event.id) === i"
+                  [class.opacity-0]="getCurrentImageIndex(event.id) !== i">
+                
+                <!-- Gradient overlay inferior -->
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
+                
+                <!-- Navigation Arrows -->
+                <button 
+                  (click)="prevImage(event.id, event.images)"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/95 dark:bg-gray-800/95 p-2.5 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-110 transition-all duration-200 z-20"
+                  aria-label="Imagen anterior">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                  </svg>
+                </button>
+                <button 
+                  (click)="nextImage(event.id, event.images)"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/95 dark:bg-gray-800/95 p-2.5 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-110 transition-all duration-200 z-20"
+                  aria-label="Imagen siguiente">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </button>
+                
+                <!-- Info overlay en la parte inferior -->
+                <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
+                  <div class="flex items-center justify-between">
+                    <span class="text-white text-sm font-bold backdrop-blur-sm bg-black/50 px-4 py-2 rounded-full">
+                      {{ getCurrentImageIndex(event.id) + 1 }} / {{ event.images.length }}
+                    </span>
+                    <!-- Dots Indicators -->
+                    <div class="flex gap-2">
+                      <button 
+                        *ngFor="let image of event.images; let i = index"
+                        (click)="goToImage(event.id, i)"
+                        [ngClass]="{
+                          'w-2 h-2 rounded-full transition-all duration-300 bg-white/60 hover:bg-white/80': getCurrentImageIndex(event.id) !== i,
+                          'w-8 h-2 rounded-full transition-all duration-300 bg-white': getCurrentImageIndex(event.id) === i
+                        }"
+                        [attr.aria-label]="'Ir a imagen ' + (i + 1)">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Badge de galería -->
+                <div class="absolute top-3 left-3 bg-primary-600 text-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-lg z-10 flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  Galería de fotos
+                </div>
               </div>
             </div>
           </div>
