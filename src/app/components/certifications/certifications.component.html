@@ -10,130 +10,92 @@
 
     <!-- Certifications -->
     <div class="mb-16 animate-on-scroll">
-      <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center justify-center mb-12">
         <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white">
           Certificaciones ({{ certifications.length }})
         </h3>
-        <button
-          (click)="toggleAllOrgs()"
-          class="ml-4 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/50 transition-colors flex items-center gap-2"
-          title="Desplegar/Colapsar todas las organizaciones">
-          <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-          <span>{{ allOrgsExpanded ? 'Colapsar todos' : 'Desplegar todos' }}</span>
-        </button>
       </div>
       
-      <!-- Accordion by Organization -->
-      <div class="space-y-4">
-        <div *ngFor="let org of organizations" class="animate-on-scroll">
-          <!-- Organization Accordion Header -->
-          <div 
-            (click)="toggleOrg(org)"
-            class="flex items-center justify-between p-6 bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 cursor-pointer transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+      <!-- Organizations Grid as Map -->
+      <div class="space-y-12">
+        <div *ngFor="let org of organizations; let orgIndex = index" class="animate-on-scroll">
+          
+          <!-- Organization Header (Folder-like) -->
+          <div class="mb-6">
+            <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-xl border-l-4 border-primary-600 shadow-sm">
+              <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
                 </svg>
               </div>
-              <div>
-                <h4 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <div class="flex-1">
+                <h4 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                   {{ org }}
                 </h4>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
+                <p class="text-sm text-gray-600 dark:text-gray-300 font-medium">
                   {{ getTotalCertsForOrg(org) }} certificación{{ getTotalCertsForOrg(org) !== 1 ? 'es' : '' }}
                 </p>
               </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 rounded-full text-sm font-bold">
-                {{ getTotalCertsForOrg(org) }}
-              </span>
-              <svg 
-                class="w-6 h-6 text-gray-400 transition-transform duration-300"
-                [class.rotate-180]="isOrgExpanded(org)"
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
+              <div class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-md">
+                <span class="text-xl font-bold text-primary-600 dark:text-primary-400">
+                  {{ getTotalCertsForOrg(org) }}
+                </span>
+              </div>
             </div>
           </div>
-          
-          <!-- Accordion Content -->
-          <div 
-            class="overflow-hidden transition-all duration-300"
-            [class.max-h-0]="!isOrgExpanded(org)"
-            [class.max-h-[10000px]]="isOrgExpanded(org)">
-            <div class="pt-4 pb-2">
-              <!-- Certificates Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div
-                  *ngFor="let cert of getVisibleCertsForOrg(org); let i = index"
-                  (click)="openCertificate(cert.pdfUrl)"
-                  class="group relative bg-white dark:bg-gray-800 rounded-xl p-5 cursor-pointer overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                  [style.animation-delay]="i * 30 + 'ms'">
-                  
-                  <!-- Gradient overlay on hover -->
-                  <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  <!-- Content -->
-                  <div class="relative z-10">
-                    <div class="flex items-start gap-3">
-                      <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+
+          <!-- Certificates Grid (Always visible) -->
+          <div class="pl-6 md:pl-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div
+                *ngFor="let cert of getVisibleCertsForOrg(org); let i = index"
+                (click)="openCertificate(cert.pdfUrl)"
+                class="group relative bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+                [style.animation-delay]="(orgIndex * 50 + i * 30) + 'ms'">
+                
+                <!-- Gradient overlay on hover -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <!-- Content -->
+                <div class="relative z-10">
+                  <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h5 class="font-bold text-gray-900 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 text-sm leading-tight">
+                        {{ cert.title }}
+                      </h5>
+                      <div class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
+                        {{ cert.date }}
                       </div>
-                      <div class="flex-1 min-w-0">
-                        <h5 class="font-bold text-gray-900 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 text-sm leading-tight">
-                          {{ cert.title }}
-                        </h5>
-                        <div class="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-                          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                          </svg>
-                          {{ cert.date }}
-                        </div>
-                      </div>
-                      <!-- Hover arrow -->
-                      <div class="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                      </div>
+                    </div>
+                    <!-- Hover icon -->
+                    <div class="opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
+                      <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              <!-- Action Buttons -->
-              <div class="flex gap-3 mt-4 justify-center">
-                <!-- Ver más (todas si son ≤5, o mostrar 5 si son >5) -->
-                <button
-                  *ngIf="canShowMore(org) && !canShowAll(org)"
-                  (click)="showMoreCerts(org); $event.stopPropagation()"
-                  class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 shadow-md flex items-center gap-2">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                  </svg>
-                  Ver todas ({{ getTotalCertsForOrg(org) }})
-                </button>
-                
-                
-                <!-- Ver todos (cuando ya se muestran 5 y hay más) -->
-                <button
-                  *ngIf="canShowAll(org)"
-                  (click)="showAllCertsForOrg(org); $event.stopPropagation()"
-                  class="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 shadow-md flex items-center gap-2">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                  </svg>
-                  Ver todas ({{ getTotalCertsForOrg(org) }})
-                </button>
-              </div>
+            </div>
+            
+            <!-- Show More Button -->
+            <div class="flex justify-center mt-6" *ngIf="canShowMore(org)">
+              <button
+                (click)="showMoreCerts(org)"
+                class="group px-8 py-3 bg-white dark:bg-gray-800 border-2 border-primary-500 dark:border-primary-400 text-primary-600 dark:text-primary-400 font-bold rounded-xl hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 transition-all duration-300 shadow-md hover:shadow-xl flex items-center gap-3">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                <span>Ver más certificaciones ({{ getTotalCertsForOrg(org) - getVisibleCertsForOrg(org).length }} restantes)</span>
+              </button>
             </div>
           </div>
         </div>

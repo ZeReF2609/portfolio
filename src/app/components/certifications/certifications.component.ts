@@ -24,8 +24,8 @@ export class CertificationsComponent implements OnInit, OnDestroy {
   certLimit = 6;
   eventLimit = 3;
   sidebarOpen = true;
-  expandedOrgs: Set<string> = new Set();
   orgVisibleCounts: { [key: string]: number } = {};
+  initialVisibleCount = 6; // Mostrar 6 certificados inicialmente por organización
 
   // Carousel state
   carouselIntervals: { [eventId: number]: any } = {};
@@ -125,9 +125,9 @@ export class CertificationsComponent implements OnInit, OnDestroy {
 
     this.organizations = Object.keys(this.certificationsByOrg);
     
-    // Inicializar contadores de visibilidad (mostrar 1 inicialmente por organización)
+    // Inicializar contadores de visibilidad (mostrar 6 inicialmente por organización)
     this.organizations.forEach(org => {
-      this.orgVisibleCounts[org] = 5;
+      this.orgVisibleCounts[org] = this.initialVisibleCount;
     });
   }
 
@@ -178,61 +178,23 @@ export class CertificationsComponent implements OnInit, OnDestroy {
     this.sidebarOpen = !this.sidebarOpen;
   }
 
-  toggleOrg(org: string): void {
-    if (this.expandedOrgs.has(org)) {
-      this.expandedOrgs.delete(org);
-    } else {
-      this.expandedOrgs.add(org);
-    }
-  }
-
-  isOrgExpanded(org: string): boolean {
-    return this.expandedOrgs.has(org);
-  }
-
-  // Devuelve true si todas las organizaciones están expandidas
-  get allOrgsExpanded(): boolean {
-    return this.organizations.length > 0 && this.organizations.every(org => this.expandedOrgs.has(org));
-  }
-
-  // Alterna: si todas están expandidas las colapsa, si no las expande
-  toggleAllOrgs(): void {
-    if (this.allOrgsExpanded) {
-      this.expandedOrgs.clear();
-    } else {
-      this.organizations.forEach(org => this.expandedOrgs.add(org));
-    }
-  }
-
   getVisibleCertsForOrg(org: string): Certification[] {
     const certs = this.certificationsByOrg[org] || [];
-    const count = this.orgVisibleCounts[org] || 1;
+    const count = this.orgVisibleCounts[org] || this.initialVisibleCount;
     return certs.slice(0, count);
   }
 
   showMoreCerts(org: string): void {
     const totalCerts = this.certificationsByOrg[org]?.length || 0;
-    // Si tiene 5 o menos, mostrar todos. Si tiene más, mostrar 5
-    this.orgVisibleCounts[org] = totalCerts <= 5 ? totalCerts : 5;
-  }
-
-  showAllCertsForOrg(org: string): void {
-    const totalCerts = this.certificationsByOrg[org]?.length || 0;
+    // Mostrar todos los certificados
     this.orgVisibleCounts[org] = totalCerts;
   }
 
   canShowMore(org: string): boolean {
     const certs = this.certificationsByOrg[org] || [];
-    const currentCount = this.orgVisibleCounts[org] || 1;
-    // Solo mostrar "ver más" si tiene más de 1 certificación y aún no se han mostrado todas
-    return certs.length > 1 && currentCount < certs.length;
-  }
-
-  canShowAll(org: string): boolean {
-    const certs = this.certificationsByOrg[org] || [];
-    const currentCount = this.orgVisibleCounts[org] || 1;
-    // Solo mostrar "ver todos" si tiene más de 5 y no se están mostrando todas
-    return certs.length > 5 && currentCount < certs.length;
+    const currentCount = this.orgVisibleCounts[org] || this.initialVisibleCount;
+    // Mostrar botón si hay más certificados que los visibles actualmente
+    return certs.length > currentCount;
   }
 
   getTotalCertsForOrg(org: string): number {
