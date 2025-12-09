@@ -22,8 +22,8 @@
           
           <!-- Organization Header (Folder-like) -->
           <div class="mb-6">
-            <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-xl border-l-4 border-primary-600 shadow-sm">
-              <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg">
+            <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-primary-100/50 to-primary-50/50 dark:from-primary-900/20 dark:to-primary-800/20 rounded-xl border-l-4 border-primary-600 dark:border-primary-500 shadow-sm">
+              <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-500 dark:from-primary-500 dark:to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
                 </svg>
@@ -32,11 +32,11 @@
                 <h4 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                   {{ org }}
                 </h4>
-                <p class="text-sm text-gray-600 dark:text-gray-300 font-medium">
+                <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
                   {{ getTotalCertsForOrg(org) }} certificación{{ getTotalCertsForOrg(org) !== 1 ? 'es' : '' }}
                 </p>
               </div>
-              <div class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-md">
+              <div class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-700 rounded-full shadow-md border-2 border-primary-200 dark:border-primary-700">
                 <span class="text-xl font-bold text-primary-600 dark:text-primary-400">
                   {{ getTotalCertsForOrg(org) }}
                 </span>
@@ -50,16 +50,16 @@
               <div
                 *ngFor="let cert of getVisibleCertsForOrg(org); let i = index"
                 (click)="openCertificate(cert.pdfUrl)"
-                class="group relative bg-white dark:bg-gray-800 rounded-lg p-4 cursor-pointer overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+                class="group relative bg-white dark:bg-gray-800/90 rounded-lg p-4 cursor-pointer overflow-hidden border-2 border-gray-200 dark:border-gray-700/70 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl dark:hover:shadow-primary-500/20 hover:-translate-y-2 backdrop-blur-sm"
                 [style.animation-delay]="(orgIndex * 50 + i * 30) + 'ms'">
                 
                 <!-- Gradient overlay on hover -->
-                <div class="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-500/10 dark:from-primary-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <!-- Content -->
                 <div class="relative z-10">
                   <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-md">
                       <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                       </svg>
@@ -90,7 +90,7 @@
             <div class="flex justify-center mt-6" *ngIf="canShowMore(org)">
               <button
                 (click)="showMoreCerts(org)"
-                class="group px-8 py-3 bg-white dark:bg-gray-800 border-2 border-primary-500 dark:border-primary-400 text-primary-600 dark:text-primary-400 font-bold rounded-xl hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 transition-all duration-300 shadow-md hover:shadow-xl flex items-center gap-3">
+                class="group px-8 py-3 bg-white dark:bg-gray-800 border-2 border-primary-500 dark:border-primary-400 text-primary-600 dark:text-primary-400 font-bold rounded-xl hover:bg-primary-500 dark:hover:bg-primary-600 hover:text-white dark:hover:text-white hover:border-primary-600 dark:hover:border-primary-500 transition-all duration-300 shadow-md hover:shadow-xl dark:hover:shadow-primary-500/30 flex items-center gap-3">
                 <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                 </svg>
