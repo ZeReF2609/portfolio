@@ -195,17 +195,26 @@ export class DataService {
         location: 'Universidad Peruana de Ciencias Aplicadas',
         date: 'Junio 2025',
         description: 'Conferencias y workshops sobre Firebase, Cloud, Android, Flutter, Machine Learning y Vertex AI.',
-        topics: ['Firebase', 'Cloud', 'Android', 'Flutter', 'ML', 'Vertex AI']
+        topics: ['Firebase', 'Cloud', 'Android', 'Flutter', 'ML', 'Vertex AI'],
+        folder: 'FireBase2025',
+        images: [
+          'assets/events/FireBase2025/1.jpeg',
+          'assets/events/FireBase2025/2.jpeg',
+          'assets/events/FireBase2025/3.jpeg',
+          // 'assets/events/FireBase2025/4.jpeg',
+          'assets/events/FireBase2025/5.jpeg',
+          'assets/events/FireBase2025/6.jpeg',
+        ]
       },
-      {
-        id: 2,
-        title: 'AI Developer Day: Build with AI',
-        organization: 'GDG Callao',
-        location: 'UPC Campus San Miguel',
-        date: 'Julio 2025',
-        description: 'Talleres y charlas sobre Machine Learning, TensorFlow, Gemini, Flutter y Cloud.',
-        topics: ['Machine Learning', 'TensorFlow', 'Gemini', 'Flutter', 'Cloud']
-      },
+      // {
+      //   id: 2,
+      //   title: 'AI Developer Day: Build with AI',
+      //   organization: 'GDG Callao',
+      //   location: 'UPC Campus San Miguel',
+      //   date: 'Julio 2025',
+      //   description: 'Talleres y charlas sobre Machine Learning, TensorFlow, Gemini, Flutter y Cloud.',
+      //   topics: ['Machine Learning', 'TensorFlow', 'Gemini', 'Flutter', 'Cloud']
+      // },
       {
         id: 3,
         title: 'Ng Conf Perú 2025',
@@ -213,16 +222,35 @@ export class DataService {
         location: 'Universidad Tecnológica del Perú',
         date: 'Septiembre 2025',
         description: 'Conferencia internacional enfocada en Angular, mejores prácticas, casos de estudio y tendencias de desarrollo frontend.',
-        topics: ['Angular', 'Frontend', 'Best Practices', 'Case Studies']
+        topics: ['Angular', 'Frontend', 'Best Practices', 'Case Studies'],
+        folder: 'NgConf2025',
+        images: [
+          'assets/events/NgConf2025/1.jpeg',
+          'assets/events/NgConf2025/2.jpeg',
+          'assets/events/NgConf2025/3.jpeg',
+          'assets/events/NgConf2025/4.jpeg',
+          'assets/events/NgConf2025/5.jpeg',
+          'assets/events/NgConf2025/6.jpeg',
+        ]
       },
       {
-        id: 4,
+        id: 6,
         title: 'CodeOn 2025 (1ª edición)',
         organization: 'CodeOn / GDG',
         location: 'Av. Arequipa 265, Lima, Perú',
         date: 'Octubre 2025',
         description: 'Asistí a la 1ª edición de CodeOn 2025: un día de charlas, talleres y networking sobre AI, Android, DevOps, Firebase y desarrollo web.',
-        topics: ['AI', 'Android', 'DevOps', 'Firebase', 'Web']
+        topics: ['AI', 'Android', 'DevOps', 'Firebase', 'Web'],
+        folder: 'CodeonN12025',
+        images: [
+          'assets/events/CodeonN12025/1.jpeg',
+          'assets/events/CodeonN12025/2.jpeg',
+          'assets/events/CodeonN12025/3.jpeg',
+          'assets/events/CodeonN12025/4.jpeg',
+          'assets/events/CodeonN12025/5.jpeg',
+          'assets/events/CodeonN12025/6.jpeg',
+          'assets/events/CodeonN12025/7.jpeg',
+        ]
       },
       {
         id: 5,
@@ -232,27 +260,39 @@ export class DataService {
         date: 'Mayo 2025',
         description: 'Asistí a Ethereum Lima Day 2025 jornada con charlas y workshops sobre Ethereum, Web3, blockchain y AI. Se presentaron ponentes nacionales e internacionales.',
         topics: ['Ethereum', 'Web3', 'Blockchain', 'AI'],
-        folder: 'Ethereum',
+        folder: 'Ethereum2025',
         images: [
-          'assets/events/Ethereum/1.jpeg',
-          'assets/events/Ethereum/2.jpeg',
-          'assets/events/Ethereum/3.jpeg',
-          'assets/events/Ethereum/4.jpeg',
-          'assets/events/Ethereum/5.jpeg',
-          'assets/events/Ethereum/6.jpeg',
-          'assets/events/Ethereum/7.jpeg',
-          'assets/events/Ethereum/8.jpeg',
-          'assets/events/Ethereum/9.jpeg',
+          'assets/events/Ethereum2025/1.jpeg',
+          'assets/events/Ethereum2025/2.jpeg',
+          'assets/events/Ethereum2025/3.jpeg',
+          'assets/events/Ethereum2025/4.jpeg',
+          'assets/events/Ethereum2025/5.jpeg',
+          'assets/events/Ethereum2025/6.jpeg',
+          'assets/events/Ethereum2025/7.jpeg',
+          'assets/events/Ethereum2025/8.jpeg',
+          'assets/events/Ethereum2025/9.jpeg',
         ]
       },
       {
-        id: 6,
+        id: 2,
         title: 'CodeOn 2025 (2ª edición)',
         organization: 'CodeOn / GDG',
         location: 'Av. Arequipa 265, Lima, Perú',
         date: 'Noviembre 2025',
         description: 'Asistí en la 2ª edición de CodeOn 2025, enfocada en talleres prácticos y sesiones técnicas. Temas técnicos destacados: integración continua y despliegues con GitHub Actions, contenedores Docker y despliegues en entornos serverless, orquestación introductoria con Kubernetes, optimización de rendimiento web, arquitecturas backend con Firebase y Supabase, y desarrollo móvil con Android y Flutter. Hubo sesiones hands-on con ejercicios de CI/CD, pipelines, y ejemplos de monitoring y observability.',
-        topics: ['CI/CD', 'Docker', 'Kubernetes (intro)', 'Serverless', 'Firebase', 'Supabase', 'Android', 'Flutter', 'Web Performance', 'Observability']
+        topics: ['CI/CD', 'Docker', 'Kubernetes (intro)', 'Serverless', 'Firebase', 'Supabase', 'Android', 'Flutter', 'Web Performance', 'Observability'],
+        folder: 'CodeonN22025',
+        images: [
+          'assets/events/CodeonN22025/1.jpeg',
+          'assets/events/CodeonN22025/2.jpeg',
+          'assets/events/CodeonN22025/3.jpeg',
+          'assets/events/CodeonN22025/4.jpeg',
+          'assets/events/CodeonN22025/5.jpeg',
+          'assets/events/CodeonN22025/6.jpeg',
+          'assets/events/CodeonN22025/7.jpeg',
+          'assets/events/CodeonN22025/8.jpeg',
+          'assets/events/CodeonN22025/9.jpeg',
+        ]
       },
       {
         id: 7,
@@ -262,6 +302,19 @@ export class DataService {
         date: 'Noviembre 2025',
         description: 'Asistí en DevFest Lima 2025, la conferencia anual más grande de desarrolladores en Perú organizada por GDG Lima. El evento se centró en las tecnologías emergentes de Google y la comunidad de código abierto, con un enfoque en las siguientes áreas temáticas:',
         topics: ['AI/ML', 'Cloud', 'GCP', 'Serverless', 'Web', 'Mobile', 'Flutter', 'Android', 'Security', 'Observability'],
+        folder: 'DevFestLima2025',
+        images: [
+          'assets/events/DevFestLima2025/1.jpeg',
+          'assets/events/DevFestLima2025/2.jpeg',
+          'assets/events/DevFestLima2025/3.jpeg',
+          'assets/events/DevFestLima2025/4.jpeg',
+          'assets/events/DevFestLima2025/5.jpeg',
+          'assets/events/DevFestLima2025/6.jpeg',
+          'assets/events/DevFestLima2025/7.jpeg',
+          'assets/events/DevFestLima2025/8.jpeg',
+          'assets/events/DevFestLima2025/9.jpeg',
+          'assets/events/DevFestLima2025/10.jpeg',
+        ]
       }
     ];
   }
