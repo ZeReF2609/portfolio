@@ -206,7 +206,6 @@ export class DataService {
           'assets/events/Ethereum2025/6.jpeg',
           'assets/events/Ethereum2025/7.jpeg',
           'assets/events/Ethereum2025/8.jpeg',
-          'assets/events/Ethereum2025/9.jpeg',
         ]
       },
       {
