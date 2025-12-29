@@ -67,6 +67,15 @@ export class DataService {
         technologies: ["Next.js", "Firebase", "TypeScript", "Gemini AI", "Tailwind CSS", "Data Connect"],
         githubUrl: "https://github.com/ZeReF2609/expenseIQ",
         category: "Web"
+      },
+      {
+        id: 4,
+        title: "expenseIQ V2",
+        description: "Plataforma de inteligencia financiera para control de gastos y presupuestos. Incorpora reconocimiento automático de comprobantes (OCR) mediante IA (Gemini), dashboards analíticos en tiempo real y un sistema de diseño 'Crimson' (Dark Mode nativo). Arquitectura serverless escalable. Además de idiomas implementados",
+        image: "assets/project/expense_iq_v2.png",
+        technologies: ["Next.js", "Firebase", "TypeScript", "Gemini AI", "Tailwind CSS", "Data Connect"],
+        githubUrl: "https://github.com/ZeReF2609/expenseIQV2",
+        category: "Web"
       }
     ];
   }
