@@ -200,6 +200,14 @@ export class DataService {
         date: '05 Dic 2025',
         description: 'Badge otorgado por completar el programa de Cloud Operations de AWS Academy. Incluye contenidos sobre operaciones en la nube, administración de infraestructuras, despliegue, monitorización y buenas prácticas en AWS.',
         pdfUrl: '/assets/certificates/AWS/AWS_Academy_Graduate___Cloud_Operations___Training_Badge_Badge20251205-31-83t6ix.pdf'
+      },
+      {
+        id: 15,
+        title: 'Inteligencia Artificial con Python',
+        organization: 'Datux',
+        date: '27 DIC 2025',
+        description: 'Curso de introducción a la inteligencia artificial utilizando Python. Cubre conceptos básicos, algoritmos y aplicaciones prácticas de IA.',
+        pdfUrl: '/assets/certificates/datux/InteligenciaArtificialConPython.pdf'
       }
     ];
   }
@@ -207,7 +215,7 @@ export class DataService {
   getEvents(): Event[] {
     return [
       {
-        id: 1, 
+        id: 1,
         title: 'Ethereum Lima Day 2025',
         organization: 'Ethereum Lima',
         location: 'Av. Arequipa 265, Lima, Perú',
@@ -244,7 +252,7 @@ export class DataService {
         ]
       },
       {
-        id: 3, 
+        id: 3,
         title: 'Ng Conf Perú 2025',
         organization: 'GDG Callao',
         location: 'Universidad Tecnológica del Perú',
@@ -262,7 +270,7 @@ export class DataService {
         ]
       },
       {
-        id: 4, 
+        id: 4,
         title: 'CodeOn 2025 (1ª edición)',
         organization: 'CodeOn / GDG',
         location: 'Av. Arequipa 265, Lima, Perú',
@@ -281,7 +289,7 @@ export class DataService {
         ]
       },
       {
-        id: 5, 
+        id: 5,
         title: 'CodeOn 2025 (2ª edición)',
         organization: 'CodeOn / GDG',
         location: 'Av. Arequipa 265, Lima, Perú',
@@ -302,7 +310,7 @@ export class DataService {
         ]
       },
       {
-        id: 6, 
+        id: 6,
         title: 'DevFest Lima 2025',
         organization: 'GDG Lima (Google Developers Group)',
         location: 'UPC Campus Villa, 11 Avenida Alameda San Marcos, Chorrillos, 15067',
