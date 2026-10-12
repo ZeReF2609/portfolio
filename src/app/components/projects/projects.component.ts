@@ -5,11 +5,10 @@ import { Project } from '../../models/project.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 
 @Component({
-  selector: 'app-projects',
-  standalone: true,
-  imports: [CommonModule, ScrollAnimationDirective],
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+    selector: 'app-projects',
+    imports: [CommonModule, ScrollAnimationDirective],
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [];

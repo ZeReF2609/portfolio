@@ -5,10 +5,9 @@ import { Experience } from '../../models/experience.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 
 @Component({
-  selector: 'app-experience',
-  standalone: true,
-  imports: [CommonModule, ScrollAnimationDirective],
-  templateUrl: './experience.component.html'
+    selector: 'app-experience',
+    imports: [CommonModule, ScrollAnimationDirective],
+    templateUrl: './experience.component.html'
 })
 export class ExperienceComponent implements OnInit {
   experience: Experience[] = [];

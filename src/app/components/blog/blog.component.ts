@@ -5,11 +5,10 @@ import { Community, BlogPost } from '../../models/community.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 
 @Component({
-  selector: 'app-blog',
-  standalone: true,
-  imports: [CommonModule, ScrollAnimationDirective],
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+    selector: 'app-blog',
+    imports: [CommonModule, ScrollAnimationDirective],
+    templateUrl: './blog.component.html',
+    styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
   communities: Community[] = [];

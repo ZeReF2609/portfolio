@@ -12,23 +12,22 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
 import { ExperienceComponent } from "./components/experience/experience.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    HeaderComponent,
-    HeroComponent,
-    AboutComponent,
-    SkillsComponent,
-    ProjectsComponent,
-    CertificationsComponent,
-    BlogComponent,
-    ContactComponent,
-    FooterComponent,
-    ThemeSelectorComponent,
-    ExperienceComponent
-],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [
+        HeaderComponent,
+        HeroComponent,
+        AboutComponent,
+        SkillsComponent,
+        ProjectsComponent,
+        CertificationsComponent,
+        BlogComponent,
+        ContactComponent,
+        FooterComponent,
+        ThemeSelectorComponent,
+        ExperienceComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'portfolio';

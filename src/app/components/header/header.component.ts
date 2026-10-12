@@ -5,11 +5,10 @@ import { DataService } from '../../services/data.service';
 import { CarouselService, CarouselMode } from '../../services/carousel.service';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+    selector: 'app-header',
+    imports: [CommonModule],
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
   isScrolled = false;

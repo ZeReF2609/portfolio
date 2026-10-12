@@ -5,11 +5,10 @@ import { CarouselService, CarouselMode, CarouselConfig } from '../../services/ca
 import { Observable, map } from 'rxjs';
 
 @Component({
-  selector: 'app-theme-selector',
-  templateUrl: './theme-selector.component.html',
-  styleUrls: ['./theme-selector.component.css'],
-  standalone: true,
-  imports: [CommonModule]
+    selector: 'app-theme-selector',
+    templateUrl: './theme-selector.component.html',
+    styleUrls: ['./theme-selector.component.css'],
+    imports: [CommonModule]
 })
 export class ThemeSelectorComponent {
   isOpen = false;

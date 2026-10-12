@@ -28,11 +28,10 @@ interface FormData {
 }
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ScrollAnimationDirective],
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+    selector: 'app-contact',
+    imports: [CommonModule, FormsModule, ScrollAnimationDirective],
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);

@@ -4,11 +4,10 @@ import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.interface';
 
 @Component({
-  selector: 'app-hero',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.css']
+    selector: 'app-hero',
+    imports: [CommonModule],
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit, OnDestroy {
   user: User | null = null;

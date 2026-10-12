@@ -8,11 +8,10 @@ import Splide from '@splidejs/splide';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-certifications',
-  standalone: true,
-  imports: [CommonModule, ScrollAnimationDirective],
-  templateUrl: './certifications.component.html',
-  styleUrls: ['./certifications.component.css']
+    selector: 'app-certifications',
+    imports: [CommonModule, ScrollAnimationDirective],
+    templateUrl: './certifications.component.html',
+    styleUrls: ['./certifications.component.css']
 })
 export class CertificationsComponent implements OnInit, OnDestroy, AfterViewInit {
   certifications: Certification[] = [];
