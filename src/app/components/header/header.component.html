@@ -17,7 +17,7 @@
       </div>
 
       <!-- Desktop Menu -->
-      <ul class="hidden md:flex items-center space-x-8">
+      <ul class="hidden lg:flex items-center space-x-6 xl:space-x-8">
         <li *ngFor="let item of menuItems">
           <a (click)="scrollToSection(item.anchor)"
             class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors duration-300">
@@ -138,8 +138,19 @@
         </div>
 
 
+        <!-- Guided Tour (reinicia el tour) -->
+        <button (click)="startTour()" type="button"
+          class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+          [attr.aria-label]="'tour.start' | t"
+          [attr.title]="'tour.start' | t">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-width="2" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 8.5l-2 5-5 2 2-5 5-2z" />
+          </svg>
+        </button>
+
         <!-- Language Toggle (ES/EN) -->
-        <button (click)="toggleLanguage()" type="button"
+        <button (click)="toggleLanguage()" type="button" data-tour="lang"
           class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 text-sm font-bold leading-5 min-w-[2.25rem]"
           [attr.aria-label]="'header.switchLang' | t"
           [attr.title]="'header.switchLang' | t">
@@ -162,7 +173,7 @@
 
         <!-- Mobile Menu Button -->
         <button (click)="toggleMobileMenu()"
-          class="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+          class="lg:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
           [attr.aria-label]="'header.mobileMenu' | t">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -175,7 +186,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div *ngIf="isMobileMenuOpen" class="md:hidden mt-4 pb-4 animate-slide-down">
+    <div *ngIf="isMobileMenuOpen" class="lg:hidden mt-4 pb-4 animate-slide-down">
       <ul class="space-y-2">
         <li *ngFor="let item of menuItems">
           <a (click)="scrollToSection(item.anchor)"

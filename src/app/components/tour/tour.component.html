@@ -1,0 +1,119 @@
+<!-- ============ Tour guiado ============ -->
+@if (active()) {
+  <!-- Capa que bloquea clics fuera del diálogo -->
+  <div class="fixed inset-0 z-[1000]" aria-hidden="true"
+    [class.tour-dim]="!spot()"></div>
+
+  <!-- Recorte (spotlight): la sombra gigante oscurece todo menos el objetivo -->
+  @if (spot(); as s) {
+    <div class="tour-spot fixed z-[1001] pointer-events-none rounded-xl ring-4 ring-primary-400 motion-safe:transition-all motion-safe:duration-300"
+      aria-hidden="true"
+      [style.top.px]="s.top" [style.left.px]="s.left"
+      [style.width.px]="s.width" [style.height.px]="s.height"></div>
+  }
+
+  <!-- Tarjeta del guía -->
+  <div #card
+    class="tour-card fixed z-[1002] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-4 focus:outline-none"
+    [class.tour-card--docked]="mobile() || !cardPos()"
+    [style.top.px]="mobile() ? null : cardPos()?.top"
+    [style.left.px]="mobile() ? null : cardPos()?.left"
+    role="dialog" aria-modal="true" tabindex="-1"
+    aria-labelledby="tour-step-title" aria-describedby="tour-step-text">
+
+    <div class="flex items-start gap-3">
+      <img [src]="avatarSrc()" (error)="onAvatarError()" width="64" height="64"
+        [alt]="'tour.avatarAlt' | t"
+        class="w-16 h-16 shrink-0 rounded-full object-cover ring-2 ring-primary-400 bg-primary-50 dark:bg-primary-900/40">
+
+      <div class="min-w-0 flex-1" aria-live="polite" aria-atomic="true">
+        <h2 id="tour-step-title" class="font-display font-bold text-lg leading-tight text-gray-900 dark:text-white">
+          {{ titleKey() | t }}
+        </h2>
+        <p id="tour-step-text" class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          {{ textKey() | t }}
+        </p>
+      </div>
+
+      <button type="button" (click)="finish()"
+        class="-mt-1 -mr-1 p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400"
+        [attr.aria-label]="'tour.close' | t">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Progreso -->
+    <div class="mt-3 flex items-center gap-2">
+      <div class="flex-1 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden" aria-hidden="true">
+        <div class="h-full bg-primary-500 motion-safe:transition-all motion-safe:duration-300"
+          [style.width.%]="((index() + 1) / steps().length) * 100"></div>
+      </div>
+      <span class="text-xs font-semibold tabular-nums text-gray-500 dark:text-gray-400" [attr.aria-label]="progressLabel()">
+        {{ index() + 1 }} / {{ steps().length }}
+      </span>
+    </div>
+
+    <!-- Botones -->
+    <div class="mt-3 flex items-center justify-between gap-2">
+      <button type="button" (click)="finish()"
+        class="px-2 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400">
+        {{ 'tour.skip' | t }}
+      </button>
+      <div class="flex items-center gap-2">
+        <button type="button" (click)="back()" [disabled]="isFirst()"
+          class="px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400">
+          {{ 'tour.back' | t }}
+        </button>
+        <button type="button" (click)="next()"
+          class="px-4 py-1.5 text-sm font-semibold rounded-lg bg-primary-600 hover:bg-primary-700 text-white shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300">
+          {{ (isLast() ? 'tour.finish' : 'tour.next') | t }}
+        </button>
+      </div>
+    </div>
+
+    <p class="hidden sm:block mt-2 text-[11px] text-gray-400 dark:text-gray-500 text-center">{{ 'tour.keyboardHint' | t }}</p>
+  </div>
+}
+
+<!-- ============ Invitación de primera visita ============ -->
+@if (inviteVisible() && !active()) {
+  <div class="tour-pop fixed bottom-24 left-6 z-[1000] max-w-[calc(100vw-3rem)] w-72 flex items-start gap-3 p-3 rounded-2xl shadow-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+    role="dialog" aria-labelledby="tour-invite-text">
+    <img [src]="avatarSrc()" (error)="onAvatarError()" width="48" height="48" [alt]="'tour.avatarAlt' | t"
+      class="w-12 h-12 shrink-0 rounded-full object-cover ring-2 ring-primary-400 bg-primary-50 dark:bg-primary-900/40">
+    <div class="min-w-0">
+      <p id="tour-invite-text" class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ 'tour.invite.text' | t }}</p>
+      <div class="mt-2 flex flex-wrap gap-2">
+        <button type="button" (click)="acceptInvite()"
+          class="px-3 py-1 text-xs font-semibold rounded-lg bg-primary-600 hover:bg-primary-700 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300">
+          {{ 'tour.invite.yes' | t }}
+        </button>
+        <button type="button" (click)="declineInvite()"
+          class="px-3 py-1 text-xs font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400">
+          {{ 'tour.invite.no' | t }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ============ Toast del easter egg ============ -->
+@if (toastVisible()) {
+  <div class="fixed inset-x-0 bottom-6 z-[1010] flex justify-center px-4 pointer-events-none">
+  <div class="tour-pop pointer-events-auto w-full max-w-[26rem] flex items-center gap-3 p-3 rounded-2xl shadow-2xl bg-white dark:bg-gray-800 border-2 border-primary-400"
+    role="status" aria-live="polite">
+    <img [src]="avatarSrc()" (error)="onAvatarError()" width="48" height="48" [alt]="'tour.avatarAlt' | t"
+      class="w-12 h-12 shrink-0 rounded-full object-cover bg-primary-50 dark:bg-primary-900/40">
+    <p class="flex-1 text-sm font-medium text-gray-800 dark:text-gray-100">{{ 'tour.egg.toast' | t }}</p>
+    <button type="button" (click)="closeToast()"
+      class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400"
+      [attr.aria-label]="'tour.egg.close' | t">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  </div>
+}

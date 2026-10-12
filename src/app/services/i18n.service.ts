@@ -4,7 +4,12 @@ import { EN } from '../i18n/en';
 
 export type Lang = 'es' | 'en';
 
-const DICTIONARIES: Record<Lang, Record<string, string>> = { es: ES, en: EN };
+import { FEATURE_DICTS } from '../i18n/features';
+
+const DICTIONARIES: Record<Lang, Record<string, string>> = {
+  es: Object.assign({}, ES, ...FEATURE_DICTS.map(d => d.es)),
+  en: Object.assign({}, EN, ...FEATURE_DICTS.map(d => d.en))
+};
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +47,7 @@ export class I18nService {
   }
 
   t(key: string): string {
-    return DICTIONARIES[this.lang()][key] ?? ES[key] ?? key;
+    return DICTIONARIES[this.lang()][key] ?? DICTIONARIES['es'][key] ?? key;
   }
 
   setLang(l: Lang): void {

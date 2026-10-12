@@ -7,4 +7,12 @@ export interface Project {
   demoUrl?: string;
   githubUrl?: string;
   category: string;
+  caseStudy?: ProjectCaseStudy; // Problema → Datos → Análisis → Resultado
+}
+
+export interface ProjectCaseStudy {
+  problem: string;
+  data: string;
+  analysis: string;
+  result: string;
 }

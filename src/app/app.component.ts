@@ -10,6 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { ExperienceComponent } from "./components/experience/experience.component";
 import { ScrollHelpersComponent } from './components/scroll-helpers/scroll-helpers.component';
+import { PlaygroundComponent } from './components/playground/playground.component';
+import { TourComponent } from './components/tour/tour.component';
 
 @Component({
     selector: 'app-root',
@@ -24,7 +26,9 @@ import { ScrollHelpersComponent } from './components/scroll-helpers/scroll-helpe
         FooterComponent,
         ThemeSelectorComponent,
         ExperienceComponent,
-        ScrollHelpersComponent
+        ScrollHelpersComponent,
+        PlaygroundComponent,
+        TourComponent
     ],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']

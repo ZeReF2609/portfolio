@@ -9,18 +9,40 @@ export const USER_EN = {
 
 export const CONTACT_LOCATION_EN = 'Peru';
 
-export const PROJECTS_EN: Record<number, { title: string; description: string }> = {
+export const PROJECTS_EN: Record<number, {
+  title: string;
+  description: string;
+  caseStudy?: { problem: string; data: string; analysis: string; result: string };
+}> = {
   12: {
     title: 'Titanic — Survival Dashboard in Power BI',
-    description: 'Power BI dashboard covering 891 Titanic passengers: KPIs and survival rate by class, sex, age group and port of embarkation. Semantic model with DAX measures and calculated columns, Power Query for data loading and PBIP format versioned in Git. Key insight: women survived at 4 times the rate of men (74 % vs 19 %).'
+    description: 'Power BI dashboard covering 891 Titanic passengers: KPIs and survival rate by class, sex, age group and port of embarkation. Semantic model with DAX measures and calculated columns, Power Query for data loading and PBIP format versioned in Git. Key insight: women survived at 4 times the rate of men (74 % vs 19 %).',
+    caseStudy: {
+      problem: 'Which factors explain who survived the Titanic sinking?',
+      data: 'Kaggle training set: 891 passengers and 12 variables, in a CSV whose passenger names contain commas.',
+      analysis: 'Power Query load (CSV QuoteStyle, en-US types), calculated columns (age group, class, port), DAX measures (survival rate) and visuals by class, sex, age and port.',
+      result: '38.4 % survived; women 74.2 % vs men 18.9 %; 1st class 63.0 % vs 3rd class 24.2 %; children aged 0–12 58.0 %.'
+    }
   },
   6: {
     title: 'Finanzas360 — Expense Tracking with OCR and Machine Learning',
-    description: 'Personal finance system that records expenses from a photo or PDF of a receipt/invoice. An AI microservice extracts the issuer, tax ID (RUC), date, total and line items (EasyOCR + OpenCV) and classifies each product into a spending category using KNN over semantic embeddings (sentence-transformers), with retraining. Includes a JWT-secured REST API, dashboard and budgets.'
+    description: 'Personal finance system that records expenses from a photo or PDF of a receipt/invoice. An AI microservice extracts the issuer, tax ID (RUC), date, total and line items (EasyOCR + OpenCV) and classifies each product into a spending category using KNN over semantic embeddings (sentence-transformers), with retraining. Includes a JWT-secured REST API, dashboard and budgets.',
+    caseStudy: {
+      problem: 'Recording expenses by hand is slow and error-prone.',
+      data: 'Photos/PDFs of Peruvian receipts and invoices (tax ID/RUC, issuer, total, line items).',
+      analysis: 'EasyOCR + OpenCV extract the fields; line items are classified with KNN (k=5) over multilingual embeddings (paraphrase-multilingual-MiniLM-L12-v2) using cosine similarity, retrainable through an endpoint.',
+      result: 'The user uploads a receipt and gets a categorized expense ready for the dashboard and budgets.'
+    }
   },
   7: {
     title: 'Classification and Clustering — Breast Cancer Wisconsin',
-    description: 'Supervised and unsupervised Machine Learning analysis: a decision tree to predict benign/malignant tumors (accuracy, precision, recall, F1 and confusion matrix) and K-Means with the elbow method and PCA for segmentation. The results presentation is generated automatically with Python.'
+    description: 'Supervised and unsupervised Machine Learning analysis: a decision tree to predict benign/malignant tumors (accuracy, precision, recall, F1 and confusion matrix) and K-Means with the elbow method and PCA for segmentation. The results presentation is generated automatically with Python.',
+    caseStudy: {
+      problem: 'Support the detection of malignant tumors.',
+      data: 'Breast Cancer Wisconsin dataset: 569 samples, 30 variables.',
+      analysis: 'EDA and a decision tree classifier; K-Means with the elbow method and PCA for segmentation.',
+      result: '158 of 171 test cases correctly classified (≈92 %); clusters consistent with the diagnosis.'
+    }
   },
   13: {
     title: 'Neural Networks with Keras — 5 Hands-on Case Studies',
@@ -28,7 +50,13 @@ export const PROJECTS_EN: Record<number, { title: string; description: string }>
   },
   8: {
     title: 'Real-time PLC Monitoring (Industry 4.0)',
-    description: 'Service for an industrial plant that reads dryer PLCs in real time via Modbus TCP, decodes the registers, persists them in SQL Server and streams them to web clients for operational dashboards. Automatic detection of new equipment and deployment as a standalone executable. Company project (private code).'
+    description: 'Service for an industrial plant that reads dryer PLCs in real time via Modbus TCP, decodes the registers, persists them in SQL Server and streams them to web clients for operational dashboards. Automatic detection of new equipment and deployment as a standalone executable. Company project (private code).',
+    caseStudy: {
+      problem: 'Readings from the industrial dryers were not centralized.',
+      data: 'Modbus TCP registers from several PLCs (real-time values, processes, maintenance, steps).',
+      analysis: 'Multithreaded Python service that decodes the registers, stores them in SQL Server and streams them over sockets.',
+      result: '35 % improvement in early incident detection; data available for operational dashboards.'
+    }
   },
   9: {
     title: 'FieldSync — Offline-first Field Inspections',

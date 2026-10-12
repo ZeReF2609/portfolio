@@ -50,7 +50,13 @@ export class DataService {
         image: 'assets/project/titanic_powerbi.webp',
         technologies: ['Power BI', 'DAX', 'Power Query (M)', 'PBIP / TMDL', 'Data Storytelling'],
         githubUrl: 'https://github.com/ZeReF2609/titanic-powerbi-dashboard',
-        category: 'Data'
+        category: 'Data',
+        caseStudy: {
+          problem: '¿Qué factores explican quién sobrevivió al hundimiento del Titanic?',
+          data: 'Conjunto train de Kaggle: 891 pasajeros y 12 variables, en un CSV con nombres que contienen comas.',
+          analysis: 'Carga con Power Query (QuoteStyle CSV, tipos en-US), columnas calculadas (grupo de edad, clase, puerto), medidas DAX (tasa de supervivencia) y visuales por clase, sexo, edad y puerto.',
+          result: 'Sobrevivió el 38.4 %; mujeres 74.2 % vs hombres 18.9 %; 1ª clase 63.0 % vs 3ª clase 24.2 %; niños de 0–12 años 58.0 %.'
+        }
       },
       {
         id: 6,
@@ -59,7 +65,13 @@ export class DataService {
         image: 'assets/project/finanzas360_arch.svg',
         technologies: ['Python', 'FastAPI', 'EasyOCR', 'scikit-learn', 'sentence-transformers', '.NET 10', 'Dapper', 'SQL Server', 'Angular 20', 'Docker'],
         githubUrl: 'https://github.com/ZeReF2609/OCR',
-        category: 'Data'
+        category: 'Data',
+        caseStudy: {
+          problem: 'Registrar gastos a mano es lento y propenso a errores.',
+          data: 'Fotos/PDF de boletas y facturas peruanas (RUC, emisor, total, ítems).',
+          analysis: 'EasyOCR + OpenCV extraen los campos; los ítems se clasifican con KNN (k=5) sobre embeddings multilingües (paraphrase-multilingual-MiniLM-L12-v2) con similitud coseno, reentrenable vía endpoint.',
+          result: 'El usuario sube la boleta y obtiene el gasto categorizado, listo para el dashboard y los presupuestos.'
+        }
       },
       {
         id: 7,
@@ -68,7 +80,13 @@ export class DataService {
         image: 'assets/project/ml_breast_cancer.webp',
         technologies: ['Python', 'pandas', 'scikit-learn', 'matplotlib', 'seaborn', 'Jupyter'],
         githubUrl: 'https://github.com/ZeReF2609/ml-breast-cancer-clasificacion',
-        category: 'Data'
+        category: 'Data',
+        caseStudy: {
+          problem: 'Apoyar la detección de tumores malignos.',
+          data: 'Dataset Breast Cancer Wisconsin: 569 muestras, 30 variables.',
+          analysis: 'EDA y árbol de decisión; K-Means con método del codo y PCA para segmentación.',
+          result: '158 de 171 casos de prueba bien clasificados (≈92 %); clusters coherentes con el diagnóstico.'
+        }
       },
       {
         id: 13,
@@ -85,7 +103,13 @@ export class DataService {
         description: 'Servicio para una planta industrial que lee en tiempo real los PLC de secadoras vía Modbus TCP, decodifica los registros, los persiste en SQL Server y los transmite a clientes web para dashboards operativos. Detección automática de nuevos equipos y despliegue como ejecutable. Proyecto de empresa (código privado).',
         image: 'assets/project/plc_monitoring_arch.svg',
         technologies: ['Python', 'Modbus TCP', 'SQL Server', 'Sockets', 'Multithreading', 'PyInstaller'],
-        category: 'Data'
+        category: 'Data',
+        caseStudy: {
+          problem: 'Las lecturas de las secadoras industriales no estaban centralizadas.',
+          data: 'Registros Modbus TCP de varios PLC (tiempo real, procesos, mantenimiento, pasos).',
+          analysis: 'Servicio Python multihilo que decodifica los registros, los guarda en SQL Server y los emite por socket.',
+          result: '35 % de mejora en la detección temprana de incidencias; datos disponibles para dashboards operativos.'
+        }
       },
       {
         id: 9,
@@ -345,7 +369,7 @@ export class DataService {
   }
 
   getCVUrl(): string {
-    return 'assets/cv_wilder_rojas_marin.pdf';
+    return this.en ? 'assets/cv_wilder_rojas_marin_en.pdf' : 'assets/cv_wilder_rojas_marin.pdf';
   }
 
   // Sin porcentajes: las habilidades se agrupan por área, sin autoevaluaciones numéricas.

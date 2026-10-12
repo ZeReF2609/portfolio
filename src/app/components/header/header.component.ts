@@ -5,6 +5,7 @@ import { DataService } from '../../services/data.service';
 import { CarouselService, CarouselMode } from '../../services/carousel.service';
 import { I18nService } from '../../services/i18n.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
+import { TourService } from '../../services/tour.service';
 
 @Component({
     selector: 'app-header',
@@ -106,7 +107,8 @@ export class HeaderComponent {
     private themeService: ThemeService,
     private dataService: DataService,
     private carouselService: CarouselService,
-    public i18n: I18nService
+    public i18n: I18nService,
+    private tourService: TourService
   ) {
     this.cvUrl = this.dataService.getCVUrl();
     this.themeService.themeMode$.subscribe(mode => {
@@ -136,6 +138,13 @@ export class HeaderComponent {
 
   toggleThemeMode(): void {
     this.themeService.toggleThemeMode();
+  }
+
+  startTour(): void {
+    this.isMobileMenuOpen = false;
+    this.isThemeMenuOpen = false;
+    this.isCarouselMenuOpen = false;
+    this.tourService.start();
   }
 
   toggleLanguage(): void {

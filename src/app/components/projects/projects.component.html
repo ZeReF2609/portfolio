@@ -26,8 +26,22 @@
       </div>
     </div>
 
+    <!-- Filtro activo por tecnología -->
+    <div *ngIf="selectedTech" class="flex justify-center -mt-6 mb-8">
+      <button
+        type="button"
+        (click)="clearTech()"
+        [attr.aria-label]="'px.clearFilter' | t"
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900/50 text-primary-800 dark:text-primary-200 border border-primary-300 dark:border-primary-700 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors">
+        {{ 'px.techFilter' | t }}: <strong>{{ selectedTech }}</strong>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
     <!-- Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
+    <div id="projects-grid" class="scroll-mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
       <div
         *ngFor="let project of filteredProjects"
         (click)="openDetails(project)"
@@ -49,6 +63,13 @@
               </div>
             </ng-template>
           </div>
+          <!-- Insignia de caso de estudio -->
+          <span *ngIf="project.caseStudy" class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-gray-900/90 text-primary-700 dark:text-primary-300 shadow">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            {{ 'px.caseStudy' | t }}
+          </span>
           <!-- Overlay on hover -->
           <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
             <div class="flex gap-4">
@@ -87,11 +108,22 @@
 
           <!-- Technologies (máx. 5 en la tarjeta; el resto en el detalle) -->
           <div class="flex flex-wrap gap-2 pt-2">
-            <span
+            <button
               *ngFor="let tech of project.technologies.slice(0, 5)"
-              class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium">
+              type="button"
+              (click)="filterByTech(tech, $event)"
+              (keydown.enter)="$event.stopPropagation()"
+              [attr.aria-pressed]="selectedTech === tech"
+              [attr.aria-label]="('px.filterBy' | t) + tech"
+              [class.bg-primary-600]="selectedTech === tech"
+              [class.text-white]="selectedTech === tech"
+              [class.bg-gray-100]="selectedTech !== tech"
+              [class.dark:bg-gray-700]="selectedTech !== tech"
+              [class.text-gray-700]="selectedTech !== tech"
+              [class.dark:text-gray-300]="selectedTech !== tech"
+              class="px-3 py-1 rounded-full text-xs font-medium hover:ring-2 hover:ring-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition">
               {{ tech }}
-            </span>
+            </button>
             <span *ngIf="project.technologies.length > 5" class="px-3 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
               +{{ project.technologies.length - 5 }}
             </span>
@@ -138,8 +170,32 @@
           <h3 [id]="'project-title-' + p.id" class="text-2xl font-display font-bold text-gray-900 dark:text-white">{{ p.title }}</h3>
           <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ p.description }}</p>
           <div class="flex flex-wrap gap-2">
-            <span *ngFor="let tech of p.technologies" class="px-3 py-1 bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium">{{ tech }}</span>
+            <button
+              *ngFor="let tech of p.technologies"
+              type="button"
+              (click)="filterByTech(tech, $event, true)"
+              [attr.aria-pressed]="selectedTech === tech"
+              [attr.aria-label]="('px.filterBy' | t) + tech"
+              class="px-3 py-1 bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium hover:bg-primary-100 dark:hover:bg-primary-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-colors">{{ tech }}</button>
           </div>
+
+          <!-- Caso de estudio: Problema → Datos → Análisis → Resultado -->
+          <section *ngIf="p.caseStudy as cs" class="pt-2" [attr.aria-label]="'px.caseStudy' | t">
+            <h4 class="text-sm uppercase tracking-widest font-semibold text-gray-500 dark:text-gray-400 mb-3">{{ 'px.caseStudy' | t }}</h4>
+            <ol class="relative space-y-4 border-l-2 border-primary-200 dark:border-primary-800 ml-3">
+              <li *ngFor="let step of caseSteps; let i = index" class="pl-6 relative">
+                <span class="absolute -left-[13px] top-0 flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold text-white ring-4 ring-white dark:ring-gray-800"
+                  [class.bg-primary-600]="step.key !== 'result'"
+                  [class.bg-emerald-600]="step.key === 'result'"
+                  aria-hidden="true">{{ i + 1 }}</span>
+                <h5 class="text-sm font-semibold text-gray-900 dark:text-white">{{ step.label | t }}</h5>
+                <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+                  [class.font-medium]="step.key === 'result'"
+                  [class.text-gray-800]="step.key === 'result'"
+                  [class.dark:text-gray-100]="step.key === 'result'">{{ cs[step.key] }}</p>
+              </li>
+            </ol>
+          </section>
           <div class="flex flex-wrap gap-3 pt-2">
             <a *ngIf="p.githubUrl" [href]="p.githubUrl" target="_blank" rel="noopener noreferrer" class="btn-primary">{{ 'projects.viewCode' | t }}</a>
             <a *ngIf="p.demoUrl" [href]="p.demoUrl" target="_blank" rel="noopener noreferrer" class="btn-secondary">{{ 'projects.viewDemo' | t }}</a>

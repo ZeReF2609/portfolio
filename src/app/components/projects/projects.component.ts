@@ -15,7 +15,16 @@ export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [];
   filteredProjects: Project[] = [];
   selectedCategory: string = 'all';
+  selectedTech: string | null = null;
   categories: string[] = ['all', 'Data', 'Web', 'Mobile'];
+
+  // Pasos del caso de estudio (Problema → Datos → Análisis → Resultado)
+  readonly caseSteps: { key: 'problem' | 'data' | 'analysis' | 'result'; label: string }[] = [
+    { key: 'problem', label: 'px.problem' },
+    { key: 'data', label: 'px.data' },
+    { key: 'analysis', label: 'px.analysis' },
+    { key: 'result', label: 'px.result' }
+  ];
 
   constructor(private dataService: DataService) {}
 
@@ -31,13 +40,31 @@ export class ProjectsComponent implements OnInit {
 
   filterProjects(category: string): void {
     this.selectedCategory = category;
-    if (category === 'all') {
-      this.filteredProjects = this.allProjects;
-    } else {
-      this.filteredProjects = this.allProjects.filter(
-        project => project.category === category
-      );
+    this.applyFilters();
+  }
+
+  // Filtro por tecnología (combinable con la categoría). Clic en el chip activo lo desactiva.
+  filterByTech(tech: string, event?: Event, fromModal = false): void {
+    event?.stopPropagation();
+    this.selectedTech = this.selectedTech === tech && !fromModal ? null : tech;
+    this.applyFilters();
+    if (fromModal) {
+      this.closeDetails();
+      setTimeout(() => document.getElementById('projects-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
+  }
+
+  clearTech(): void {
+    this.selectedTech = null;
+    this.applyFilters();
+  }
+
+  private applyFilters(): void {
+    const tech = this.selectedTech;
+    this.filteredProjects = this.allProjects.filter(p =>
+      (this.selectedCategory === 'all' || p.category === this.selectedCategory) &&
+      (!tech || p.technologies.includes(tech))
+    );
   }
 
   selected: Project | null = null;
