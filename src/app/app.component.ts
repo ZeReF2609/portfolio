@@ -5,7 +5,6 @@ import { AboutComponent } from './components/about/about.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificationsComponent } from './components/certifications/certifications.component';
-import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
@@ -20,7 +19,6 @@ import { ExperienceComponent } from "./components/experience/experience.componen
         SkillsComponent,
         ProjectsComponent,
         CertificationsComponent,
-        BlogComponent,
         ContactComponent,
         FooterComponent,
         ThemeSelectorComponent,
