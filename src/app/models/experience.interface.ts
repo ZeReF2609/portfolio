@@ -7,3 +7,9 @@ export interface Experience {
     description: string;
     current: boolean;
 }
+
+export interface Education {
+    institution: string;
+    degree: string;
+    period: string;
+}

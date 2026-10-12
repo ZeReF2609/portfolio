@@ -241,6 +241,16 @@ export class CertificationsComponent implements OnInit, OnDestroy, AfterViewInit
     });
   }
 
+  // "2025-09-23" -> "23 sept 2025"
+  formatCertDate(iso: string): string {
+    const [y, m, d] = iso.split('-').map(Number);
+    if (!y || !m || !d) return iso;
+    return new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'short', year: 'numeric' })
+      .format(new Date(y, m - 1, d))
+      .replace(/\./g, '')
+      .replace(/ de /g, ' ');
+  }
+
   openCertificate(pdfUrl: string | undefined): void {
     if (pdfUrl) {
       window.open(pdfUrl, '_blank');

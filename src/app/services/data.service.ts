@@ -5,7 +5,8 @@ import { SkillCategory } from '../models/skill.interface';
 import { ContactInfo } from '../models/contact.interface';
 import { Certification, Event } from '../models/certification.interface';
 import { Community, BlogPost } from '../models/community.interface';
-import { Experience } from '../models/experience.interface';
+import { Experience, Education } from '../models/experience.interface';
+import certificationsData from '../data/certifications.json';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class DataService {
   getUserData(): User {
     return {
       name: 'Wilder Rojas',
-      profession: 'Full Stack Developer & Software Engineer',
-      description: 'Desarrollador de Software apasionado por crear soluciones escalables e innovadoras. Especializado en tecnologías modernas como Java, Spring Boot, Angular, TypeScript y Flutter. Con experiencia en desarrollo Full Stack y un enfoque en la calidad del código y las mejores prácticas.',
+      profession: 'Analista de Datos Junior · Científico de Datos',
+      description: 'Científico de Datos con experiencia práctica en análisis, modelado predictivo y visualización de datos para la toma de decisiones de negocio. Trabajo con Python (pandas, scikit-learn, matplotlib), SQL Server, Jupyter y Power BI para construir pipelines de datos, proyecciones y dashboards. Mi base en ingeniería de software me permite integrar los datos con sistemas reales usando Docker y Git.',
       email: 'wilderrojasmarin@gmail.com',
       location: 'Lima, Perú',
-      profileImage: 'assets/images/profile.jpg',
+      profileImage: 'assets/images/profile.webp',
       socialLinks: [
         { platform: 'GitHub', url: 'https://github.com/ZeReF2609/', icon: 'github' },
         { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/wilderrojasmarin/', icon: 'linkedin' },
@@ -31,185 +32,132 @@ export class DataService {
   getProjects(): Project[] {
     return [
       {
+        id: 12,
+        title: 'Titanic — Dashboard de supervivencia en Power BI',
+        description: 'Dashboard en Power BI sobre 891 pasajeros del Titanic: KPIs y tasa de supervivencia por clase, sexo, grupo de edad y puerto de embarque. Modelo semántico con medidas DAX y columnas calculadas, Power Query para la carga y formato PBIP versionado en Git. Hallazgo clave: las mujeres sobrevivieron 4 veces más que los hombres (74 % vs 19 %).',
+        image: 'assets/project/titanic_powerbi.webp',
+        technologies: ['Power BI', 'DAX', 'Power Query (M)', 'PBIP / TMDL', 'Data Storytelling'],
+        githubUrl: 'https://github.com/ZeReF2609/titanic-powerbi-dashboard',
+        category: 'Data'
+      },
+      {
+        id: 6,
+        title: 'Finanzas360 — Gastos con OCR y Machine Learning',
+        description: 'Sistema de finanzas personales que registra gastos a partir de la foto o PDF de una boleta/factura. Un microservicio de IA extrae emisor, RUC, fecha, total e ítems (EasyOCR + OpenCV) y clasifica cada producto en una categoría de gasto con KNN sobre embeddings semánticos (sentence-transformers), con reentrenamiento. Incluye API REST con JWT, dashboard y presupuestos.',
+        technologies: ['Python', 'FastAPI', 'EasyOCR', 'scikit-learn', 'sentence-transformers', '.NET 10', 'Dapper', 'SQL Server', 'Angular 20', 'Docker'],
+        githubUrl: 'https://github.com/ZeReF2609/OCR',
+        category: 'Data'
+      },
+      {
+        id: 7,
+        title: 'Clasificación y Clustering — Breast Cancer Wisconsin',
+        description: 'Análisis de Machine Learning supervisado y no supervisado: árbol de decisión para predecir tumores benignos/malignos (accuracy, precision, recall, F1 y matriz de confusión) y K-Means con método del codo y PCA para segmentación. Generación automática de la presentación de resultados con Python.',
+        image: 'assets/project/ml_breast_cancer.webp',
+        technologies: ['Python', 'pandas', 'scikit-learn', 'matplotlib', 'seaborn', 'Jupyter'],
+        githubUrl: 'https://github.com/ZeReF2609/ml-breast-cancer-clasificacion',
+        category: 'Data'
+      },
+      {
+        id: 13,
+        title: 'Redes Neuronales con Keras — 5 casos prácticos',
+        description: 'Cinco modelos de deep learning aplicados a problemas reales: diagnóstico de diabetes (MLP), precio de viviendas (regresión), clasificación de prendas Fashion-MNIST (CNN), detección de spam (Embedding) y predicción de ventas con series de tiempo (LSTM).',
+        technologies: ['Python', 'TensorFlow', 'Keras', 'CNN', 'LSTM', 'NLP'],
+        githubUrl: 'https://github.com/ZeReF2609/redes-neuronales-keras',
+        category: 'Data'
+      },
+      {
+        id: 8,
+        title: 'Monitoreo de PLC en tiempo real (Industria 4.0)',
+        description: 'Servicio para una planta industrial que lee en tiempo real los PLC de secadoras vía Modbus TCP, decodifica los registros, los persiste en SQL Server y los transmite a clientes web para dashboards operativos. Detección automática de nuevos equipos y despliegue como ejecutable. Proyecto de empresa (código privado).',
+        technologies: ['Python', 'Modbus TCP', 'SQL Server', 'Sockets', 'Multithreading', 'PyInstaller'],
+        category: 'Data'
+      },
+      {
+        id: 9,
+        title: 'FieldSync — Inspecciones de campo offline-first',
+        description: 'App móvil para registrar inspecciones con fotografía sin depender de la conexión. Persistencia local con estados (pendiente, sincronizado, fallido), sincronización automática al recuperar red con reintentos y compresión de imágenes. Arquitectura con Cubit y pruebas unitarias.',
+        image: 'assets/project/fieldsync.webp',
+        technologies: ['Flutter', 'Dart', 'flutter_bloc', 'Hive', 'Camera', 'Mocktail'],
+        githubUrl: 'https://github.com/ZeReF2609/FieldSync',
+        category: 'Mobile'
+      },
+      {
+        id: 10,
+        title: 'Velocicommerce — E-commerce de alto rendimiento',
+        description: 'E-commerce diseñado para alto tráfico: patrón BFF (Composite API) que reduce 10–15 peticiones por página a una sola, caché cache-aside, carrito y rate limiting en Redis, y pruebas de carga con k6. Frontend con SSR.',
+        technologies: ['Go', 'Gin', 'Redis', 'MySQL', 'Nuxt 3', 'Vue 3', 'Docker', 'k6'],
+        githubUrl: 'https://github.com/ZeReF2609/velocicommerce',
+        category: 'Web'
+      },
+      {
+        id: 11,
+        title: 'Portal Corporativo (Intranet, RR.HH. y e-commerce)',
+        description: 'Aplicación web corporativa desarrollada en equipo: portal del trabajador y boletas, control de visitas, cotizaciones, HelpDesk con notificaciones en tiempo real, tablero Scrum, reportes en Excel/PDF y módulos de e-commerce con IA generativa (Gemini). Autenticación con Active Directory. Proyecto de empresa (código privado).',
+        technologies: ['C#', 'ASP.NET Core MVC', 'SQL Server', 'MySQL', 'Vue.js', 'Gemini AI', 'Active Directory'],
+        category: 'Web'
+      },
+      {
+        id: 14,
+        title: 'Mi Repositorio Académico — Planificador de horarios',
+        description: 'Web app para estudiantes que organiza instituciones, ciclos y cursos; genera el cronograma y la vista semanal automáticamente, detecta choques de horario y guarda notas y archivos por curso. 100 % en el navegador, sin frameworks.',
+        image: 'assets/project/horarios.webp',
+        technologies: ['JavaScript', 'ES Modules', 'IndexedDB', 'HTML5', 'CSS3'],
+        githubUrl: 'https://github.com/ZeReF2609/mi-repositorio-academico',
+        category: 'Web'
+      },
+      {
         id: 1,
         title: 'Zafar E-Commerce',
         description: 'Plataforma de e-commerce moderna para ropa y accesorios. Incluye carrito persistente, sistema de checkout, cuenta de usuario, y panel de administración. Desarrollado con las últimas tecnologías.',
-        image: 'assets/project/zafar_ecommerce.png',
+        image: 'assets/project/zafar_ecommerce.webp',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'ShadCN UI', 'Zustand', 'React Hook Form', 'Zod'],
         demoUrl: 'https://zafar-ecommerce-wp5b.vercel.app',
         githubUrl: 'https://github.com/ZeReF2609/zafarEcommerce',
         category: 'Web'
       },
       {
-        id: 2,
-        title: 'Portfolio Personal',
-        description: 'Mi portafolio personal desarrollado con Angular, mostrando mis habilidades, proyectos y experiencia profesional. Diseño moderno y responsivo con sistema de temas personalizable.',
-        image: 'assets/project/portafolio1.png',
-        technologies: ['Angular', 'TypeScript', 'SCSS', 'Lottie', 'Responsive Design'],
-        demoUrl: 'https://portafolio-theta-lilac.vercel.app',
-        githubUrl: 'https://github.com/ZeReF2609/portafolio',
-        category: 'Web'
-      },
-      {
-        id: 3,
-        title: 'Ticket Support App',
-        description: 'Sistema multiplataforma para gestión de tickets de soporte técnico (roles, tickets, chat, calendario, dashboard y métricas). Arquitectura modular con Riverpod y SQLite; UI basada en Material 3 y componentes Syncfusion/FL Chart.',
-        image: 'assets/project/ticket_support_app.png',
-        technologies: ['Flutter', 'Dart', 'Riverpod', 'SQLite', 'Syncfusion', 'FL Chart', 'Provider'],
-        githubUrl: 'https://github.com/ZeReF2609/ticket_support_app',
-        category: 'Mobile'
+        id: 5,
+        title: "expenseIQ V2",
+        description: "Plataforma de inteligencia financiera para control de gastos y presupuestos. Reconocimiento automático de comprobantes (OCR) con IA (Gemini), dashboards analíticos en tiempo real, soporte multi-idioma y sistema de diseño 'Crimson' (Dark Mode nativo). Arquitectura serverless.",
+        image: "assets/project/expense_iq_v2.webp",
+        technologies: ["Next.js", "Firebase", "TypeScript", "Gemini AI", "Tailwind CSS", "Data Connect"],
+        githubUrl: "https://github.com/ZeReF2609/expenseIQV2",
+        category: "Web"
       },
       {
         id: 4,
         title: "expenseIQ",
-        description: "Plataforma de inteligencia financiera para control de gastos y presupuestos. Incorpora reconocimiento automático de comprobantes (OCR) mediante IA (Gemini), dashboards analíticos en tiempo real y un sistema de diseño 'Crimson' (Dark Mode nativo). Arquitectura serverless escalable.",
-        image: "assets/project/expense_iq.png",
+        description: "Primera versión de la plataforma de control de gastos y presupuestos con OCR mediante Gemini, dashboards analíticos y arquitectura serverless.",
+        image: "assets/project/expense_iq.webp",
         technologies: ["Next.js", "Firebase", "TypeScript", "Gemini AI", "Tailwind CSS", "Data Connect"],
         githubUrl: "https://github.com/ZeReF2609/expenseIQ",
         category: "Web"
       },
       {
-        id: 4,
-        title: "expenseIQ V2",
-        description: "Plataforma de inteligencia financiera para control de gastos y presupuestos. Incorpora reconocimiento automático de comprobantes (OCR) mediante IA (Gemini), dashboards analíticos en tiempo real y un sistema de diseño 'Crimson' (Dark Mode nativo). Arquitectura serverless escalable. Además de idiomas implementados",
-        image: "assets/project/expense_iq_v2.png",
-        technologies: ["Next.js", "Firebase", "TypeScript", "Gemini AI", "Tailwind CSS", "Data Connect"],
-        githubUrl: "https://github.com/ZeReF2609/expenseIQV2",
-        category: "Web"
+        id: 3,
+        title: 'Ticket Support App',
+        description: 'Sistema multiplataforma para gestión de tickets de soporte técnico (roles, tickets, chat, calendario, dashboard y métricas). Arquitectura modular con Riverpod y SQLite; UI basada en Material 3 y componentes Syncfusion/FL Chart.',
+        image: 'assets/project/ticket_support_app.webp',
+        technologies: ['Flutter', 'Dart', 'Riverpod', 'SQLite', 'Syncfusion', 'FL Chart', 'Provider'],
+        githubUrl: 'https://github.com/ZeReF2609/ticket_support_app',
+        category: 'Mobile'
+      },
+      {
+        id: 2,
+        title: 'Portfolio Personal',
+        description: 'Este portafolio: Angular con componentes standalone, Tailwind, sistema de temas personalizable y datos desacoplados en JSON para actualizar certificaciones sin tocar código.',
+        image: 'assets/project/portafolio1.webp',
+        technologies: ['Angular', 'TypeScript', 'Tailwind CSS', 'Responsive Design'],
+        demoUrl: 'https://portafolio-theta-lilac.vercel.app',
+        githubUrl: 'https://github.com/ZeReF2609/portfolio',
+        category: 'Web'
       }
     ];
   }
 
   getCertifications(): Certification[] {
-    return [
-      // Cisco Certifications
-      {
-        id: 1,
-        title: 'Python Essentials 1',
-        organization: 'Cisco Networking Academy',
-        date: '23 Sep 2025',
-        description: 'Fundamentos de programación en Python',
-        pdfUrl: '/assets/certificates/cisco/Python_Essentials_1_certificate.pdf'
-      },
-      {
-        id: 2,
-        title: 'Introduction to IoT',
-        organization: 'Cisco Networking Academy',
-        date: '14 Nov 2023',
-        description: 'Conceptos básicos de Internet de las Cosas (IoT)',
-        pdfUrl: '/assets/certificates/cisco/Introduction_to_IoT_certificate.pdf'
-      },
-
-      // Platzi Certifications
-      {
-        id: 3,
-        title: 'Backend con Node.js',
-        organization: 'Platzi',
-        date: '24 Ago 2025',
-        description: 'Desarrollo backend con Node.js y Express',
-        pdfUrl: '/assets/certificates/platzi/diploma-backend.pdf'
-      },
-      {
-        id: 4,
-        title: 'Desarrollo con Flutter',
-        organization: 'Platzi',
-        date: '31 Jul 2025',
-        description: 'Desarrollo de aplicaciones móviles con Flutter',
-        pdfUrl: '/assets/certificates/platzi/diploma-flutter.pdf'
-      },
-      {
-        id: 5,
-        title: 'Git y GitHub',
-        organization: 'Platzi',
-        date: '30 Jul 2025',
-        description: 'Control de versiones con Git y GitHub',
-        pdfUrl: '/assets/certificates/platzi/diploma-gitgithub.pdf'
-      },
-      {
-        id: 6,
-        title: 'GitHub Copilot',
-        organization: 'Platzi',
-        date: '31 Jul 2025',
-        description: 'Programación asistida con IA',
-        pdfUrl: '/assets/certificates/platzi/diploma-github-copilot.pdf'
-      },
-      {
-        id: 7,
-        title: 'Gestión de Proyectos PMBOK',
-        organization: 'Platzi',
-        date: '24 Ago 2025',
-        description: 'Metodología de gestión de proyectos',
-        pdfUrl: '/assets/certificates/platzi/diploma-proyectos-pmbok.pdf'
-      },
-      {
-        id: 8,
-        title: 'Programación en Python',
-        organization: 'Platzi',
-        date: '27 Jul 2025',
-        description: 'Python desde cero hasta avanzado',
-        pdfUrl: '/assets/certificates/platzi/diploma-python.pdf'
-      },
-
-      // UPN Certifications
-      {
-        id: 9,
-        title: 'Ingeniería del Futuro',
-        organization: 'Universidad Privada del Norte',
-        date: '29 Oct 2025',
-        description: 'Conferencia sobre tendencias en ingeniería',
-        pdfUrl: '/assets/certificates/upn/IngenieriaDelFuturo.pdf'
-      },
-
-      // Cibertec Certifications
-      {
-        id: 10,
-        title: 'Certificación de Participación',
-        organization: 'Cibertec',
-        date: '07 Nov 2023',
-        description: 'Certificación de participación en programa académico',
-        pdfUrl: '/assets/certificates/cibertec/Certificación_de_Participación_Rojas Marin, Wilder Enrique.pdf'
-      },
-      {
-        id: 11,
-        title: 'Constancia de Egresado',
-        organization: 'Cibertec',
-        date: '30 Dic 2024',
-        description: 'Constancia de Término de Estudios en Cibertec',
-        pdfUrl: '/assets/certificates/cibertec/COVT.CIB-2025-001588_ROJAS MARIN, WILDER ENRIQUE.pdf'
-      },
-      {
-        id: 12,
-        title: 'Certificado Modular',
-        organization: 'Cibertec',
-        date: '10 Dic 2023',
-        description: 'Certificación de cumplimiento de módulos académicos',
-        pdfUrl: '/assets/certificates/cibertec/M2202382-202030368-ROJAS MARIN, WILDER ENRIQUE-COMPUTACIÓN E INFORMÁTICA.pdf'
-      },
-      {
-        id: 13,
-        title: 'Diploma de Reconocimiento - Programa MiConsultor (MiBanco)',
-        organization: 'Universidad Privada del Norte',
-        date: '26 Nov 2025',
-        description: 'Diploma otorgado por haber culminado el programa MiConsultor de MiBanco, en alianza con la Universidad Privada del Norte. Incluye firmas de la Gerencia de Sostenibilidad e Inclusión Financiera de MiBanco y del Decano de la Facultad de Negocios de la UPN.',
-        pdfUrl: '/assets/certificates/upn/Wilder Enrique Rojas Marin MI BANCO.pdf'
-      },
-      {
-        id: 14,
-        title: 'AWS Academy Graduate — Cloud Operations (Training Badge)',
-        organization: 'AWS Academy',
-        date: '05 Dic 2025',
-        description: 'Badge otorgado por completar el programa de Cloud Operations de AWS Academy. Incluye contenidos sobre operaciones en la nube, administración de infraestructuras, despliegue, monitorización y buenas prácticas en AWS.',
-        pdfUrl: '/assets/certificates/AWS/AWS_Academy_Graduate___Cloud_Operations___Training_Badge_Badge20251205-31-83t6ix.pdf'
-      },
-      {
-        id: 15,
-        title: 'Inteligencia Artificial con Python',
-        organization: 'Datux',
-        date: '27 DIC 2025',
-        description: 'Curso de introducción a la inteligencia artificial utilizando Python. Cubre conceptos básicos, algoritmos y aplicaciones prácticas de IA.',
-        pdfUrl: '/assets/certificates/datux/InteligenciaArtificialConPython.pdf'
-      }
-    ];
+    // Fuente única: src/app/data/certifications.json (fechas ISO YYYY-MM-DD). Más reciente primero.
+    return [...(certificationsData as Certification[])].sort((a, b) => b.date.localeCompare(a.date));
   }
 
   getEvents(): Event[] {
@@ -224,14 +172,14 @@ export class DataService {
         topics: ['Ethereum', 'Web3', 'Blockchain', 'AI'],
         folder: 'Ethereum2025',
         images: [
-          'assets/events/Ethereum2025/1.jpeg',
-          'assets/events/Ethereum2025/2.jpeg',
-          'assets/events/Ethereum2025/3.jpeg',
-          'assets/events/Ethereum2025/4.jpeg',
-          'assets/events/Ethereum2025/5.jpeg',
-          'assets/events/Ethereum2025/6.jpeg',
-          'assets/events/Ethereum2025/7.jpeg',
-          'assets/events/Ethereum2025/8.jpeg',
+          'assets/events/Ethereum2025/1.webp',
+          'assets/events/Ethereum2025/2.webp',
+          'assets/events/Ethereum2025/3.webp',
+          'assets/events/Ethereum2025/4.webp',
+          'assets/events/Ethereum2025/5.webp',
+          'assets/events/Ethereum2025/6.webp',
+          'assets/events/Ethereum2025/7.webp',
+          'assets/events/Ethereum2025/8.webp',
         ]
       },
       {
@@ -244,12 +192,21 @@ export class DataService {
         topics: ['Firebase', 'Cloud', 'Android', 'Flutter', 'ML', 'Vertex AI'],
         folder: 'FireBase2025',
         images: [
-          'assets/events/FireBase2025/1.jpeg',
-          'assets/events/FireBase2025/2.jpeg',
-          'assets/events/FireBase2025/3.jpeg',
-          'assets/events/FireBase2025/5.jpeg',
-          'assets/events/FireBase2025/6.jpeg',
+          'assets/events/FireBase2025/1.webp',
+          'assets/events/FireBase2025/2.webp',
+          'assets/events/FireBase2025/3.webp',
+          'assets/events/FireBase2025/5.webp',
+          'assets/events/FireBase2025/6.webp',
         ]
+      },
+      {
+        id: 7,
+        title: 'AI Developer Day: Build with AI',
+        organization: 'GDG Callao',
+        location: 'UPC San Miguel, Lima',
+        date: 'Julio 2025',
+        description: 'Jornada de charlas y talleres sobre desarrollo con inteligencia artificial: Machine Learning, TensorFlow, Gemini y Cloud.',
+        topics: ['ML', 'TensorFlow', 'Gemini', 'Cloud']
       },
       {
         id: 3,
@@ -261,12 +218,12 @@ export class DataService {
         topics: ['Angular', 'Frontend', 'Best Practices', 'Case Studies'],
         folder: 'NgConf2025',
         images: [
-          'assets/events/NgConf2025/1.jpeg',
-          'assets/events/NgConf2025/2.jpeg',
-          'assets/events/NgConf2025/3.jpeg',
-          'assets/events/NgConf2025/4.jpeg',
-          'assets/events/NgConf2025/5.jpeg',
-          'assets/events/NgConf2025/6.jpeg',
+          'assets/events/NgConf2025/1.webp',
+          'assets/events/NgConf2025/2.webp',
+          'assets/events/NgConf2025/3.webp',
+          'assets/events/NgConf2025/4.webp',
+          'assets/events/NgConf2025/5.webp',
+          'assets/events/NgConf2025/6.webp',
         ]
       },
       {
@@ -279,13 +236,13 @@ export class DataService {
         topics: ['AI', 'Android', 'DevOps', 'Firebase', 'Web'],
         folder: 'CodeonN12025',
         images: [
-          'assets/events/CodeonN12025/1.jpeg',
-          'assets/events/CodeonN12025/2.jpeg',
-          'assets/events/CodeonN12025/3.jpeg',
-          'assets/events/CodeonN12025/4.jpeg',
-          'assets/events/CodeonN12025/5.jpeg',
-          'assets/events/CodeonN12025/6.jpeg',
-          'assets/events/CodeonN12025/7.jpeg',
+          'assets/events/CodeonN12025/1.webp',
+          'assets/events/CodeonN12025/2.webp',
+          'assets/events/CodeonN12025/3.webp',
+          'assets/events/CodeonN12025/4.webp',
+          'assets/events/CodeonN12025/5.webp',
+          'assets/events/CodeonN12025/6.webp',
+          'assets/events/CodeonN12025/7.webp',
         ]
       },
       {
@@ -298,15 +255,15 @@ export class DataService {
         topics: ['CI/CD', 'Docker', 'Kubernetes', 'Serverless', 'Firebase', 'Supabase', 'Android', 'Flutter', 'Web Performance', 'Observability'],
         folder: 'CodeonN22025',
         images: [
-          'assets/events/CodeonN22025/1.jpeg',
-          'assets/events/CodeonN22025/2.jpeg',
-          'assets/events/CodeonN22025/3.jpeg',
-          'assets/events/CodeonN22025/4.jpeg',
-          'assets/events/CodeonN22025/5.jpeg',
-          'assets/events/CodeonN22025/6.jpeg',
-          'assets/events/CodeonN22025/7.jpeg',
-          'assets/events/CodeonN22025/8.jpeg',
-          'assets/events/CodeonN22025/9.jpeg',
+          'assets/events/CodeonN22025/1.webp',
+          'assets/events/CodeonN22025/2.webp',
+          'assets/events/CodeonN22025/3.webp',
+          'assets/events/CodeonN22025/4.webp',
+          'assets/events/CodeonN22025/5.webp',
+          'assets/events/CodeonN22025/6.webp',
+          'assets/events/CodeonN22025/7.webp',
+          'assets/events/CodeonN22025/8.webp',
+          'assets/events/CodeonN22025/9.webp',
         ]
       },
       {
@@ -319,16 +276,16 @@ export class DataService {
         topics: ['AI/ML', 'Cloud', 'GCP', 'Serverless', 'Web', 'Mobile', 'Flutter', 'Android', 'Security', 'Observability'],
         folder: 'DevFestLima2025',
         images: [
-          'assets/events/DevFestLima2025/1.jpeg',
-          'assets/events/DevFestLima2025/2.jpeg',
-          'assets/events/DevFestLima2025/3.jpeg',
-          'assets/events/DevFestLima2025/4.jpeg',
-          'assets/events/DevFestLima2025/5.jpeg',
-          'assets/events/DevFestLima2025/6.jpeg',
-          'assets/events/DevFestLima2025/7.jpeg',
-          'assets/events/DevFestLima2025/8.jpeg',
-          'assets/events/DevFestLima2025/9.jpeg',
-          'assets/events/DevFestLima2025/10.jpeg',
+          'assets/events/DevFestLima2025/1.webp',
+          'assets/events/DevFestLima2025/2.webp',
+          'assets/events/DevFestLima2025/3.webp',
+          'assets/events/DevFestLima2025/4.webp',
+          'assets/events/DevFestLima2025/5.webp',
+          'assets/events/DevFestLima2025/6.webp',
+          'assets/events/DevFestLima2025/7.webp',
+          'assets/events/DevFestLima2025/8.webp',
+          'assets/events/DevFestLima2025/9.webp',
+          'assets/events/DevFestLima2025/10.webp',
         ]
       }
     ];
@@ -353,44 +310,34 @@ export class DataService {
     return 'assets/cv_wilder_rojas_marin.pdf';
   }
 
+  // Sin porcentajes: las habilidades se agrupan por área, sin autoevaluaciones numéricas.
   getSkills(): SkillCategory[] {
+    const group = (name: string, skills: string[]): SkillCategory => ({
+      name,
+      skills: skills.map(s => ({ name: s, category: name }))
+    });
     return [
-      {
-        name: 'Frontend',
-        skills: [
-          { name: 'HTML5', level: 95, category: 'Frontend' },
-          { name: 'CSS3', level: 92, category: 'Frontend' },
-          { name: 'JavaScript', level: 90, category: 'Frontend' },
-          { name: 'TypeScript', level: 88, category: 'Frontend' },
-          { name: 'Angular', level: 90, category: 'Frontend' },
-          { name: 'Vue.js', level: 80, category: 'Frontend' },
-          { name: 'Sass/SCSS', level: 87, category: 'Frontend' }
-        ]
-      },
-      {
-        name: 'Backend y Bases de Datos',
-        skills: [
-          { name: 'Node.js', level: 85, category: 'Backend' },
-          { name: 'Python', level: 80, category: 'Backend' },
-          { name: 'Java', level: 90, category: 'Backend' },
-          { name: 'C#', level: 82, category: 'Backend' },
-          { name: 'MySQL', level: 88, category: 'Backend' },
-          { name: 'PostgreSQL', level: 85, category: 'Backend' },
-          { name: 'MongoDB', level: 83, category: 'Backend' },
-          { name: 'Firebase', level: 80, category: 'Backend' }
-        ]
-      },
-      {
-        name: 'Herramientas y DevOps',
-        skills: [
-          { name: 'Git', level: 92, category: 'Herramientas' },
-          { name: 'GitHub', level: 90, category: 'Herramientas' },
-          { name: 'Docker', level: 78, category: 'Herramientas' },
-          { name: 'AWS', level: 75, category: 'Herramientas' },
-          { name: 'Linux', level: 80, category: 'Herramientas' },
-          { name: 'VS Code', level: 95, category: 'Herramientas' }
-        ]
-      }
+      group('Data & Analytics', ['Python', 'pandas', 'NumPy', 'scikit-learn', 'matplotlib', 'seaborn', 'Jupyter', 'Machine Learning']),
+      group('Bases de Datos & SQL', ['SQL Server', 'SQL avanzado (CTEs, ventanas)', 'MySQL', 'MongoDB']),
+      group('Visualización & BI', ['Power BI', 'DAX', 'Modelado de datos', 'Excel avanzado']),
+      group('Desarrollo de Software', ['Java', 'C# / .NET', 'TypeScript', 'Angular', 'Flutter / Dart', 'FastAPI']),
+      group('DevOps & Herramientas', ['Docker', 'Git', 'GitHub', 'GitLab', 'VS Code', 'Visual Studio']),
+      group('Industrial & Metodologías', ['Lectura de PLC', 'Monitoreo eléctrico', 'Automatización', 'Scrum', 'Kanban', 'PMBOK'])
+    ];
+  }
+
+  getEducation(): Education[] {
+    return [
+      { institution: 'Universidad Privada del Norte', degree: 'Ingeniería de Sistemas Computacionales', period: 'Mar 2025 – En curso' },
+      { institution: 'Instituto Sinergia', degree: 'Ingeniería de Software', period: 'May 2025 – Ene 2026' },
+      { institution: 'Instituto Superior Tecnológico Cibertec', degree: 'Computación e Informática', period: 'Oct 2020 – Dic 2024' }
+    ];
+  }
+
+  getLanguages(): { name: string; level: string }[] {
+    return [
+      { name: 'Español', level: 'Nativo' },
+      { name: 'Inglés', level: 'B1 (Cibertec)' }
     ];
   }
 
@@ -404,13 +351,21 @@ export class DataService {
   getExperience(): Experience[] {
     return [
       {
+        id: 4,
+        company: 'Manufacturas San Isidro S.A.C.',
+        position: 'Analista de Datos Junior',
+        startDate: '2026-08',
+        description: 'Dashboards interactivos en Power BI conectados a SQL Server, con análisis de valor por minuto y KPIs operativos para decisiones en tiempo real. Modelos de proyección de ventas en Python (pandas, scikit-learn) con pronósticos semanales para la planificación comercial y operativa. Consultas SQL avanzadas (CTEs, funciones de ventana, joins complejos) para reportes de producción. Reportes periódicos de proyección de valor minuto para identificar cuellos de botella. Documentación de pipelines y notebooks en Jupyter para garantizar reproducibilidad.',
+        current: true
+      },
+      {
         id: 1,
         company: 'Manufacturas San Isidro S.A.C.',
         position: 'Desarrollador Full Stack',
         startDate: '2025-02',
-        endDate: '2025-12',
-        description: 'Implementación de sistema de monitoreo de PLC en tiempo real optimizando el control de procesos industriales (35% mejora). Digitalización del proceso de visitas reduciendo tiempos de validación en 40%. Optimización de gestión de reportes eléctricos y productivos automatizando la recopilación de datos (30% reducción). Desarrollo de sistemas integrando lecturas de PLC con Python y APIs en C#, generando reportes y dashboards en Flutter (80% mejora en eficiencia).',
-        current: true
+        endDate: '2026-07',
+        description: 'Sistema de monitoreo de PLC en tiempo real: 35% de mejora en la detección temprana de incidencias industriales. Dashboards y reportes automatizados con Python y Flutter, reduciendo 30% el tiempo de elaboración de reportes productivos. Integración de APIs en C# y Python con lectura de PLC: 80% más eficiencia en captura y análisis de datos. Digitalización del proceso de visitas, reduciendo 40% los tiempos de validación manual.',
+        current: false
       },
       {
         id: 2,
@@ -418,10 +373,9 @@ export class DataService {
         position: 'Prácticas Profesionales',
         startDate: '2024-08',
         endDate: '2025-02',
-        description: 'Configuración y administración de bases de datos para aplicaciones web responsivas mejorando disponibilidad en 25%. Implementación de medidas de seguridad reduciendo vulnerabilidades en 30% y optimización SEO. Aplicación de buenas prácticas logrando 20% de mejora en estabilidad y escalabilidad de sistemas internos.',
+        description: 'Configuración y administración de bases de datos para aplicaciones web, mejorando 25% la disponibilidad de la información. Medidas de seguridad que redujeron vulnerabilidades en 30%. Buenas prácticas de desarrollo con 20% de mejora en estabilidad y escalabilidad de sistemas internos.',
         current: false
-      }
-      ,
+      },
       {
         id: 3,
         company: 'Transporte Guías',

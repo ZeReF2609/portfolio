@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portafolio-theta-lilac.vercel.app/sitemap.xml

@@ -15,10 +15,11 @@ export class HeroComponent implements OnInit, OnDestroy {
   cvUrl: string = '';
   typedText = signal('');
   private texts = [
-    'Full Stack Developer',
-    'Software Engineer',
-    'Angular Specialist',
-    'Problem Solver'
+    'Analista de Datos Junior',
+    'Científico de Datos',
+    'Power BI & SQL Server',
+    'Python & Machine Learning',
+    'Full Stack Developer'
   ];
   private textIndex = 0;
   private charIndex = 0;

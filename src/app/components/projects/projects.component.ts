@@ -15,7 +15,7 @@ export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [];
   filteredProjects: Project[] = [];
   selectedCategory: string = 'all';
-  categories: string[] = ['all', 'Web', 'Mobile', 'Tool'];
+  categories: string[] = ['all', 'Data', 'Web', 'Mobile'];
 
   constructor(private dataService: DataService) {}
 
@@ -48,6 +48,6 @@ export class ProjectsComponent implements OnInit {
 
   onImgError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/image/image.png';
+    img.src = 'assets/images/image.webp';
   }
 }

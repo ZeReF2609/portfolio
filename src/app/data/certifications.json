@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "title": "Python Essentials 1",
+    "organization": "Cisco Networking Academy",
+    "date": "2025-09-23",
+    "description": "Fundamentos de programación en Python",
+    "pdfUrl": "/assets/certificates/cisco/Python_Essentials_1_certificate.pdf"
+  },
+  {
+    "id": 2,
+    "title": "Introduction to IoT",
+    "organization": "Cisco Networking Academy",
+    "date": "2023-11-14",
+    "description": "Conceptos básicos de Internet de las Cosas (IoT)",
+    "pdfUrl": "/assets/certificates/cisco/Introduction_to_IoT_certificate.pdf"
+  },
+  {
+    "id": 3,
+    "title": "Backend con Node.js",
+    "organization": "Platzi",
+    "date": "2025-08-24",
+    "description": "Desarrollo backend con Node.js y Express",
+    "pdfUrl": "/assets/certificates/platzi/diploma-backend.pdf"
+  },
+  {
+    "id": 4,
+    "title": "Desarrollo con Flutter",
+    "organization": "Platzi",
+    "date": "2025-07-31",
+    "description": "Desarrollo de aplicaciones móviles con Flutter",
+    "pdfUrl": "/assets/certificates/platzi/diploma-flutter.pdf"
+  },
+  {
+    "id": 5,
+    "title": "Git y GitHub",
+    "organization": "Platzi",
+    "date": "2025-07-30",
+    "description": "Control de versiones con Git y GitHub",
+    "pdfUrl": "/assets/certificates/platzi/diploma-gitgithub.pdf"
+  },
+  {
+    "id": 6,
+    "title": "GitHub Copilot",
+    "organization": "Platzi",
+    "date": "2025-07-31",
+    "description": "Programación asistida con IA",
+    "pdfUrl": "/assets/certificates/platzi/diploma-github-copilot.pdf"
+  },
+  {
+    "id": 7,
+    "title": "Gestión de Proyectos PMBOK",
+    "organization": "Platzi",
+    "date": "2025-08-24",
+    "description": "Metodología de gestión de proyectos",
+    "pdfUrl": "/assets/certificates/platzi/diploma-proyectos-pmbok.pdf"
+  },
+  {
+    "id": 8,
+    "title": "Programación en Python",
+    "organization": "Platzi",
+    "date": "2025-07-27",
+    "description": "Python desde cero hasta avanzado",
+    "pdfUrl": "/assets/certificates/platzi/diploma-python.pdf"
+  },
+  {
+    "id": 9,
+    "title": "Ingeniería del Futuro",
+    "organization": "Universidad Privada del Norte",
+    "date": "2025-10-29",
+    "description": "Conferencia sobre tendencias en ingeniería",
+    "pdfUrl": "/assets/certificates/upn/IngenieriaDelFuturo.pdf"
+  },
+  {
+    "id": 10,
+    "title": "Certificación de Participación",
+    "organization": "Cibertec",
+    "date": "2023-11-07",
+    "description": "Certificación de participación en programa académico",
+    "pdfUrl": "/assets/certificates/cibertec/Certificación_de_Participación_Rojas Marin, Wilder Enrique.pdf"
+  },
+  {
+    "id": 11,
+    "title": "Constancia de Egresado",
+    "organization": "Cibertec",
+    "date": "2024-12-30",
+    "description": "Constancia de Término de Estudios en Cibertec",
+    "pdfUrl": "/assets/certificates/cibertec/COVT.CIB-2025-001588_ROJAS MARIN, WILDER ENRIQUE.pdf"
+  },
+  {
+    "id": 12,
+    "title": "Certificado Modular",
+    "organization": "Cibertec",
+    "date": "2023-12-10",
+    "description": "Certificación de cumplimiento de módulos académicos",
+    "pdfUrl": "/assets/certificates/cibertec/M2202382-202030368-ROJAS MARIN, WILDER ENRIQUE-COMPUTACIÓN E INFORMÁTICA.pdf"
+  },
+  {
+    "id": 13,
+    "title": "Diploma de Reconocimiento - Programa MiConsultor (MiBanco)",
+    "organization": "Universidad Privada del Norte",
+    "date": "2025-11-26",
+    "description": "Diploma otorgado por haber culminado el programa MiConsultor de MiBanco, en alianza con la Universidad Privada del Norte. Incluye firmas de la Gerencia de Sostenibilidad e Inclusión Financiera de MiBanco y del Decano de la Facultad de Negocios de la UPN.",
+    "pdfUrl": "/assets/certificates/upn/Wilder Enrique Rojas Marin MI BANCO.pdf"
+  },
+  {
+    "id": 14,
+    "title": "AWS Academy Graduate — Cloud Operations (Training Badge)",
+    "organization": "AWS Academy",
+    "date": "2025-12-05",
+    "description": "Badge otorgado por completar el programa de Cloud Operations de AWS Academy. Incluye contenidos sobre operaciones en la nube, administración de infraestructuras, despliegue, monitorización y buenas prácticas en AWS.",
+    "pdfUrl": "/assets/certificates/AWS/AWS_Academy_Graduate___Cloud_Operations___Training_Badge_Badge20251205-31-83t6ix.pdf"
+  },
+  {
+    "id": 15,
+    "title": "Inteligencia Artificial con Python",
+    "organization": "Datux",
+    "date": "2025-12-27",
+    "description": "Curso de introducción a la inteligencia artificial utilizando Python. Cubre conceptos básicos, algoritmos y aplicaciones prácticas de IA.",
+    "pdfUrl": "/assets/certificates/datux/InteligenciaArtificialConPython.pdf"
+  },
+  {
+    "id": 16,
+    "title": "Introducción a la IA moderna",
+    "organization": "Cisco Networking Academy",
+    "date": "2026-07-03",
+    "description": "Fundamentos de la inteligencia artificial moderna: modelos generativos, aprendizaje automático y uso responsable de la IA.",
+    "pdfUrl": "/assets/certificates/cisco/Introduction_to_Modern_AI_certificate.webp"
+  }
+]

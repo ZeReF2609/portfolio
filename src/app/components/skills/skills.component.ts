@@ -13,19 +13,10 @@ import { ScrollAnimationDirective } from '../../directives/scroll-animation.dire
 })
 export class SkillsComponent implements OnInit {
   skillCategories: SkillCategory[] = [];
-  selectedCategory: string = 'Frontend';
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.skillCategories = this.dataService.getSkills();
-  }
-
-  selectCategory(categoryName: string): void {
-    this.selectedCategory = categoryName;
-  }
-
-  get currentSkills(): SkillCategory | undefined {
-    return this.skillCategories.find(cat => cat.name === this.selectedCategory);
   }
 }
