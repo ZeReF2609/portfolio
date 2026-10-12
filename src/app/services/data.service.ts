@@ -148,7 +148,7 @@ export class DataService {
         description: 'Este portafolio: Angular con componentes standalone, Tailwind, sistema de temas personalizable y datos desacoplados en JSON para actualizar certificaciones sin tocar código.',
         image: 'assets/project/portafolio1.webp',
         technologies: ['Angular', 'TypeScript', 'Tailwind CSS', 'Responsive Design'],
-        demoUrl: 'https://portafolio-theta-lilac.vercel.app',
+        demoUrl: 'https://wilder-rojas-marin.vercel.app',
         githubUrl: 'https://github.com/ZeReF2609/portfolio',
         category: 'Web'
       }
