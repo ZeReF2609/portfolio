@@ -2,9 +2,9 @@
   <div class="container mx-auto max-w-6xl">
     <!-- Section Header -->
     <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="section-title">Habilidades</h2>
+      <h2 class="section-title">{{ 'skills.title' | t }}</h2>
       <p class="section-subtitle">
-        Herramientas que uso en mi trabajo diario y en mis proyectos
+        {{ 'skills.subtitle' | t }}
       </p>
     </div>
 
@@ -35,7 +35,7 @@
           </svg>
         </div>
         <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">+{{ stat.shown }}</p>
-        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">{{ stat.label }}</p>
+        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">{{ stat.label | t }}</p>
       </div>
     </div>
   </div>

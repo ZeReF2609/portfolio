@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { SkillCategory } from '../../models/skill.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
+// label = clave de traducción
 interface Stat { label: string; value: number; shown: number; icon: string; }
 
 @Component({
     selector: 'app-skills',
-    imports: [CommonModule, ScrollAnimationDirective],
+    imports: [CommonModule, ScrollAnimationDirective, TranslatePipe],
     templateUrl: './skills.component.html',
     styleUrls: ['./skills.component.css']
 })
@@ -24,10 +26,10 @@ export class SkillsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.skillCategories = this.dataService.getSkills();
     const s = this.dataService.getStats();
     this.stats = [
-      { label: 'Años de experiencia', value: s.years, shown: s.years, icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
-      { label: 'Proyectos', value: s.projects, shown: s.projects, icon: 'M3 7h18M3 12h18M3 17h18' },
-      { label: 'Certificaciones', value: s.certifications, shown: s.certifications, icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' },
-      { label: 'Tecnologías', value: s.technologies, shown: s.technologies, icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4' }
+      { label: 'skills.stat.years', value: s.years, shown: s.years, icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+      { label: 'skills.stat.projects', value: s.projects, shown: s.projects, icon: 'M3 7h18M3 12h18M3 17h18' },
+      { label: 'skills.stat.certifications', value: s.certifications, shown: s.certifications, icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' },
+      { label: 'skills.stat.technologies', value: s.technologies, shown: s.technologies, icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4' }
     ];
   }
 

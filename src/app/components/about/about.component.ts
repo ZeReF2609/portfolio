@@ -4,10 +4,11 @@ import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.interface';
 import { Education } from '../../models/experience.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
     selector: 'app-about',
-    imports: [CommonModule, ScrollAnimationDirective],
+    imports: [CommonModule, ScrollAnimationDirective, TranslatePipe],
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.css']
 })
@@ -17,14 +18,8 @@ export class AboutComponent implements OnInit {
   education: Education[] = [];
   languages: { name: string; level: string }[] = [];
 
-  interests = [
-    'Análisis de Datos',
-    'Machine Learning',
-    'Business Intelligence',
-    'Modelos Predictivos',
-    'Industria 4.0',
-    'Desarrollo Full Stack'
-  ];
+  // Claves de traducción (about.interest.N en src/app/i18n)
+  interests = [0, 1, 2, 3, 4, 5].map(i => `about.interest.${i}`);
 
   constructor(private dataService: DataService) {}
 

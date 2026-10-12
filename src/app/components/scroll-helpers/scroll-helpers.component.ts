@@ -1,9 +1,11 @@
 import { Component, HostListener, signal } from '@angular/core';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 // Barra de progreso de lectura (arriba) y botón "volver arriba" (abajo a la izquierda,
 // para no chocar con el selector de temas de la derecha).
 @Component({
   selector: 'app-scroll-helpers',
+  imports: [TranslatePipe],
   template: `
     <div class="fixed top-0 left-0 right-0 h-1 z-[70] pointer-events-none" aria-hidden="true">
       <div class="h-full bg-gradient-to-r from-primary-600 to-primary-400 transition-[width] duration-75"
@@ -12,7 +14,7 @@ import { Component, HostListener, signal } from '@angular/core';
     @if (showTop()) {
       <button type="button" (click)="toTop()"
         class="fixed bottom-6 left-6 z-50 p-3 rounded-full bg-primary-600 text-white shadow-lg hover:bg-primary-700 hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300"
-        aria-label="Volver arriba">
+        [attr.aria-label]="'common.backToTop' | t">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
         </svg>

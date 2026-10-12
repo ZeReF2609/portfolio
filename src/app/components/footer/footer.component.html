@@ -8,7 +8,7 @@
           <span class="text-gradient">Portfolio</span>
         </h3>
         <p class="text-gray-400 mb-4">
-          Analista de Datos Junior que convierte datos en decisiones, con base sólida en desarrollo de software.
+          {{ 'footer.tagline' | t }}
         </p>
         <!-- Social Links -->
         <div class="flex gap-3">
@@ -30,13 +30,13 @@
 
       <!-- Quick Links Column -->
       <div>
-        <h4 class="text-lg font-display font-semibold mb-4">Enlaces Rápidos</h4>
+        <h4 class="text-lg font-display font-semibold mb-4">{{ 'footer.quickLinks' | t }}</h4>
         <ul class="space-y-2">
           <li *ngFor="let item of menuItems">
             <a
               (click)="scrollToSection(item.anchor)"
               class="text-gray-400 hover:text-primary-400 cursor-pointer transition-colors duration-300">
-              {{ item.label }}
+              {{ item.label | t }}
             </a>
           </li>
         </ul>
@@ -44,7 +44,7 @@
 
       <!-- Contact Column -->
       <div>
-        <h4 class="text-lg font-display font-semibold mb-4">Contacto</h4>
+        <h4 class="text-lg font-display font-semibold mb-4">{{ 'footer.contact' | t }}</h4>
         <ul class="space-y-3 text-gray-400">
           <li class="flex items-start space-x-2">
             <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,13 +73,13 @@
     <!-- Bottom Footer -->
     <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
       <p class="text-gray-400 text-sm">
-        © {{ currentYear }} {{ user?.name }}. Todos los derechos reservados.
+        © {{ currentYear }} {{ user?.name }}. {{ 'footer.rights' | t }}
       </p>
       
       <button
         (click)="scrollToTop()"
         class="w-12 h-12 bg-primary-600 hover:bg-primary-700 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"
-        aria-label="Volver arriba">
+        [attr.aria-label]="'common.backToTop' | t">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
         </svg>

@@ -2,8 +2,8 @@
   <div class="container mx-auto max-w-7xl">
     <!-- Section Header -->
     <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="section-title">Experiencia Laboral</h2>
-            <p class="section-subtitle">Mi trayectoria profesional</p>
+            <h2 class="section-title">{{ 'experience.title' | t }}</h2>
+            <p class="section-subtitle">{{ 'experience.subtitle' | t }}</p>
         </div>
 
         <!-- Timeline -->
@@ -26,10 +26,10 @@
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ exp.position }}</h3>
                                     <p class="text-sm text-primary-600 font-semibold">{{ exp.company }}</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ formatDate(exp.startDate) }} - {{ exp.current ? 'Presente' : formatDate(exp.endDate) }}</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ formatDate(exp.startDate) }} - {{ exp.current ? ('experience.present' | t) : formatDate(exp.endDate) }}</p>
                                 </div>
                                 <div *ngIf="exp.current">
-                                    <span class="inline-flex items-center px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">Actual</span>
+                                    <span class="inline-flex items-center px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">{{ 'experience.current' | t }}</span>
                                 </div>
                             </div>
                             <p class="mt-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{{ exp.description }}</p>

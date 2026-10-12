@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Project } from '../../models/project.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
     selector: 'app-projects',
-    imports: [CommonModule, ScrollAnimationDirective],
+    imports: [CommonModule, ScrollAnimationDirective, TranslatePipe],
     templateUrl: './projects.component.html',
     styleUrls: ['./projects.component.css']
 })

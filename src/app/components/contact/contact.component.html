@@ -2,9 +2,9 @@
   <div class="container mx-auto max-w-6xl">
     <!-- Section Header -->
     <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="section-title">Contacto</h2>
+      <h2 class="section-title">{{ 'contact.title' | t }}</h2>
       <p class="section-subtitle">
-        Hablemos sobre tu próximo proyecto
+        {{ 'contact.subtitle' | t }}
       </p>
     </div>
 
@@ -13,11 +13,10 @@
       <div class="space-y-8 animate-on-scroll">
         <div>
           <h3 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">
-            Pongámonos en Contacto
+            {{ 'contact.heading' | t }}
           </h3>
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-            Estoy disponible para nuevos proyectos y colaboraciones. No dudes en contactarme 
-            si tienes alguna pregunta o simplemente quieres saludar.
+            {{ 'contact.intro' | t }}
           </p>
         </div>
 
@@ -30,7 +29,7 @@
               </svg>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Email</h4>
+              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">{{ 'contact.email' | t }}</h4>
               <a 
                 [href]="'mailto:' + contactInfo?.email"
                 class="text-primary-600 dark:text-primary-400 hover:underline">
@@ -47,7 +46,7 @@
               </svg>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Ubicación</h4>
+              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">{{ 'contact.location' | t }}</h4>
               <p class="text-gray-600 dark:text-gray-400">{{ contactInfo?.location }}</p>
             </div>
           </div>
@@ -61,7 +60,7 @@
               </svg>
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Teléfono</h4>
+              <h4 class="font-semibold text-gray-900 dark:text-white mb-1">{{ 'contact.phone' | t }}</h4>
               <p class="text-gray-600 dark:text-gray-400">{{ contactInfo?.phone }}</p>
             </div>
           </div>
@@ -104,7 +103,7 @@
           <!-- Name Field -->
           <div>
             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Nombre *
+              {{ 'contact.name' | t }}
             </label>
             <input
               type="text"
@@ -113,13 +112,13 @@
               [(ngModel)]="formData.name"
               required
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-              placeholder="Tu nombre">
+              [placeholder]="'contact.namePlaceholder' | t">
           </div>
 
           <!-- Email Field -->
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Email *
+              {{ 'contact.emailLabel' | t }}
             </label>
             <input
               type="email"
@@ -129,13 +128,13 @@
               required
               email
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-              placeholder="tu@email.com">
+              [placeholder]="'contact.emailPlaceholder' | t">
           </div>
 
           <!-- Subject Field -->
           <div>
             <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Asunto
+              {{ 'contact.subject' | t }}
             </label>
             <input
               type="text"
@@ -143,13 +142,13 @@
               name="subject"
               [(ngModel)]="formData.subject"
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-              placeholder="Asunto del mensaje">
+              [placeholder]="'contact.subjectPlaceholder' | t">
           </div>
 
           <!-- Message Field -->
           <div>
             <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Mensaje *
+              {{ 'contact.message' | t }}
             </label>
             <textarea
               id="message"
@@ -158,7 +157,7 @@
               required
               rows="5"
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300 resize-none"
-              placeholder="Escribe tu mensaje aquí..."></textarea>
+              [placeholder]="'contact.messagePlaceholder' | t"></textarea>
           </div>
 
           <!-- Submit Button -->
@@ -166,8 +165,8 @@
             type="submit"
             [disabled]="isSubmittingState()"
             class="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed">
-            <span *ngIf="!isSubmittingState()">Enviar Mensaje</span>
-            <span *ngIf="isSubmittingState()">Enviando...</span>
+            <span *ngIf="!isSubmittingState()">{{ 'contact.send' | t }}</span>
+            <span *ngIf="isSubmittingState()">{{ 'contact.sending' | t }}</span>
             <svg *ngIf="!isSubmittingState()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>

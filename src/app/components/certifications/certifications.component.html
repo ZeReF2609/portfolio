@@ -2,9 +2,9 @@
   <div class="container mx-auto max-w-7xl">
     <!-- Section Header -->
     <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="section-title">Certificaciones y Eventos</h2>
+      <h2 class="section-title">{{ 'certs.title' | t }}</h2>
       <p class="section-subtitle">
-        Formación continua y participación en la comunidad tecnológica
+        {{ 'certs.subtitle' | t }}
       </p>
     </div>
 
@@ -28,7 +28,7 @@
                   {{ org }}
                 </h4>
                 <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                  {{ getTotalCertsForOrg(org) }} certificación{{ getTotalCertsForOrg(org) !== 1 ? 'es' : '' }}
+                  {{ getTotalCertsForOrg(org) }} {{ (getTotalCertsForOrg(org) !== 1 ? 'certs.certifications' : 'certs.certification') | t }}
                 </p>
               </div>
               <div class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-700 rounded-full shadow-md border-2 border-primary-200 dark:border-primary-700">
@@ -49,7 +49,7 @@
                 (keydown.space)="$event.preventDefault(); openCertificate(cert.pdfUrl)"
                 role="button"
                 tabindex="0"
-                [attr.aria-label]="'Ver certificado: ' + cert.title + ' — ' + cert.organization"
+                [attr.aria-label]="('certs.viewCertificate' | t) + cert.title + ' — ' + cert.organization"
                 class="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 group relative bg-white dark:bg-gray-800/90 rounded-lg p-4 cursor-pointer overflow-hidden border-2 border-gray-200 dark:border-gray-700/70 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl dark:hover:shadow-primary-500/20 hover:-translate-y-2 backdrop-blur-sm"
                 [style.animation-delay]="(orgIndex * 50 + i * 30) + 'ms'">
                 
@@ -94,7 +94,7 @@
                 <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                 </svg>
-                <span>Ver más certificaciones ({{ getTotalCertsForOrg(org) - getVisibleCertsForOrg(org).length }} restantes)</span>
+                <span>{{ 'certs.showMore' | t }} ({{ getTotalCertsForOrg(org) - getVisibleCertsForOrg(org).length }} {{ 'certs.remaining' | t }})</span>
               </button>
             </div>
           </div>
@@ -106,13 +106,13 @@
     <div class="animate-on-scroll">
       <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
         <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white text-center md:text-left">
-          Eventos y Conferencias 
+          {{ 'certs.events' | t }}
           <!-- ({{ events.length }}) -->
         </h3>
       </div>
       
       <!-- Splide Carousel -->
-      <div class="splide" role="group" aria-label="Eventos y Conferencias">
+      <div class="splide" role="group" [attr.aria-label]="'certs.events' | t">
         <div class="splide__track">
           <ul class="splide__list">
             <li 

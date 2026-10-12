@@ -5,6 +5,8 @@ import { EmailService } from '../../services/email.service';
 import { DataService } from '../../services/data.service';
 import { ContactInfo } from '../../models/contact.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
+import { I18nService } from '../../services/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 interface ContactMethod {
   title: string;
@@ -29,7 +31,7 @@ interface FormData {
 
 @Component({
     selector: 'app-contact',
-    imports: [CommonModule, FormsModule, ScrollAnimationDirective],
+    imports: [CommonModule, FormsModule, ScrollAnimationDirective, TranslatePipe],
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.css']
 })
@@ -37,7 +39,8 @@ export class ContactComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private emailService = inject(EmailService);
   private dataService = inject(DataService);
-  
+  private i18n = inject(I18nService);
+
   // Estado del formulario
   protected readonly isSubmitting = signal(false);
   protected readonly submitStatus = signal<'idle' | 'success' | 'error'>('idle');
@@ -138,21 +141,21 @@ export class ContactComponent implements OnInit {
     if (this.formData.website) {
       console.warn('Honeypot filled; possible bot. Rejecting submission.');
       this.submitStatus.set('error');
-      this.submitMessage.set('Error al enviar el mensaje.');
+      this.submitMessage.set(this.i18n.t('contact.msg.error'));
       return;
     }
 
     // Rate limiting (client-side fallback)
     if (this.isRateLimited()) {
       this.submitStatus.set('error');
-      this.submitMessage.set('Has enviado mensajes recientemente. Por favor espera antes de intentar de nuevo.');
+      this.submitMessage.set(this.i18n.t('contact.msg.rateLimited'));
       return;
     }
 
     // Validar formulario
     if (!this.formData.name || !this.formData.email || !this.formData.message) {
       this.submitStatus.set('error');
-      this.submitMessage.set('Por favor, completa todos los campos obligatorios.');
+      this.submitMessage.set(this.i18n.t('contact.msg.required'));
       return;
     }
 
@@ -168,7 +171,7 @@ export class ContactComponent implements OnInit {
       .then((response: any) => {
         console.log('Email enviado exitosamente:', response);
         this.submitStatus.set('success');
-        this.submitMessage.set('¡Mensaje enviado exitosamente! Te contactaré pronto.');
+        this.submitMessage.set(this.i18n.t('contact.msg.success'));
         
         // Resetear formulario
         this.formData = {
@@ -182,16 +185,16 @@ export class ContactComponent implements OnInit {
         console.error('Error al enviar email:', error);
         
         // Mostrar mensaje de error más específico
-        let errorMessage = 'Error al enviar el mensaje. ';
+        let errorMessage = this.i18n.t('contact.msg.errorPrefix');
         
         if (error.message && error.message.includes('credenciales')) {
-          errorMessage = 'El servicio de email no está configurado. Por favor, contacta al administrador.';
+          errorMessage = this.i18n.t('contact.msg.notConfigured');
         } else if (error.text) {
-          errorMessage += `Detalles: ${error.text}`;
+          errorMessage += this.i18n.t('contact.msg.details') + error.text;
         } else if (error.message) {
           errorMessage += error.message;
         } else {
-          errorMessage += 'Por favor, intenta nuevamente o envía un email directamente a wilderrojasmarin@gmail.com';
+          errorMessage += this.i18n.t('contact.msg.fallback');
         }
         
         this.submitStatus.set('error');

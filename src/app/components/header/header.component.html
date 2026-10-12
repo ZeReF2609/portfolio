@@ -21,7 +21,7 @@
         <li *ngFor="let item of menuItems">
           <a (click)="scrollToSection(item.anchor)"
             class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors duration-300">
-            {{ item.label }}
+            {{ item.label | t }}
           </a>
         </li>
       </ul>
@@ -43,7 +43,7 @@
         <div class="relative hidden md:block">
           <button (click)="toggleCarouselMenu()"
             class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-            aria-label="Selector de vista de carrusel">
+            [attr.aria-label]="'header.carouselSelector' | t">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 6h16M4 10h16M4 14h16M4 18h16" />
@@ -54,8 +54,8 @@
           <div *ngIf="isCarouselMenuOpen"
             class="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-4 animate-fade-in border-2 border-gray-200 dark:border-gray-700 z-50">
             <div class="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-              <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-1">Modo de Visualización</h3>
-              <p class="text-xs text-gray-500 dark:text-gray-400">Aplica a todos los carruseles</p>
+              <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-1">{{ 'header.carouselMenuTitle' | t }}</h3>
+              <p class="text-xs text-gray-500 dark:text-gray-400">{{ 'header.carouselMenuSubtitle' | t }}</p>
             </div>
 
             <div class="grid grid-cols-2 gap-1 mb-2">
@@ -76,11 +76,11 @@
                 <span class="text-[10px] font-semibold text-center leading-tight" [ngClass]="currentCarouselMode === mode.id
             ? 'text-primary-700 dark:text-primary-300'
             : 'text-gray-700 dark:text-gray-300'">
-                  {{ mode.name }}
+                  {{ mode.name | t }}
                 </span>
 
                 <span class="text-[9px] text-gray-500 dark:text-gray-400 text-center leading-tight">
-                  {{ mode.description }}
+                  {{ mode.description | t }}
                 </span>
 
               </button>
@@ -90,7 +90,7 @@
             <!-- Controles adicionales -->
             <div class="pt-3 border-t border-gray-200 dark:border-gray-700 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Autoplay</span>
+                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ 'header.autoplay' | t }}</span>
                 <button (click)="toggleAutoplay()"
                   class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
                   [ngClass]="carouselAutoplay ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'">
@@ -107,7 +107,7 @@
           <!-- Botón para abrir el menú -->
           <button (click)="toggleThemeMenu()"
             class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-            aria-label="Selector de tema de color">
+            [attr.aria-label]="'header.colorThemeSelector' | t">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd"
                 d="M4 2a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v11H4V4zm2 2a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z"
@@ -130,7 +130,7 @@
                 <span class="w-8 h-8 rounded-full shadow-sm border border-gray-300 dark:border-gray-600"
                   [style.background-color]="theme.color"></span>
                 <span class="text-xs mt-2 text-gray-700 dark:text-gray-300">
-                  {{ theme.label }}
+                  {{ theme.label | t }}
                 </span>
               </button>
             </div>
@@ -138,10 +138,18 @@
         </div>
 
 
+        <!-- Language Toggle (ES/EN) -->
+        <button (click)="toggleLanguage()" type="button"
+          class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 text-sm font-bold leading-5 min-w-[2.25rem]"
+          [attr.aria-label]="'header.switchLang' | t"
+          [attr.title]="'header.switchLang' | t">
+          {{ 'header.switchLangLabel' | t }}
+        </button>
+
         <!-- Dark Mode Toggle -->
         <button (click)="toggleThemeMode()"
           class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-          aria-label="Cambiar modo oscuro">
+          [attr.aria-label]="'header.darkMode' | t">
           <svg *ngIf="currentThemeMode === 'light'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
           </svg>
@@ -155,7 +163,7 @@
         <!-- Mobile Menu Button -->
         <button (click)="toggleMobileMenu()"
           class="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-          aria-label="Menú móvil">
+          [attr.aria-label]="'header.mobileMenu' | t">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16" />
@@ -172,7 +180,7 @@
         <li *ngFor="let item of menuItems">
           <a (click)="scrollToSection(item.anchor)"
             class="block px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium cursor-pointer transition-colors duration-300">
-            {{ item.label }}
+            {{ item.label | t }}
           </a>
         </li>
         <!-- CV Button for Mobile -->
@@ -183,7 +191,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <span>Ver CV</span>
+            <span>{{ 'header.viewCv' | t }}</span>
           </button>
         </li>
       </ul>

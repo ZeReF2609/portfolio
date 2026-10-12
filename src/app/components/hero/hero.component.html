@@ -5,7 +5,7 @@
       <div class="text-center lg:text-left space-y-6 animate-fade-in">
         <div class="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
           <span class="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wider">
-            Bienvenido a mi portafolio
+            {{ 'hero.welcome' | t }}
           </span>
           <!-- Open to work -->
           <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300">
@@ -13,12 +13,12 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
             </span>
-            Disponible para nuevas oportunidades
+            {{ 'hero.available' | t }}
           </span>
         </div>
         
         <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold">
-          Hola, soy
+          {{ 'hero.greeting' | t }}
           <span class="text-gradient block mt-2">{{ user?.name }}</span>
         </h1>
         
@@ -36,12 +36,12 @@
           <button 
             (click)="scrollToContact()"
             class="btn-primary">
-            Contáctame
+            {{ 'hero.contactMe' | t }}
           </button>
           <a 
             href="#projects" 
             class="btn-secondary">
-            Ver Proyectos
+            {{ 'hero.viewProjects' | t }}
           </a>
           <button
             (click)="downloadCV()"
@@ -49,7 +49,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
-            <span>Ver CV</span>
+            <span>{{ 'hero.viewCv' | t }}</span>
           </button>
         </div>
         
@@ -76,13 +76,13 @@
             type="button"
             (click)="copyEmail()"
             class="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            [attr.aria-label]="'Copiar email ' + user?.email">
+            [attr.aria-label]="('hero.copyEmail' | t) + ' ' + user?.email">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
             <span>{{ user?.email }}</span>
             <span class="text-xs font-semibold" [class.text-green-600]="copied()" [class.text-primary-600]="!copied()" aria-live="polite">
-              {{ copied() ? '¡Copiado!' : 'Copiar' }}
+              {{ (copied() ? 'hero.copied' : 'hero.copy') | t }}
             </span>
           </button>
         </div>
@@ -96,7 +96,7 @@
           
           <!-- Profile Image Container -->
           <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl">
-            <img src="assets/images/profilegit.webp" alt="Profile" class="w-full h-full object-cover">
+            <img src="assets/images/profilegit.webp" [alt]="'hero.profileAlt' | t" class="w-full h-full object-cover">
           </div>
         </div>
       </div>

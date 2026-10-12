@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { User } from '../models/user.interface';
 import { Project } from '../models/project.interface';
 import { SkillCategory } from '../models/skill.interface';
@@ -7,14 +7,25 @@ import { Certification, Event } from '../models/certification.interface';
 import { Community, BlogPost } from '../models/community.interface';
 import { Experience, Education } from '../models/experience.interface';
 import certificationsData from '../data/certifications.json';
+import { I18nService } from './i18n.service';
+import {
+  USER_EN, CONTACT_LOCATION_EN, PROJECTS_EN, EXPERIENCE_EN, SKILL_CATEGORIES_EN, SKILLS_EN,
+  EDUCATION_EN, LANGUAGES_EN, EVENTS_EN, COMMUNITY_ROLES_EN, CERTIFICATIONS_EN
+} from '../i18n/content.en';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  private i18n = inject(I18nService);
+
+  // Cuando el idioma es inglés, los getters fusionan las traducciones de i18n/content.en.ts
+  private get en(): boolean {
+    return this.i18n.lang() === 'en';
+  }
 
   getUserData(): User {
-    return {
+    const user: User = {
       name: 'Wilder Rojas',
       profession: 'Analista de Datos Junior · Científico de Datos',
       description: 'Científico de Datos con experiencia práctica en análisis, modelado predictivo y visualización de datos para la toma de decisiones de negocio. Trabajo con Python (pandas, scikit-learn, matplotlib), SQL Server, Jupyter y Power BI para construir pipelines de datos, proyecciones y dashboards. Mi base en ingeniería de software me permite integrar los datos con sistemas reales usando Docker y Git.',
@@ -27,10 +38,11 @@ export class DataService {
         { platform: 'Instagram', url: 'https://www.instagram.com/zereff.26', icon: 'instagram' }
       ]
     };
+    return this.en ? { ...user, ...USER_EN } : user;
   }
 
   getProjects(): Project[] {
-    return [
+    const projects: Project[] = [
       {
         id: 12,
         title: 'Titanic — Dashboard de supervivencia en Power BI',
@@ -158,15 +170,19 @@ export class DataService {
         category: 'Web'
       }
     ];
+    if (!this.en) return projects;
+    return projects.map(p => ({ ...p, ...(PROJECTS_EN[p.id] ?? {}) }));
   }
 
   getCertifications(): Certification[] {
     // Fuente única: src/app/data/certifications.json (fechas ISO YYYY-MM-DD). Más reciente primero.
-    return [...(certificationsData as Certification[])].sort((a, b) => b.date.localeCompare(a.date));
+    const certs = [...(certificationsData as Certification[])].sort((a, b) => b.date.localeCompare(a.date));
+    if (!this.en) return certs;
+    return certs.map(c => (CERTIFICATIONS_EN[c.id] ? { ...c, description: CERTIFICATIONS_EN[c.id] } : c));
   }
 
   getEvents(): Event[] {
-    return [
+    const events: Event[] = [
       {
         id: 1,
         title: 'Ethereum Lima Day 2025',
@@ -294,15 +310,19 @@ export class DataService {
         ]
       }
     ];
+    if (!this.en) return events;
+    return events.map(e => ({ ...e, ...(EVENTS_EN[e.id] ?? {}) }));
   }
 
   getCommunities(): Community[] {
-    return [
+    const communities: Community[] = [
       { id: 1, name: 'GDG Callao', role: 'Miembro Activo', url: 'https://gdg.community.dev/gdg-callao/' },
       { id: 2, name: 'Platzi Community', role: 'Estudiante', url: 'https://platzi.com/' },
       { id: 3, name: 'Stack Overflow', role: 'Contributor' },
       { id: 4, name: 'GitHub Community', role: 'Open Source Contributor', url: 'https://github.com/ZeReF2609' }
     ];
+    if (!this.en) return communities;
+    return communities.map(c => ({ ...c, role: COMMUNITY_ROLES_EN[c.id] ?? c.role }));
   }
 
   getBlogPosts(): BlogPost[] {
@@ -330,10 +350,14 @@ export class DataService {
 
   // Sin porcentajes: las habilidades se agrupan por área, sin autoevaluaciones numéricas.
   getSkills(): SkillCategory[] {
-    const group = (name: string, skills: string[]): SkillCategory => ({
-      name,
-      skills: skills.map(s => ({ name: s, category: name }))
-    });
+    const en = this.en;
+    const group = (rawName: string, skills: string[]): SkillCategory => {
+      const name = en ? (SKILL_CATEGORIES_EN[rawName] ?? rawName) : rawName;
+      return {
+        name,
+        skills: skills.map(s => ({ name: en ? (SKILLS_EN[s] ?? s) : s, category: name }))
+      };
+    };
     return [
       group('Data & Analytics', ['Python', 'pandas', 'NumPy', 'scikit-learn', 'matplotlib', 'seaborn', 'Jupyter', 'Machine Learning']),
       group('Bases de Datos & SQL', ['SQL Server', 'SQL avanzado (CTEs, ventanas)', 'MySQL', 'MongoDB']),
@@ -345,14 +369,17 @@ export class DataService {
   }
 
   getEducation(): Education[] {
-    return [
+    const education: Education[] = [
       { institution: 'Universidad Privada del Norte', degree: 'Ingeniería de Sistemas Computacionales', period: 'Mar 2025 – En curso' },
       { institution: 'Instituto Sinergia', degree: 'Ingeniería de Software', period: 'May 2025 – Ene 2026' },
       { institution: 'Instituto Superior Tecnológico Cibertec', degree: 'Computación e Informática', period: 'Oct 2020 – Dic 2024' }
     ];
+    if (!this.en) return education;
+    return education.map(e => ({ ...e, ...(EDUCATION_EN[e.institution] ?? {}) }));
   }
 
   getLanguages(): { name: string; level: string }[] {
+    if (this.en) return LANGUAGES_EN.map(l => ({ ...l }));
     return [
       { name: 'Español', level: 'Nativo' },
       { name: 'Inglés', level: 'B1 (Cibertec)' }
@@ -362,12 +389,12 @@ export class DataService {
   getContactInfo(): ContactInfo {
     return {
       email: 'wilderrojasmarin@gmail.com',
-      location: 'Perú'
+      location: this.en ? CONTACT_LOCATION_EN : 'Perú'
     };
   }
 
   getExperience(): Experience[] {
-    return [
+    const experience: Experience[] = [
       {
         id: 4,
         company: 'Manufacturas San Isidro S.A.C.',
@@ -404,5 +431,7 @@ export class DataService {
         current: false
       }
     ];
+    if (!this.en) return experience;
+    return experience.map(e => ({ ...e, ...(EXPERIENCE_EN[e.id] ?? {}) }));
   }
 }

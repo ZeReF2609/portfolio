@@ -6,10 +6,12 @@ import { Certification, Event } from '../../models/certification.interface';
 import { ScrollAnimationDirective } from '../../directives/scroll-animation.directive';
 import Splide from '@splidejs/splide';
 import { Subscription } from 'rxjs';
+import { I18nService } from '../../services/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
     selector: 'app-certifications',
-    imports: [CommonModule, ScrollAnimationDirective],
+    imports: [CommonModule, ScrollAnimationDirective, TranslatePipe],
     templateUrl: './certifications.component.html',
     styleUrls: ['./certifications.component.css']
 })
@@ -43,6 +45,7 @@ export class CertificationsComponent implements OnInit, OnDestroy, AfterViewInit
   constructor(
     private dataService: DataService,
     private carouselService: CarouselService,
+    private i18n: I18nService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -52,7 +55,10 @@ export class CertificationsComponent implements OnInit, OnDestroy, AfterViewInit
     // Ordenar eventos por fecha (más reciente primero). Soportamos formatos como "Mayo 2025" y fechas ISO "YYYY-MM-DD".
     const monthMap: { [key: string]: number } = {
       'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3, 'mayo': 4, 'junio': 5,
-      'julio': 6, 'agosto': 7, 'septiembre': 8, 'setiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+      'julio': 6, 'agosto': 7, 'septiembre': 8, 'setiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11,
+      // Inglés (cuando el idioma activo es 'en')
+      'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
+      'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
     };
 
     function parseDateString(s: string): Date {
@@ -240,11 +246,12 @@ export class CertificationsComponent implements OnInit, OnDestroy, AfterViewInit
     });
   }
 
-  // "2025-09-23" -> "23 sept 2025"
+  // "2025-09-23" -> "23 sept 2025" (es) / "Sep 23, 2025" (en)
   formatCertDate(iso: string): string {
     const [y, m, d] = iso.split('-').map(Number);
     if (!y || !m || !d) return iso;
-    return new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'short', year: 'numeric' })
+    const locale = this.i18n.lang() === 'en' ? 'en-US' : 'es-PE';
+    return new Intl.DateTimeFormat(locale, { day: '2-digit', month: 'short', year: 'numeric' })
       .format(new Date(y, m - 1, d))
       .replace(/\./g, '')
       .replace(/ de /g, ' ');

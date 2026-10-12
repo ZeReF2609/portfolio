@@ -3,29 +3,32 @@ import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeEffect } from '../../services/theme.service';
 import { CarouselService, CarouselMode, CarouselConfig } from '../../services/carousel.service';
 import { Observable, map } from 'rxjs';
+import { I18nService } from '../../services/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
     selector: 'app-theme-selector',
     templateUrl: './theme-selector.component.html',
     styleUrls: ['./theme-selector.component.css'],
-    imports: [CommonModule]
+    imports: [CommonModule, TranslatePipe]
 })
 export class ThemeSelectorComponent {
   isOpen = false;
   activeAccordion: 'appearance' | 'carousel' | null = 'appearance';
 
   // Paleta de temas con etiquetas y colores consistentes
+  // label = clave de traducción
   colorThemes = [
-    { name: 'blue', label: 'Azul', color: '#3b82f6' },
-    { name: 'green', label: 'Verde', color: '#22c55e' },
-    { name: 'gray', label: 'Gris', color: '#6b7280' },
-    { name: 'beige', label: 'Beige', color: '#b8a080' },
-    { name: 'red', label: 'Rojo', color: '#ef4444' },
-    { name: 'purple', label: 'Púrpura', color: '#a855f7' },
-    { name: 'orange', label: 'Naranja', color: '#f97316' },
-    { name: 'yellow', label: 'Amarillo', color: '#eab308' },
-    { name: 'white', label: 'Blanco', color: '#ffffff' },
-    { name: 'pink', label: 'Rosa', color: '#ec4899' }
+    { name: 'blue', label: 'color.blue', color: '#3b82f6' },
+    { name: 'green', label: 'color.green', color: '#22c55e' },
+    { name: 'gray', label: 'color.gray', color: '#6b7280' },
+    { name: 'beige', label: 'color.beige', color: '#b8a080' },
+    { name: 'red', label: 'color.red', color: '#ef4444' },
+    { name: 'purple', label: 'color.purple', color: '#a855f7' },
+    { name: 'orange', label: 'color.orange', color: '#f97316' },
+    { name: 'yellow', label: 'color.yellow', color: '#eab308' },
+    { name: 'white', label: 'color.white', color: '#ffffff' },
+    { name: 'pink', label: 'color.pink', color: '#ec4899' }
   ];
 
   // Modos de carrusel
@@ -39,7 +42,8 @@ export class ThemeSelectorComponent {
 
   constructor(
     private themeService: ThemeService,
-    private carouselService: CarouselService
+    private carouselService: CarouselService,
+    private i18n: I18nService
   ) {
     this.currentTheme$ = this.themeService.colorTheme$;
     this.currentMode$ = this.themeService.themeMode$;
@@ -50,11 +54,16 @@ export class ThemeSelectorComponent {
     // Cargar modos disponibles del servicio
     this.carouselModes = this.carouselService.availableModes.map(m => ({
       id: m.id,
-      name: m.name,
-      description: m.description,
+      name: this.translateOr(`carouselFull.${m.id}.name`, m.name),
+      description: this.translateOr(`carouselFull.${m.id}.desc`, m.description),
       icon: m.icon,
       perPage: typeof m.perPage === 'number' ? m.perPage : Math.floor(m.perPage)
     }));
+  }
+
+  private translateOr(key: string, fallback: string): string {
+    const value = this.i18n.t(key);
+    return value === key ? fallback : value;
   }
 
   toggleSelector(): void {

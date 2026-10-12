@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.interface';
+import { I18nService } from '../../services/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
     selector: 'app-hero',
-    imports: [CommonModule],
+    imports: [CommonModule, TranslatePipe],
     templateUrl: './hero.component.html',
     styleUrls: ['./hero.component.css']
 })
@@ -13,20 +15,15 @@ export class HeroComponent implements OnInit, OnDestroy {
   user: User | null = null;
   cvUrl: string = '';
   typedText = signal('');
-  private texts = [
-    'Analista de Datos Junior',
-    'Científico de Datos',
-    'Power BI & SQL Server',
-    'Python & Machine Learning',
-    'Full Stack Developer'
-  ];
+  private texts: string[];
   private textIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
   private timerId: number | undefined;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private i18n: I18nService) {
     this.cvUrl = this.dataService.getCVUrl();
+    this.texts = [0, 1, 2, 3, 4].map(i => this.i18n.t(`hero.typing.${i}`));
   }
 
   ngOnInit(): void {
