@@ -44,6 +44,7 @@ export class DataService {
         id: 6,
         title: 'Finanzas360 — Gastos con OCR y Machine Learning',
         description: 'Sistema de finanzas personales que registra gastos a partir de la foto o PDF de una boleta/factura. Un microservicio de IA extrae emisor, RUC, fecha, total e ítems (EasyOCR + OpenCV) y clasifica cada producto en una categoría de gasto con KNN sobre embeddings semánticos (sentence-transformers), con reentrenamiento. Incluye API REST con JWT, dashboard y presupuestos.',
+        image: 'assets/project/finanzas360_arch.svg',
         technologies: ['Python', 'FastAPI', 'EasyOCR', 'scikit-learn', 'sentence-transformers', '.NET 10', 'Dapper', 'SQL Server', 'Angular 20', 'Docker'],
         githubUrl: 'https://github.com/ZeReF2609/OCR',
         category: 'Data'
@@ -61,6 +62,7 @@ export class DataService {
         id: 13,
         title: 'Redes Neuronales con Keras — 5 casos prácticos',
         description: 'Cinco modelos de deep learning aplicados a problemas reales: diagnóstico de diabetes (MLP), precio de viviendas (regresión), clasificación de prendas Fashion-MNIST (CNN), detección de spam (Embedding) y predicción de ventas con series de tiempo (LSTM).',
+        image: 'assets/project/redes_neuronales_arch.svg',
         technologies: ['Python', 'TensorFlow', 'Keras', 'CNN', 'LSTM', 'NLP'],
         githubUrl: 'https://github.com/ZeReF2609/redes-neuronales-keras',
         category: 'Data'
@@ -69,6 +71,7 @@ export class DataService {
         id: 8,
         title: 'Monitoreo de PLC en tiempo real (Industria 4.0)',
         description: 'Servicio para una planta industrial que lee en tiempo real los PLC de secadoras vía Modbus TCP, decodifica los registros, los persiste en SQL Server y los transmite a clientes web para dashboards operativos. Detección automática de nuevos equipos y despliegue como ejecutable. Proyecto de empresa (código privado).',
+        image: 'assets/project/plc_monitoring_arch.svg',
         technologies: ['Python', 'Modbus TCP', 'SQL Server', 'Sockets', 'Multithreading', 'PyInstaller'],
         category: 'Data'
       },
@@ -85,6 +88,7 @@ export class DataService {
         id: 10,
         title: 'Velocicommerce — E-commerce de alto rendimiento',
         description: 'E-commerce diseñado para alto tráfico: patrón BFF (Composite API) que reduce 10–15 peticiones por página a una sola, caché cache-aside, carrito y rate limiting en Redis, y pruebas de carga con k6. Frontend con SSR.',
+        image: 'assets/project/velocicommerce_arch.svg',
         technologies: ['Go', 'Gin', 'Redis', 'MySQL', 'Nuxt 3', 'Vue 3', 'Docker', 'k6'],
         githubUrl: 'https://github.com/ZeReF2609/velocicommerce',
         category: 'Web'
@@ -93,6 +97,7 @@ export class DataService {
         id: 11,
         title: 'Portal Corporativo (Intranet, RR.HH. y e-commerce)',
         description: 'Aplicación web corporativa desarrollada en equipo: portal del trabajador y boletas, control de visitas, cotizaciones, HelpDesk con notificaciones en tiempo real, tablero Scrum, reportes en Excel/PDF y módulos de e-commerce con IA generativa (Gemini). Autenticación con Active Directory. Proyecto de empresa (código privado).',
+        image: 'assets/project/portal_corporativo_arch.svg',
         technologies: ['C#', 'ASP.NET Core MVC', 'SQL Server', 'MySQL', 'Vue.js', 'Gemini AI', 'Active Directory'],
         category: 'Web'
       },
@@ -304,6 +309,19 @@ export class DataService {
     return [
       // Preparado para futuros artículos
     ];
+  }
+
+  // Cifras del resumen calculadas a partir de los datos (no hay que actualizarlas a mano)
+  getStats(): { years: number; projects: number; certifications: number; technologies: number } {
+    const firstJob = new Date(2024, 7, 1); // Prácticas profesionales, ago 2024
+    const years = Math.max(1, Math.floor((Date.now() - firstJob.getTime()) / (365.25 * 24 * 3600 * 1000)));
+    const technologies = new Set(this.getSkills().flatMap(c => c.skills.map(s => s.name))).size;
+    return {
+      years,
+      projects: this.getProjects().length,
+      certifications: this.getCertifications().length,
+      technologies
+    };
   }
 
   getCVUrl(): string {

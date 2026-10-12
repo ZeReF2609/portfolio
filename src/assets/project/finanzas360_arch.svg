@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#172036"/></linearGradient>
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1"/></pattern>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker>
+</defs>
+<rect width="1280" height="720" fill="url(#bg)"/><rect width="1280" height="720" fill="url(#g)" opacity=".6"/>
+<text x="60" y="78" font-size="40" font-weight="800" fill="#f8fafc">Finanzas360</text>
+<text x="60" y="114" font-size="22" fill="#94a3b8">Arquitectura · OCR + clasificación KNN de gastos</text>
+<line x1="290" y1="355" x2="370" y2="235" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/>
+<line x1="495" y1="290" x2="495" y2="450" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="459" y="353" width="72" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="495" y="375" text-anchor="middle" font-size="18" fill="#cbd5e1">REST</text>
+<line x1="495" y1="450" x2="825" y2="290" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="611" y="353" width="98" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="660" y="375" text-anchor="middle" font-size="18" fill="#cbd5e1">imagen</text>
+<line x1="950" y1="235" x2="1000" y2="235" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="932.5" y="218" width="85" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="975" y="240" text-anchor="middle" font-size="18" fill="#cbd5e1">ítems</text>
+<line x1="620" y1="505" x2="700" y2="505" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/>
+<rect x="60" y="300" width="230" height="110" rx="18" fill="#1e293b" stroke="#06b6d4" stroke-width="3"/><rect x="60" y="300" width="10" height="110" rx="5" fill="#06b6d4"/><text x="180" y="349" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">Boleta / PDF</text><text x="180" y="381" text-anchor="middle" font-size="18" fill="#94a3b8">foto o factura</text>
+<rect x="370" y="180" width="250" height="110" rx="18" fill="#1e293b" stroke="#22c55e" stroke-width="3"/><rect x="370" y="180" width="10" height="110" rx="5" fill="#22c55e"/><text x="500" y="229" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">Angular 20</text><text x="500" y="261" text-anchor="middle" font-size="18" fill="#94a3b8">dashboard · gastos</text>
+<rect x="370" y="450" width="250" height="110" rx="18" fill="#1e293b" stroke="#ef4444" stroke-width="3"/><rect x="370" y="450" width="10" height="110" rx="5" fill="#ef4444"/><text x="500" y="499" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">API .NET 10</text><text x="500" y="531" text-anchor="middle" font-size="18" fill="#94a3b8">JWT · Dapper</text>
+<rect x="700" y="180" width="250" height="110" rx="18" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/><rect x="700" y="180" width="10" height="110" rx="5" fill="#3b82f6"/><text x="830" y="229" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">FastAPI OCR</text><text x="830" y="261" text-anchor="middle" font-size="18" fill="#94a3b8">EasyOCR · OpenCV</text>
+<rect x="1000" y="180" width="230" height="110" rx="18" fill="#1e293b" stroke="#a855f7" stroke-width="3"/><rect x="1000" y="180" width="10" height="110" rx="5" fill="#a855f7"/><text x="1120" y="229" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">KNN (k=5)</text><text x="1120" y="261" text-anchor="middle" font-size="18" fill="#94a3b8">embeddings</text>
+<rect x="700" y="450" width="250" height="110" rx="18" fill="#1e293b" stroke="#f59e0b" stroke-width="3"/><rect x="700" y="450" width="10" height="110" rx="5" fill="#f59e0b"/><text x="830" y="499" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">SQL Server</text><text x="830" y="531" text-anchor="middle" font-size="18" fill="#94a3b8">11 tablas</text>
+</svg>

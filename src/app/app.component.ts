@@ -9,6 +9,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { ExperienceComponent } from "./components/experience/experience.component";
+import { ScrollHelpersComponent } from './components/scroll-helpers/scroll-helpers.component';
 
 @Component({
     selector: 'app-root',
@@ -22,7 +23,8 @@ import { ExperienceComponent } from "./components/experience/experience.componen
         ContactComponent,
         FooterComponent,
         ThemeSelectorComponent,
-        ExperienceComponent
+        ExperienceComponent,
+        ScrollHelpersComponent
     ],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']

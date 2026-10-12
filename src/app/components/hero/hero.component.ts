@@ -49,6 +49,19 @@ export class HeroComponent implements OnInit, OnDestroy {
     window.open(this.cvUrl, '_blank');
   }
 
+  copied = signal(false);
+
+  async copyEmail(): Promise<void> {
+    if (!this.user?.email) return;
+    try {
+      await navigator.clipboard.writeText(this.user.email);
+      this.copied.set(true);
+      setTimeout(() => this.copied.set(false), 2000);
+    } catch {
+      window.location.href = `mailto:${this.user.email}`;
+    }
+  }
+
   private typeEffect(): void {
     const currentText = this.texts[this.textIndex];
     

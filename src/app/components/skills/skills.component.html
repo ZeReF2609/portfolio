@@ -26,36 +26,16 @@
       </div>
     </div>
 
-    <!-- Skills Summary -->
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
-      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    <!-- Skills Summary: valores calculados desde los datos, con animación de conteo -->
+    <div #statsGrid class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-on-scroll">
+      <div *ngFor="let stat of stats" class="text-center p-6 md:p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="stat.icon"/>
           </svg>
         </div>
-        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">+ 2</h3>
-        <p class="text-gray-600 dark:text-gray-400">Años de Experiencia</p>
-      </div>
-
-      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-          </svg>
-        </div>
-        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">+ 20</h3>
-        <p class="text-gray-600 dark:text-gray-400">Tecnologías en uso</p>
-      </div>
-
-      <div class="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-          </svg>
-        </div>
-        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">+ 10</h3>
-        <p class="text-gray-600 dark:text-gray-400">Proyectos Completados</p>
+        <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">+{{ stat.shown }}</p>
+        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">{{ stat.label }}</p>
       </div>
     </div>
   </div>

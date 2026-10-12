@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Project } from '../../models/project.interface';
@@ -37,6 +37,24 @@ export class ProjectsComponent implements OnInit {
         project => project.category === category
       );
     }
+  }
+
+  selected: Project | null = null;
+  private lastFocused: HTMLElement | null = null;
+
+  openDetails(project: Project): void {
+    this.lastFocused = document.activeElement as HTMLElement | null;
+    this.selected = project;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => (document.querySelector('[role=dialog] button') as HTMLElement | null)?.focus());
+  }
+
+  @HostListener('document:keydown.escape')
+  closeDetails(): void {
+    if (!this.selected) return;
+    this.selected = null;
+    document.body.style.overflow = '';
+    this.lastFocused?.focus();
   }
 
   openLink(url: string | undefined): void {

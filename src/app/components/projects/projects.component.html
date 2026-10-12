@@ -30,7 +30,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
       <div
         *ngFor="let project of filteredProjects"
-        class="card group overflow-hidden cursor-pointer transform hover:-translate-y-2 transition-all duration-300">
+        (click)="openDetails(project)"
+        (keydown.enter)="openDetails(project)"
+        role="button"
+        tabindex="0"
+        [attr.aria-label]="'Ver detalles de ' + project.title"
+        class="card group overflow-hidden cursor-pointer transform hover:-translate-y-2 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
         
         <!-- Project Image -->
         <div class="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-800 dark:to-primary-600">
@@ -49,7 +54,7 @@
             <div class="flex gap-4">
               <button
                 *ngIf="project.demoUrl"
-                (click)="openLink(project.demoUrl)"
+                (click)="$event.stopPropagation(); openLink(project.demoUrl)"
                 class="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors duration-300"
                 aria-label="Ver demo">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +64,7 @@
               </button>
               <button
                 *ngIf="project.githubUrl"
-                (click)="openLink(project.githubUrl)"
+                (click)="$event.stopPropagation(); openLink(project.githubUrl)"
                 class="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors duration-300"
                 aria-label="Ver código">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -79,14 +84,66 @@
           <p class="text-gray-600 dark:text-gray-400 line-clamp-2">
             {{ project.description }}
           </p>
-          
-          <!-- Technologies -->
+
+          <!-- Technologies (máx. 5 en la tarjeta; el resto en el detalle) -->
           <div class="flex flex-wrap gap-2 pt-2">
             <span
-              *ngFor="let tech of project.technologies"
+              *ngFor="let tech of project.technologies.slice(0, 5)"
               class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium">
               {{ tech }}
             </span>
+            <span *ngIf="project.technologies.length > 5" class="px-3 py-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+              +{{ project.technologies.length - 5 }}
+            </span>
+          </div>
+          <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 dark:text-primary-400">
+            Ver detalles
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project details modal -->
+    <div
+      *ngIf="selected as p"
+      class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      (click)="closeDetails()">
+      <div
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-labelledby]="'project-title-' + p.id"
+        class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl"
+        (click)="$event.stopPropagation()">
+        <div class="aspect-video bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-800 dark:to-primary-600 rounded-t-2xl overflow-hidden flex items-center justify-center">
+          <img *ngIf="p.image; else modalCover" [src]="p.image" [alt]="p.title" class="w-full h-full object-cover object-top" />
+          <ng-template #modalCover>
+            <span class="text-white text-xl font-display font-bold px-6 text-center">{{ p.technologies.slice(0, 3).join(' · ') }}</span>
+          </ng-template>
+        </div>
+        <button
+          #closeBtn
+          type="button"
+          (click)="closeDetails()"
+          class="absolute top-3 right-3 p-2 rounded-full bg-white/90 dark:bg-gray-900/90 text-gray-700 dark:text-gray-200 hover:bg-primary-600 hover:text-white transition-colors"
+          aria-label="Cerrar">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="p-6 space-y-4">
+          <span class="text-xs uppercase tracking-widest font-semibold text-primary-600 dark:text-primary-400">{{ p.category }}</span>
+          <h3 [id]="'project-title-' + p.id" class="text-2xl font-display font-bold text-gray-900 dark:text-white">{{ p.title }}</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ p.description }}</p>
+          <div class="flex flex-wrap gap-2">
+            <span *ngFor="let tech of p.technologies" class="px-3 py-1 bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium">{{ tech }}</span>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a *ngIf="p.githubUrl" [href]="p.githubUrl" target="_blank" rel="noopener noreferrer" class="btn-primary">Ver código</a>
+            <a *ngIf="p.demoUrl" [href]="p.demoUrl" target="_blank" rel="noopener noreferrer" class="btn-secondary">Ver demo</a>
+            <span *ngIf="!p.githubUrl && !p.demoUrl" class="text-sm text-gray-500 dark:text-gray-400">Código privado (proyecto de empresa)</span>
           </div>
         </div>
       </div>

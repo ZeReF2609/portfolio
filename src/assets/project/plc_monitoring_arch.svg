@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#172036"/></linearGradient>
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1"/></pattern>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker>
+</defs>
+<rect width="1280" height="720" fill="url(#bg)"/><rect width="1280" height="720" fill="url(#g)" opacity=".6"/>
+<text x="60" y="78" font-size="40" font-weight="800" fill="#f8fafc">Monitoreo de PLC en tiempo real</text>
+<text x="60" y="114" font-size="22" fill="#94a3b8">Arquitectura · Industria 4.0</text>
+<line x1="290" y1="355" x2="400" y2="355" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="270" y="338" width="150" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="345" y="360" text-anchor="middle" font-size="18" fill="#cbd5e1">Modbus TCP</text>
+<line x1="680" y1="355" x2="800" y2="225" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="678" y="273" width="124" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="740" y="295" text-anchor="middle" font-size="18" fill="#cbd5e1">lecturas</text>
+<line x1="680" y1="355" x2="800" y2="485" stroke="#94a3b8" stroke-width="3" marker-end="url(#a)"/><rect x="691" y="403" width="98" height="30" rx="15" fill="#0f172a" stroke="#334155"/><text x="740" y="425" text-anchor="middle" font-size="18" fill="#cbd5e1">socket</text>
+<rect x="60" y="300" width="230" height="110" rx="18" fill="#1e293b" stroke="#06b6d4" stroke-width="3"/><rect x="60" y="300" width="10" height="110" rx="5" fill="#06b6d4"/><text x="180" y="349" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">PLC secadoras</text><text x="180" y="381" text-anchor="middle" font-size="18" fill="#94a3b8">N equipos</text>
+<rect x="400" y="300" width="280" height="110" rx="18" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/><rect x="400" y="300" width="10" height="110" rx="5" fill="#3b82f6"/><text x="545" y="349" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">Servicio Python</text><text x="545" y="381" text-anchor="middle" font-size="18" fill="#94a3b8">1 hilo por PLC</text>
+<rect x="800" y="170" width="260" height="110" rx="18" fill="#1e293b" stroke="#f59e0b" stroke-width="3"/><rect x="800" y="170" width="10" height="110" rx="5" fill="#f59e0b"/><text x="935" y="219" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">SQL Server</text><text x="935" y="251" text-anchor="middle" font-size="18" fill="#94a3b8">procedimientos</text>
+<rect x="800" y="430" width="260" height="110" rx="18" fill="#1e293b" stroke="#22c55e" stroke-width="3"/><rect x="800" y="430" width="10" height="110" rx="5" fill="#22c55e"/><text x="935" y="479" text-anchor="middle" font-size="26" font-weight="700" fill="#f8fafc">Clientes web</text><text x="935" y="511" text-anchor="middle" font-size="18" fill="#94a3b8">dashboards</text>
+</svg>
